@@ -1,5 +1,27 @@
 {% extends 'base.html.twig' %}
 
+{% block navbar %}
+    <ul class="nav navbar-nav menu__list">
+        <li class="menu__item menu__item--current"><a class="menu__link" href="index.html">Home <span class="sr-only">(current)</span></a></li>
+        <li class=" menu__item"><a class="menu__link" href="about.html">About</a></li>
+        <li class="menu__item dropdown">
+            <a class="menu__link" href="#" class="dropdown-toggle" data-toggle="dropdown">Suppliers <b class="caret"></b></a>
+            <ul class="dropdown-menu agile_short_dropdown">
+                <li><a href="icons.html">Maxima</a></li>
+                <li><a href="typography.html">Can can</a></li>
+            </ul>
+        </li>
+    </ul>
+{% endblock %}
+
 {% block body %}
-    {% block fos_user_content %}{% endblock fos_user_content %}
+    <div class = "row" style = "margin-top:40px; margin-bottom: 40px;">
+        <div class = "col-md-3"></div>
+
+        <div class = "col-md-6 col-sm-12">
+            {% block fos_user_content %}{% endblock fos_user_content %}
+        </div>
+
+        <div class = "col-md-3"></div>
+    </div>
 {% endblock %}
