@@ -69,17 +69,47 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
-fos_user:
-    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
-    firewall_name: main
-    user_class: AppBundle\Entity\User
-    from_email:
-        address: "discounted@gmail.com"
-        sender_name: "NFQ"
-
 doctrine_migrations:
     dir_name: "%kernel.root_dir%/DoctrineMigrations"
     namespace: Application\Migrations
     table_name: migration_versions
     name: Application Migrations
     organize_migrations: false # Version >=1.2 Possible values are: "BY_YEAR", "BY_YEAR_AND_MONTH", false
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: AppBundle\UserBundle\Entity\User
+    service:
+        user_manager: pugx_user_manager
+    from_email:
+        address: "discounted@gmail.com"
+        sender_name: "NFQ"
+
+pugx_multi_user:
+  users:
+    user_one:
+        entity:
+          class: AppBundle\UserBundle\Entity\Customer
+#          factory:
+        registration:
+          form:
+            type: AppBundle\UserBundle\Form\Type\RegistrationCustomerFormType
+            name: fos_user_registration_form
+            validation_groups:  [Registration, Default]
+          template: AppBundle:RegistrationCustomer:register.html.twig
+        profile:
+          form:
+            type: AppBundle\UserBundle\Form\Type\ProfileUserOneFormType
+            name: fos_user_profile_form
+            validation_groups:  [Profile, Default]
+    user_two:
+        entity:
+          class: AppBundle\UserBundle\Entity\ShopOwner
+        registration:
+          form:
+            type: AppBundle\UserBundle\Form\Type\RegistrationShopOwnerFormType
+          template: AppBundle:RegistrationShopOwner:register.html.twig
+        profile:
+          form:
+            type: Acme\UserBundle\Form\Type\ProfileUserTwoFormType
