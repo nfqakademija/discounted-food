@@ -19,6 +19,15 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/about", name="about")
+     */
+    public function aboutAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('About/about.html.twig');
+    }
+
+    /**
      * @Route("/faker", name="faker")
      */
     public function fakerAction(Request $request)
