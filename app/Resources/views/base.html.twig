@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}Welcome{% endblock %}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/cards.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/easy-responsive-tabs.css') }}" rel='stylesheet' type='text/css'/>
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+<div class="header" id="home">
+    <div class="container">
+        <ul>
+            <li><a href = "{{ path('homepage') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+            <li> <a href="{{ path('fos_user_security_login') }}"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Login </a></li>
+            <li> <a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Register </a></li>
+            <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">info@example.com</a></li>
+
+            <h1 style = "color:white;" id="demo"></h1>
+        </ul>
+    </div>
+</div>
+
+
+<div class="header-bot">
+    <div class="header-bot_inner_wthreeinfo_header_mid">
+        <div class="col-md-4 header-middle">
+            <form action="#" method="post">
+                <input type="search" name="search" placeholder="Search here..." required="">
+                <input type="submit" value=" ">
+                <div class="clearfix"></div>
+            </form>
+        </div>
+        <!-- header-bot -->
+        <div class="col-md-4 logo_agile">
+            <h1><a href="index.html"><span>D</span>iscounted</a></h1>
+        </div>
+        <!-- header-bot -->
+        <div class="col-md-4 agileits-social top_content">
+            <ul class="social-nav model-3d-0 footer-social w3_agile_social">
+                <li class="share">Share On : </li>
+                <li><a href="#" class="facebook">
+                        <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                        <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
+                <li><a href="#" class="twitter">
+                        <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                        <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div></a></li>
+                <li><a href="#" class="instagram">
+                        <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                        <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
+                <li><a href="#" class="pinterest">
+                        <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                        <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div></a></li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+
+<div class="ban-top">
+    <div class="container">
+        <div class="top_nav_left">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
+
+                        {% block navbar %}{% endblock %}
+
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+{% block index_page %}{% endblock %}
+
+<div class="new_arrivals_agile_w3ls_info">
+    <div class="container">
+
+        {% block body %}{% endblock %}
+
+    </div>
+</div>
+<!-- //new_arrivals -->
+
+<!-- footer -->
+<div class="footer">
+    <div class="footer_agile_inner_info_w3l">
+        <p class="copy-right">&copy 2017 Discounted food app. All rights reserved | THIRD TEAM <3 </p>
+    </div>
+</div>
+<!-- //footer -->
+
+<!-- js -->
+<script type="text/javascript" src="{{ asset('js/jquery-2.1.4.min.js') }}"></script>
+<!-- //js -->
+<script src="{{ asset('js/modernizr.custom.js') }}"></script>
+<!-- Custom-JavaScript-File-Links -->
+<!-- cart-js -->
+<script src="{{ asset('js/minicart.min.js') }}"></script>
+<script>
+    // Mini Cart
+    paypal.minicart.render({
+        action: '#'
+    });
+
+    if (~window.location.search.indexOf('reset=true')) {
+        paypal.minicart.reset();
+    }
+</script>
+
+<!-- //cart-js -->
+<!-- script for responsive tabs -->
+<script src="{{ asset('js/easy-responsive-tabs.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        $('#horizontalTab').easyResponsiveTabs({
+            type: 'default', //Types: default, vertical, accordion
+            width: 'auto', //auto or any width like 600px
+            fit: true,   // 100% fit in a container
+            closed: 'accordion', // Start closed if in accordion view
+            activate: function(event) { // Callback function if tab is switched
+                var $tab = $(this);
+                var $info = $('#tabInfo');
+                var $name = $('span', $info);
+                $name.text($tab.text());
+                $info.show();
+            }
+        });
+        $('#verticalTab').easyResponsiveTabs({
+            type: 'vertical',
+            width: 'auto',
+            fit: true
+        });
+    });
+</script>
+<!-- //script for responsive tabs -->
+<!-- stats -->
+<script src="{{ asset('js/jquery.waypoints.min.js') }}"></script>
+<script src="{{ asset('js/jquery.countup.js') }}"></script>
+<script>
+    $('.counter').countUp();
+</script>
+<!-- //stats -->
+<!-- start-smoth-scrolling -->
+<script type="text/javascript" src="{{ asset('js/move-top.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/jquery.easing.min.js') }}"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $(".scroll").click(function(event){
+            event.preventDefault();
+            $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+        });
+    });
+</script>
+<script>
+    var x = document.getElementById("demo");
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+    function showPosition(position) {
+        x.innerHTML = "Latitude: " + position.coords.latitude +
+            "<br>Longitude: " + position.coords.longitude;
+
+
+    }
+</script>
+<!-- here stars scrolling icon -->
+<script type="text/javascript">
+
+
+
+    $(document).ready(function() {
+        /*
+            var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+            };
+        */
+
+        $().UItoTop({ easingType: 'easeOutQuart' });
+
+    });
+</script>
+<!-- //here ends scrolling icon -->
+
+
+<!-- for bootstrap working -->
+<script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
+</body>
+</html>
