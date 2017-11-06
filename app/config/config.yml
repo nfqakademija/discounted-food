@@ -81,8 +81,8 @@ fos_user:
     firewall_name: main
     user_class: AppBundle\Entity\User
     from_email:
-        address: "%mailer_user%"
-        sender_name: "%mailer_user%"
+        address: "noreply@gmail.com"
+        sender_name: "discounted"
     registration:
         form:
             type: AppBundle\Form\RegistrationFormType
@@ -101,3 +101,5 @@ easy_admin:
                     - companyName
                     - enabled
                     - lastLogin
+        Address:
+            class: AppBundle\Entity\Address
