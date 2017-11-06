@@ -26,7 +26,7 @@
             <li><a href = "{{ path('homepage') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
             <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">info@example.com</a></li>
             {% if is_granted('ROLE_USER') %}
-                <li><a href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a></li>
+                <li><a href="{{ path('profile_index') }}"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a></li>
                 <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
             {% else %}
                 <li> <a href="{{ path('fos_user_security_login') }}"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Login </a></li>
@@ -50,7 +50,7 @@
         </div>
         <!-- header-bot -->
         <div class="col-md-4 logo_agile">
-            <h1><a href="index.html"><span>D</span>iscounted</a></h1>
+            <h1><a href="{{ path('homepage') }}"><span>D</span>iscounted</a></h1>
         </div>
         <!-- header-bot -->
         <div class="col-md-4 agileits-social top_content">

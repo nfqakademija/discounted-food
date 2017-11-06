@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block navbar %}
+    <ul class="nav navbar-nav menu__list">
+        <li class="menu__item"><a class="menu__link" href="{{ path('homepage') }}">Home <span class="sr-only">(current)</span></a></li>
+        <li class="menu__item--current menu__item"><a class="menu__link" href="{{ path('about') }}">About</a></li>
+        <li class="menu__item dropdown">
+            <a class="menu__link" href="#" class="dropdown-toggle" data-toggle="dropdown">Suppliers <b class="caret"></b></a>
+            <ul class="dropdown-menu agile_short_dropdown">
+                <li><a href="#">Maxima</a></li>
+                <li><a href="#">Can can</a></li>
+            </ul>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block body %}
+    <h3 class="wthree_text_info"><span>Profile</span></h3>
+    <div id="horizontalTab">
+        <div class = "row">
+            <div class = "col-md-12 col-sm-2 text-center">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Add your shop</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            {#{{ form_start(form) }}#}
+                            {#{{ form_widget(form, { 'attr' : { 'class': 'form-control' } }) }}#}
+                            {#{{ form_end(form) }}#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="resp-tabs-container">
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="horizontalTab">
+        <div class = "row">
+            <div class = "col-md-12 col-sm-2 text-center">
+               <h2>Added shops</h2>
+            </div>
+            <div class="resp-tabs-container">
+
+                <a href = "">
+                    <div class="col-sm-3 col-md-3 col-lg-3 mt-3 product-men">
+                        <div class="card">
+                            <img class="card-img-top" src="http://www.theballoonshop.com.au/images/Shop_Front_2.jpg">
+                            <div class="card-block text-center">
+                                <h4 class="card-title mt-3">Company</h4>
+                                <div class="meta">
+                                    <a>Adress</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </a>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
