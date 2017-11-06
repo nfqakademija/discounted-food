@@ -16,7 +16,7 @@ class RegistrationShopOwnerFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
+        $builder->remove('username')
             ->add('title', null, ['label' => 'Įmonės pavadinimas']);
     }
 

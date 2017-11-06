@@ -24,9 +24,14 @@
     <div class="container">
         <ul>
             <li><a href = "{{ path('homepage') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-            <li> <a href="{{ path('fos_user_security_login') }}"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Login </a></li>
-            <li> <a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Register </a></li>
             <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">info@example.com</a></li>
+            {% if is_granted('ROLE_USER') %}
+                <li><a href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a></li>
+                <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
+            {% else %}
+                <li> <a href="{{ path('fos_user_security_login') }}"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Login </a></li>
+                <li> <a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Register </a></li>
+            {% endif %}
 
             <h1 style = "color:white;" id="demo"></h1>
         </ul>

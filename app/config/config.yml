@@ -77,39 +77,12 @@ doctrine_migrations:
     organize_migrations: false # Version >=1.2 Possible values are: "BY_YEAR", "BY_YEAR_AND_MONTH", false
 
 fos_user:
-    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    db_driver: orm
     firewall_name: main
     user_class: AppBundle\Entity\User
-    service:
-        user_manager: pugx_user_manager
     from_email:
-        address: "discounted@gmail.com"
-        sender_name: "NFQ"
-
-pugx_multi_user:
-  users:
-    customer:
-        entity:
-          class: AppBundle\Entity\Customer
-#          factory:
-        registration:
-          form:
-            type: AppBundle\Form\Type\RegistrationCustomerFormType
-            name: fos_user_registration_form
-            validation_groups:  [Registration, Default]
-          template: AppBundle:RegistrationCustomer:register.html.twig
-        profile:
-          form:
-            type: AppBundle\Form\Type\ProfileUserOneFormType
-            name: fos_user_profile_form
-            validation_groups:  [Profile, Default]
-    shop_owner:
-        entity:
-          class: AppBundle\Entity\ShopOwner
-        registration:
-          form:
-            type: AppBundle\Form\Type\RegistrationShopOwnerFormType
-          template: AppBundle:RegistrationShopOwner:register.html.twig
-        profile:
-          form:
-            type: AppBundle\Form\Type\ProfileUserTwoFormType
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
+    registration:
+        form:
+            type: AppBundle\Form\RegistrationFormType

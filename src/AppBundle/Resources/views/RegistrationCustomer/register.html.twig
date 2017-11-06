@@ -3,10 +3,48 @@
 {% block fos_user_content %}
     {% trans_default_domain 'FOSUserBundle' %}
 
-    <form action="{{ path('user_one_registration') }}" {{ form_enctype(form) }} method="POST">
+    <form action="{{ path('user_customer_registration') }}" {{ form_enctype(form) }} method="POST">
         {{ form_widget(form) }}
         <div>
             <input type="submit" value="{{ 'registration.submit'|trans }}" />
         </div>
     </form>
 {% endblock fos_user_content %}
+
+{#{% extends "base.html.twig" %}#}
+
+{#{% block body %}#}
+    {#<div class="container">#}
+
+        {#<div class="col-md-8 col-md-offset-2">#}
+            {#<div class="form-container">#}
+
+                {#<p class="page-heading">Užsiregistruok!</p>#}
+                {#<p>Užpildyk žemiau esančius laukus:</p>#}
+
+                {#{{ form_start(form, {'action': path('user_customer_registration'), 'method': 'POST', 'attr': {'novalidate': 'novalidate'} }) }}#}
+
+                {#{{ form_row(form.name) }}#}
+
+                {#{{ form_row(form.surname) }}#}
+
+                {#{{ form_row(form.email) }}#}
+
+                {#{{ form_row(form.plainPassword.first) }}#}
+
+                {#{{ form_row(form.plainPassword.second) }}#}
+
+                {#<input type="hidden" name="role" value="ROLE_USER_SEEKER">#}
+
+                {#<small>* Pažymėti laukai turi būti užpildyti</small>#}
+
+                {#<div class="text-center">#}
+                    {#<button class="btn btn-primary">Registruokis</button>#}
+                {#</div>#}
+                {#{{ form_end(form) }}#}
+
+            {#</div>#}
+        {#</div>#}
+
+    {#</div>#}
+{#{% endblock body %}#}

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Customer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class RegistrationCustomerController extends Controller
@@ -11,7 +12,7 @@ class RegistrationCustomerController extends Controller
     {
         return $this->container
             ->get('pugx_multi_user.registration_manager')
-            ->register('AppBundle\Entity\Customer');
+            ->register(Customer::class);
 //        return $this->render('AppBundle:RegistrationCustomer:register.html.twig', array(
             // ...
 //        ));
