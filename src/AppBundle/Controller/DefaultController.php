@@ -19,11 +19,15 @@ class DefaultController extends Controller
       $repository = $em->getRepository('AppBundle:Product');
       $products = $repository->findAll();
 
+      $repository = $em->getRepository('AppBundle:User');
+      $users = $repository->findAll();
+
       //var_dump($products);
       //die;
 
       return $this->render('default/index.html.twig',[
           'products' =>$products,
+          'users' => $users,
       ]);
   }
 
