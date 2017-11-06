@@ -103,3 +103,10 @@ easy_admin:
                     - lastLogin
         Address:
             class: AppBundle\Entity\Address
+            list:
+                actions: ['edit', 'search', 'show']
+        Product:
+            class: AppBundle\Entity\Product
+            list:
+                actions: ['edit', 'search', 'show']
+
