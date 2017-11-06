@@ -86,3 +86,18 @@ fos_user:
     registration:
         form:
             type: AppBundle\Form\RegistrationFormType
+
+easy_admin:
+    entities:
+        User:
+            class: AppBundle\Entity\User
+            list:
+                actions: ['edit', 'search', 'show']
+                fields:
+                    - id
+                    - email
+                    - username
+                    - legalEntityCode
+                    - companyName
+                    - enabled
+                    - lastLogin
