@@ -101,3 +101,5 @@ easy_admin:
                     - companyName
                     - enabled
                     - lastLogin
+        Address:
+            class: AppBundle\Entity\Address
