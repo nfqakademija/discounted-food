@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Welcome{% endblock %}
+{% block title %}Dicounted Food{% endblock %}
 
 {% block navbar %}
     <ul class="nav navbar-nav menu__list">
@@ -20,6 +20,15 @@
     <h3 class="wthree_text_info"><span>Products of {{ app.user.companyName }} in Address {{ shops.Address }}</span></h3>
     <div id="horizontalTab">
         <div class = "row">
+
+            {% for message in app.flashes('notice') %}
+                <div class="alert alert-success col-md-6 col-md-offset-3">
+                    <p class="text-center">
+                        <b>{{ message }}</b>
+                    </p>
+                </div>
+            {% endfor %}
+            
             <div class = "col-md-12 col-sm-2 text-center">
                 <div class="panel panel-success">
                     <div class="panel-heading">Add your product</div>

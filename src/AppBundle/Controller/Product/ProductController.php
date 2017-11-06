@@ -36,6 +36,10 @@ class ProductController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($form->getData());
             $em->flush();
+            $this->addFlash(
+                'notice',
+                'New product added!'
+            );
             return $this->redirect($request->getUri());
         }
 
