@@ -39,6 +39,11 @@ class ProfileController extends Controller
             $em->persist($address);
             $em->flush();
 
+            $this->addFlash(
+                'notice',
+                'New shop added!'
+            );
+
             return $this->redirectToRoute('profile_index', array('id' => $address->getId()));
         }
 
@@ -62,10 +67,15 @@ class ProfileController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash(
+                'notice',
+                'Shop updated!'
+            );
+
             return $this->redirectToRoute('profile_index');
         }
 
-        return $this->render('profile/edit.html.twig', array(
+        return $this->render('Profile/edit.html.twig', array(
             'shops' => $address,
             'form' => $editForm->createView(),
         ));
@@ -83,6 +93,11 @@ class ProfileController extends Controller
         $em = $this->getDoctrine()->getManager();
         $em->remove($address);
         $em->flush();
+
+        $this->addFlash(
+            'notice',
+            'Shop deleted!'
+        );
         return $this->redirectToRoute('profile_index');
     }
 
