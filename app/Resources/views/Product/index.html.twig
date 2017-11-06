@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block navbar %}
+    <ul class="nav navbar-nav menu__list">
+        <li class="menu__item"><a class="menu__link" href="{{ path('homepage') }}">Home <span class="sr-only">(current)</span></a></li>
+        <li class="menu__item--current menu__item"><a class="menu__link" href="{{ path('about') }}">About</a></li>
+        <li class="menu__item dropdown">
+            <a class="menu__link" href="#" class="dropdown-toggle" data-toggle="dropdown">Suppliers <b class="caret"></b></a>
+            <ul class="dropdown-menu agile_short_dropdown">
+                <li><a href="#">Maxima</a></li>
+                <li><a href="#">Can can</a></li>
+            </ul>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block body %}
+    <h3 class="wthree_text_info"><span>Products of {{ app.user.companyName }} in Address {{ shops.Address }}</span></h3>
+    <div id="horizontalTab">
+        <div class = "row">
+            <div class = "col-md-12 col-sm-2 text-center">
+                <div class="panel panel-success">
+                    <div class="panel-heading">Add your product</div>
+                    <div class="panel-body">
+                        {{ form_start(form) }}
+
+                        <div class="form-group">
+                            {{ form_errors(form.name) }}
+                            {{ form_label(form.name) }}
+                            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_errors(form.description) }}
+                            {{ form_label(form.description) }}
+                            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_errors(form.dateFrom) }}
+                            {{ form_label(form.dateFrom) }}
+                            {{ form_widget(form.dateFrom) }}
+                            {#{{ form_widget(form.dateFrom, {'attr': {'class': 'form-control'}}) }}#}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_errors(form.dateTo) }}
+                            {{ form_label(form.dateTo) }}
+                            {{ form_widget(form.dateTo) }}
+                            {#{{ form_widget(form.dateTo, {'attr': {'class': 'form-control'}}) }}#}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_errors(form.portions) }}
+                            {{ form_label(form.portions) }}
+                            {{ form_widget(form.portions, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+
+                        <div class="form-group">
+                            {{ form_errors(form.price) }}
+                            {{ form_label(form.price) }}
+                            {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+
+                        <button type = "submit" class = "btn btn-success">Add new product</button>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+            <div class="resp-tabs-container">
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="wthree_text_info">News <span>Feed</span></h3>
+    <div id="horizontalTab">
+        <div class = "row">
+            <div class = "col-md-12 col-sm-2 text-center">
+
+            </div>
+            <div class="resp-tabs-container">
+
+            {% for product in products %}
+                <div class="col-sm-3 col-md-3 col-lg-3 mt-3 product-men">
+                    <div class="card">
+                        <img class="card-img-top" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+                        <div class="card-block text-center">
+                            <h4 class="card-title mt-3">{{ product.name }}</h4>
+                            <div class="meta">
+                                <a>{{ app.user.companyName }} Address: {{ shops.Address }}</a>
+                            </div>
+                            <div class="card-text">
+                                {{ product.description }}
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <small>Collection time today: <strong>{{ product.dateFrom|date("y/m/d h:m:s") }} - {{ product.dateTo|date("y/m/d h:m:s") }}</strong></small>
+                        </div>
+                        <div class="card-footer text-center">
+                            <small>Left: <strong>{{ product.portions }}</strong> portions for: <strong><span class="item_price">${{ product.price }}</span></strong></small>
+                            <button style = "color:white;" class="btn snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">SHOW IN THE MAP</button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -14,8 +14,17 @@ class DefaultController extends Controller
    */
   public function indexAction(Request $request)
   {
-      // replace this example code with whatever you need
-      return $this->render('default/index.html.twig');
+      $em = $this->getDoctrine()->getManager();
+
+      $repository = $em->getRepository('AppBundle:Product');
+      $products = $repository->findAll();
+
+      //var_dump($products);
+      //die;
+
+      return $this->render('default/index.html.twig',[
+          'products' =>$products,
+      ]);
   }
 
   /**

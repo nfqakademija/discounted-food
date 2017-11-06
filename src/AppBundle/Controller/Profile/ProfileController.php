@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use AppBundle\Form\AddressType;
 
 /**
  * @Route("/profile", name="profile")
@@ -30,7 +31,7 @@ class ProfileController extends Controller
 
         $address = new Address();
         $address->setShopOwner($this->getUser());
-        $form = $this->createForm('AppBundle\Form\AddressType', $address);
+        $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * Address
@@ -48,6 +49,10 @@ class Address
      */
     private $shop_owner;
 
+    /**
+     * @OneToMany(targetEntity="AppBundle\Entity\Product", mappedBy="address")
+     */
+    private $products;
 
     /**
      * Get id

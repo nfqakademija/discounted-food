@@ -9,6 +9,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToMany;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**
@@ -40,6 +41,10 @@ class User extends BaseUser
      */
     private $company_name;
 
+    /**
+     * @OneToMany(targetEntity="AppBundle\Entity\Address", mappedBy="shop_owner")
+     */
+    private $addresses;
 
     /**
      * @return mixed

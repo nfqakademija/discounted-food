@@ -43,28 +43,29 @@
 
             </div>
             <div class="resp-tabs-container">
-
+            {% for product in products %}
                 <div class="col-sm-4 col-md-4 col-lg-4 mt-4 product-men">
                     <div class="card">
                         <img class="card-img-top" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
                         <div class="card-block text-center">
-                            <h4 class="card-title mt-3">Food name</h4>
+                            <h4 class="card-title mt-3">{{ product.name }}</h4>
                             <div class="meta">
-                                <a>Supplier name</a>
+                                <a>{{ product.address.shopOwner.companyName }} Address: {{ product.address.address }}</a>
                             </div>
                             <div class="card-text">
-                                About food
+                                {{ product.description }}
                             </div>
                         </div>
                         <div class="card-footer text-center">
-                            <small>Collection time today: <strong>17:00 - 18:00</strong></small>
+                            <small>Collection time today: <strong>{{ product.dateFrom|date("h:m") }} - {{ product.dateTo|date("h:m") }}</strong></small>
                         </div>
                         <div class="card-footer text-center">
-                            <small>Left: <strong>3</strong> portions for: <strong><span class="item_price">$3.99</span></strong></small>
+                            <small>Left: <strong>{{ product.portions }}</strong> portions for: <strong><span class="item_price">${{ product.price }}</span></strong></small>
                             <button style = "color:white;" class="btn snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">SHOW IN THE MAP</button>
                         </div>
                     </div>
                 </div>
+            {% endfor %}
 
                 <div class="clearfix"></div>
             </div>

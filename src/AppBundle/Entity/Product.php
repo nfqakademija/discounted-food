@@ -29,11 +29,18 @@ class Product
     private $name;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="address_id", type="integer", length=11)
+     */
+    private $addressId;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="price", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=255)
      */
-    private $price;
+    private $description;
 
     /**
      * @var \DateTime
@@ -50,10 +57,24 @@ class Product
     private $dateTo;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Address", inversedBy="products")
+     * @var int
+     *
+     * @ORM\Column(name="portions", type="integer")
+     */
+    private $portions;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="price", type="float")
+     */
+    private $price;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Address", inversedBy="products")
      * @ORM\JoinColumn(name="address_id", referencedColumnName="id")
      */
-    private $addressId;
+    private $address;
 
 
     /**
@@ -91,33 +112,33 @@ class Product
     }
 
     /**
-     * Set price
+     * Set description
      *
-     * @param string $price
+     * @param string $description
      *
      * @return Product
      */
-    public function setPrice($price)
+    public function setDescription($description)
     {
-        $this->price = $price;
+        $this->description = $description;
 
         return $this;
     }
 
     /**
-     * Get price
+     * Get description
      *
      * @return string
      */
-    public function getPrice()
+    public function getDescription()
     {
-        return $this->price;
+        return $this->description;
     }
 
     /**
      * Set dateFrom
      *
-     * @param \DateTime $dateFrom
+     * @param datetime $dateFrom
      *
      * @return Product
      */
@@ -131,7 +152,7 @@ class Product
     /**
      * Get dateFrom
      *
-     * @return \DateTime
+     * @return datetime
      */
     public function getDateFrom()
     {
@@ -163,27 +184,83 @@ class Product
     }
 
     /**
-     * Set addressId
+     * Set portions
      *
-     * @param integer $addressId
+     * @param integer $portions
      *
      * @return Product
      */
-    public function setAddressId($addressId)
+    public function setPortions($portions)
     {
-        $this->addressId = $addressId;
+        $this->portions = $portions;
 
         return $this;
     }
 
     /**
-     * Get addressId
+     * Get portions
      *
+     * @return int
+     */
+    public function getPortions()
+    {
+        return $this->portions;
+    }
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     *
+     * @return Product
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
      * @return int
      */
     public function getAddressId()
     {
         return $this->addressId;
+    }
+
+    /**
+     * @param int $addressId
+     */
+    public function setAddressId($addressId)
+    {
+        $this->addressId = $addressId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param mixed $address
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
     }
 }
 
