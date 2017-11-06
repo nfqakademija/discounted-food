@@ -1,9 +1,11 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% if is_granted("ROLE_USER") == false %}
-    <div class="well">
 
-        <h1 class="text-center">Register your company</h1>
+    <h1 class="text-center">Register your company</h1>
+    <br/>
+    {{ form_errors(form) }}
+    <div class="well">
 
         {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
         <div class="form-group">

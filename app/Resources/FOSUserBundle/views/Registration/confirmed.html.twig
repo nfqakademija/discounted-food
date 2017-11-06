@@ -4,7 +4,9 @@
 
 {% block fos_user_content %}
     <div class="alert alert-success">
-        <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+        <h5 class="text-center">
+            {{ 'registration.confirmed'|trans({'%username%': user.username}) }}
+        </h5>
         {% if targetUrl %}
             <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
         {% endif %}
