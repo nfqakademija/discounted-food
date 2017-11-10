@@ -29,7 +29,7 @@
                 </div>
             {% endfor %}
 
-            <div class = "col-md-12 col-sm-2 text-center">
+            <div class = "col-md-3 col-sm-2 text-center">
                 <div class="panel panel-success">
                     <div class="panel-heading">Add your shop</div>
                     <div class="panel-body">
@@ -56,6 +56,10 @@
                         {{ form_end(form) }}
                     </div>
                 </div>
+            </div>
+            <div class="col-md-9">
+                {{ ivory_google_map(map) }}
+                {{ ivory_google_api([map]) }}
             </div>
             <div class="resp-tabs-container">
                 <div class="clearfix"></div>

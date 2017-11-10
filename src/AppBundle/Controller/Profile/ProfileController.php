@@ -4,6 +4,8 @@ namespace AppBundle\Controller\Profile;
 
 use AppBundle\Entity\Address;
 use Faker\Factory;
+use Ivory\GoogleMap\Base\Coordinate;
+use Ivory\GoogleMap\Map;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -47,9 +49,17 @@ class ProfileController extends Controller
             return $this->redirectToRoute('profile_index', array('id' => $address->getId()));
         }
 
+        $map = new Map();
+
+        $map->setStylesheetOption('height', '400px');
+        $map->setStylesheetOption('width', '100%');
+        $map->setMapOption('zoom', 12);
+        $map->setCenter(new Coordinate(54.687157, 25.279652));
+
         return $this->render('Profile/profile.html.twig', array(
             'shops' => $addresses,
             'form' => $form->createView(),
+            'map'  => $map
         ));
     }
 
