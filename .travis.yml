@@ -1,0 +1,21 @@
+sudo: false
+
+language: php
+
+php:
+    - 7.1
+
+services:
+    - mysql
+
+env:
+    - SYMFONY_VERSION="3.0.*" DB=mysql
+
+before-install:
+    - composer self-update
+
+install:
+    - composer install
+    - cp app/config/parameters.yml.dist app/config/parameters.yml
+    - php bin/console doctrine:database:create --env=test
+- php bin/console doctrine:schema:create --env=test
