@@ -3,6 +3,7 @@
 namespace AppBundle\Controller\Profile;
 
 use AppBundle\Entity\Address;
+use AppBundle\Service\MapGenerator;
 use Faker\Factory;
 use Http\Adapter\Guzzle6\Client;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
@@ -69,22 +70,8 @@ class ProfileController extends Controller
             return $this->redirectToRoute('profile_index', array('id' => $address->getId()));
         }
 
-        $map = new Map();
-
-        $map->setStylesheetOption('height', '400px');
-        $map->setStylesheetOption('width', '100%');
-        $map->setMapOption('zoom', 12);
-
-        //center map Vilnius
-        $map->setCenter(new Coordinate(54.687157, 25.279652));
-
-        foreach($addresses as $address) {
-            $marker = new Marker(new Coordinate($address->getLatitude(), $address->getLongitude()));
-            $map->getOverlayManager()->addMarker($marker);
-        }
-
-//        $marker = new Marker(new Coordinate(54.687157, 25.279652));
-//        $map->getOverlayManager()->addMarker($marker);
+        $mapGenerator = new MapGenerator();
+        $map = $mapGenerator->generateMap($addresses);
 
 
         return $this->render('Profile/profile.html.twig', array(

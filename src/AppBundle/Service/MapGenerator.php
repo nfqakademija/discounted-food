@@ -1,14 +1,25 @@
 <?php
 namespace AppBundle\Service;
+use Ivory\GoogleMap\Base\Coordinate;
 use Ivory\GoogleMap\Map;
+use Ivory\GoogleMap\Overlay\Marker;
 
 class MapGenerator
 {
-    private $map;
 
-    public function __construct(Map $map)
+    public function generateMap(array $addresses) : Map
     {
-        $this->map = $map;
+        $map = new Map();
+        $map->setStylesheetOption('height', '400px');
+        $map->setStylesheetOption('width', '100%');
+        $map->setMapOption('zoom', 12);
+        $map->setCenter(new Coordinate(54.687157, 25.279652));
+
+        foreach($addresses as $address) {
+            $marker = new Marker(new Coordinate($address->getLatitude(), $address->getLongitude()));
+            $map->getOverlayManager()->addMarker($marker);
+        }
+        return $map;
     }
 
 
