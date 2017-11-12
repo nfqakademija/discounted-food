@@ -4,8 +4,13 @@ namespace AppBundle\Controller\Profile;
 
 use AppBundle\Entity\Address;
 use Faker\Factory;
+use Http\Adapter\Guzzle6\Client;
+use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Ivory\GoogleMap\Base\Coordinate;
 use Ivory\GoogleMap\Map;
+use Ivory\GoogleMap\Overlay\Marker;
+use Ivory\GoogleMap\Service\Geocoder\GeocoderService;
+use Ivory\GoogleMap\Service\Geocoder\Request\GeocoderAddressRequest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -37,7 +42,22 @@ class ProfileController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $geocoder = new GeocoderService(new Client(), new GuzzleMessageFactory());
+            $request = new GeocoderAddressRequest($address->getAddress());
+            $response = $geocoder->geocode($request);
+            $results = $response->getResults();
+
             $em = $this->getDoctrine()->getManager();
+
+            foreach ($results as $result) {
+                $addressName = $result->getFormattedAddress();
+                $lat = $result->getGeometry()->getLocation()->getLatitude();
+                $lon = $result->getGeometry()->getLocation()->getLongitude();
+                $address->setAddress($addressName);
+                $address->setLatitude($lat);
+                $address->setLongitude($lon);
+
+            };
             $em->persist($address);
             $em->flush();
 
@@ -54,7 +74,18 @@ class ProfileController extends Controller
         $map->setStylesheetOption('height', '400px');
         $map->setStylesheetOption('width', '100%');
         $map->setMapOption('zoom', 12);
+
+        //center map Vilnius
         $map->setCenter(new Coordinate(54.687157, 25.279652));
+
+        foreach($addresses as $address) {
+            $marker = new Marker(new Coordinate($address->getLatitude(), $address->getLongitude()));
+            $map->getOverlayManager()->addMarker($marker);
+        }
+
+//        $marker = new Marker(new Coordinate(54.687157, 25.279652));
+//        $map->getOverlayManager()->addMarker($marker);
+
 
         return $this->render('Profile/profile.html.twig', array(
             'shops' => $addresses,
