@@ -51,42 +51,42 @@ class ProductController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing address entity.
+     * Displays a form to edit an existing product entity.
      *
-     * @Route("/{id}/edit", name="profile_edit")
+     * @Route("/{id}/edit", name="product_edit")
      * @Method({"GET", "POST"})
      */
-//    public function editAction(Request $request, Address $address)
-//    {
-//        $editForm = $this->createForm('AppBundle\Form\AddressType', $address);
-//        $editForm->handleRequest($request);
-//
-//        if ($editForm->isSubmitted() && $editForm->isValid()) {
-//            $this->getDoctrine()->getManager()->flush();
-//
-//            return $this->redirectToRoute('profile_index');
-//        }
-//
-//        return $this->render('profile/edit.html.twig', array(
-//            'shops' => $address,
-//            'form' => $editForm->createView(),
-//        ));
-//    }
-//
-//
-//    /**
-//     * Deletes a address entity.
-//     *
-//     * @Route("/{id}", name="profile_delete")
-//     * @Method({"GET", "POST"})
-//     */
-//    public function deleteAction(Request $request, Address $address)
-//    {
-//        $em = $this->getDoctrine()->getManager();
-//        $em->remove($address);
-//        $em->flush();
-//        return $this->redirectToRoute('profile_index');
-//    }
+    public function editAction(Request $request, Product $product)
+    {
+        $editForm = $this->createForm('AppBundle\Form\ProductType', $product);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('profile_index');
+        }
+
+        return $this->render('Product/edit.html.twig', array(
+            'product' => $product,
+            'form' => $editForm->createView(),
+        ));
+    }
+
+
+    /**
+     * Deletes a product entity.
+     *
+     * @Route("/{id}", name="product_delete")
+     * @Method({"GET", "POST"})
+     */
+    public function deleteAction(Request $request, Product $product)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($product);
+        $em->flush();
+        return $this->redirectToRoute('profile_index');
+    }
 
 
 
