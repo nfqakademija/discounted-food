@@ -29,7 +29,8 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
-    AppBundle\Service\MapGenerator:
+    custom_map_generator:
+        class: AppBundle\Service\MapGenerator
         public: true
 
     # add more services, or override services that need manual wiring

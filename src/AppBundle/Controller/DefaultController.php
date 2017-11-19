@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Service\MapGenerator;
 use Faker\Factory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -16,16 +17,22 @@ class DefaultController extends Controller
   {
       $em = $this->getDoctrine()->getManager();
 
+      $addresses = $em->getRepository('AppBundle:Address')->findAll();
+
       $repository = $em->getRepository('AppBundle:Product');
       $products = $repository->findAll();
 
       $repository = $em->getRepository('AppBundle:User');
       $users = $repository->findAll();
 
-      //var_dump($products);
-      //die;
+      $mapGenerator = $this->get('custom_map_generator');
+
+      $map = $mapGenerator->generateMap($addresses);
+
 
       return $this->render('default/index.html.twig',[
+          'addresses' => $addresses,
+          'map' => $map,
           'products' =>$products,
           'users' => $users,
       ]);
