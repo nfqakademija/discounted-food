@@ -20,7 +20,9 @@ class MapGenerator
         foreach($addresses as $address) {
             $marker = new Marker(new Coordinate($address->getLatitude(), $address->getLongitude()));
             $map->getOverlayManager()->addMarker($marker);
-            $infowindow = new InfoWindow($address->getAddress());
+            $infowindow = new InfoWindow(
+                $address->getAddress() . "<img width='100px' height='100px' src='http://retaildesignblog.net/wp-content/uploads/2013/01/Max-Mara-flagship-store-Duccio-Grassi-Architects-Hong-Kong.jpg'/>"
+            );
             $marker->setInfoWindow($infowindow);
         }
         return $map;

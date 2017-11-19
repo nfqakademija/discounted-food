@@ -15,6 +15,8 @@ use Ivory\GoogleMap\Service\Geocoder\Request\GeocoderAddressRequest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\AddressType;
 
@@ -70,7 +72,16 @@ class ProfileController extends Controller
             return $this->redirectToRoute('profile_index', array('id' => $address->getId()));
         }
 
+
+        $container = new Container();
+
         $mapGenerator = new MapGenerator();
+//        $container->set('map-generator', $mapGenerator);
+//
+//        $container->get('map-generator');
+
+
+
         $map = $mapGenerator->generateMap($addresses);
 
 
@@ -91,7 +102,6 @@ class ProfileController extends Controller
     {
         $editForm = $this->createForm('AppBundle\Form\AddressType', $address);
         $editForm->handleRequest($request);
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 

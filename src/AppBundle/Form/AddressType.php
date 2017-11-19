@@ -14,7 +14,7 @@ class AddressType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('address');
+        $builder->add('address')->remove('latitude')->remove('longitude');
     }
     
     /**
