@@ -73,14 +73,7 @@ class ProfileController extends Controller
         }
 
 
-        $container = new Container();
-
-        $mapGenerator = new MapGenerator();
-//        $container->set('map-generator', $mapGenerator);
-//
-//        $container->get('map-generator');
-
-
+        $mapGenerator = $this->get('custom_map_generator');
 
         $map = $mapGenerator->generateMap($addresses);
 
