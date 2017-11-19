@@ -104,4 +104,22 @@ class User extends BaseUser
         return $this->id;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getAddresses()
+    {
+        return $this->addresses;
+    }
+
+    /**
+     * @param mixed $addresses
+     */
+    public function setAddresses($addresses)
+    {
+        $this->addresses = $addresses;
+    }
+
+
+
 }
