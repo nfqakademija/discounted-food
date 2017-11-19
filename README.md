@@ -21,6 +21,11 @@ Keywords: php, symfony, doctrine, mysql.
   $ cd path/to/<project>
   $ composer install 
   $ cp app/config/parameters.yml.dist app/config/parameters.yml
-  $ bin/console doctrine:database:create
-  $ bin/console doctrine:schema:update --force
+  $ php bin/console doctrine:database:create
+  $ php bin/console doctrine:schema:update --force
 ```
+For loading sample data
+```bash
+    $ php bin/console doctrine:fixtures:load
+```
+
