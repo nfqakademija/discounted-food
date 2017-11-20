@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use AppBundle\Entity\Address;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class AddressType extends AbstractType
 {
@@ -14,7 +15,7 @@ class AddressType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('address')->remove('latitude')->remove('longitude');
+        $builder->add('address')->remove('latitude')->remove('longitude')->add('imageFile', VichImageType::class);
     }
     
     /**

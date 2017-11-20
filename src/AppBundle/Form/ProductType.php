@@ -2,13 +2,13 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Product;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use AppBundle\Entity\Product;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ProductType extends AbstractType
 {
@@ -21,7 +21,7 @@ class ProductType extends AbstractType
             'widget' => 'choice',
         ))->add('dateTo', DateType::class, array(
             'widget' => 'choice',
-        ))->add('portions')->add('price');
+        ))->add('portions')->add('price')->add('imageFile', VichImageType::class);
     }
     
     /**
