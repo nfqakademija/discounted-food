@@ -4,12 +4,11 @@ namespace AppBundle\Controller\Product;
 
 use AppBundle\Entity\Address;
 use AppBundle\Entity\Product;
-use Faker\Factory;
+use AppBundle\Form\ProductType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Form\ProductType;
 
 /**
  * @Route("/profile/item", name="profile")

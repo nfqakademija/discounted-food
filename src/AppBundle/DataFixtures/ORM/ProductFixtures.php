@@ -20,7 +20,7 @@ class ProductFixtures extends Fixture
     {
         $faker = Factory::create();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $product = new Product();
             $product->setName('food-name-here');
             $product->setDescription($faker->sentence(4));
@@ -29,6 +29,9 @@ class ProductFixtures extends Fixture
             $product->setDateFrom($faker->dateTime());
             $product->setDateTo($faker->dateTime());
             $product->setAddress($this->getReference('address' . $i));
+            $product->setImageName('food.jpg');
+            $product->setImageSize(2000);
+            $product->setUpdatedAt($faker->dateTime());
             $manager->persist($product);
         }
 

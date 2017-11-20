@@ -20,12 +20,15 @@ class AddressFixtures extends Fixture
     {
         $faker = Factory::create();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $address = new Address();
             $address->setLatitude($faker->latitude);
             $address->setLongitude($faker->longitude);
             $address->setAddress($faker->address);
             $address->setShopOwner($this->getReference('user' . $i));
+            $address->setImageName('store.jpg');
+            $address->setImageSize(2000);
+            $address->setUpdatedAt($faker->dateTime());
             $manager->persist($address);
             $this->addReference('address'.$i , $address);
         }

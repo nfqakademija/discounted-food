@@ -54,7 +54,7 @@
             {% for product in products %}
                 <div class="col-sm-4 col-md-4 col-lg-4 mt-4 product-men">
                     <div class="card">
-                        <img class="card-img-top" src="https://static.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+                        <img class="card-img-top" src="{{ asset('images/products/'  ~ product.ImageName) }}">
                         <div class="card-block text-center">
                             <h4 class="card-title mt-3">{{ product.name }}</h4>
                             <div class="meta">
