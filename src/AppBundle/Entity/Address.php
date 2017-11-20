@@ -152,6 +152,22 @@ class Address
         $this->shop_owner = $shop_owner;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * @param mixed $products
+     */
+    public function setProducts($products)
+    {
+        $this->products = $products;
+    }
+
 
 }
 

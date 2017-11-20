@@ -94,19 +94,61 @@ easy_admin:
             list:
                 actions: ['edit', 'search', 'show']
                 fields:
+                     - email
+                     - username
+                     - enabled
+                     - lastLogin
+                     - legalEntityCode
+                     - companyName
+                     - addresses
+            edit:
+                fields:
                     - id
                     - email
                     - username
                     - legalEntityCode
                     - companyName
                     - enabled
-                    - lastLogin
         Address:
             class: AppBundle\Entity\Address
             list:
                 actions: ['edit', 'search', 'show']
+            edit:
+                fields:
+                    - address
+                    - latitude
+                    - longitude
+
         Product:
             class: AppBundle\Entity\Product
             list:
                 actions: ['edit', 'search', 'show']
+                fields:
+                    - id
+                    - name
+                    - description
+                    - dateTo
+                    - dateFrom
+                    - portions
+                    - price
+                    - address
+            edit:
+                fields:
+                    - id
+                    - name
+                    - description
+                    - dateTo
+                    - dateFrom
+                    - portions
+                    - price
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+        address_image:
+            uri_prefix:         /images/addresses
+            upload_destination: '%kernel.root_dir%/../web/images/addresses'
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true
 
