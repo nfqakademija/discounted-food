@@ -20,91 +20,98 @@
 {% endblock %}
 
 {% block index_page %}
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
-        <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <div class="container">
-                    <div class="carousel-caption">
-                        <h3>The Biggest <span>Sale</span></h3>
-                        <p>Special for today</p>
-                        <br>
-                        <div class="row">
-                            <div style="border-radius: 25px;background-color:rgba(0,0,0,0.7);padding-top:55px;padding-bottom:80px; padding-left:40px; padding-right: 40px;">
-                                <form method="post" action="#">
-                                    <div class="col-md-6">
-                                        <div class="form-group form-control-lg">
-                                            <input type="text" class="form-control" id="formGroupExampleInput"
-                                                   placeholder="Favorite food">
-                                        </div>
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <div class="container">
+                            <div class="carousel-caption">
+                                <h3>The Biggest <span>Sale</span></h3>
+                                <p>Special for today</p>
+                                <br>
+                                <div class="row">
+                                    <div style="border-radius: 25px;background-color:rgba(0,0,0,0.7);padding-top:55px;padding-bottom:80px; padding-left:40px; padding-right: 40px;">
+                                        <form method="post" action="#">
+                                            <div class="col-md-6">
+                                                <div class="form-group form-control-lg">
+                                                    <input type="text" class="form-control" id="formGroupExampleInput"
+                                                           placeholder="Favorite food">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <select class="form-control form-control-lg">
+                                                    <option>Choose city</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <button class="btn btn-success">Search</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <div class="col-md-5">
-                                        <select class="form-control form-control-lg">
-                                            <option>Choose city</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <button class="btn btn-success">Search</button>
-                                    </div>
-                                </form>
+                                </div>
+                                {#<button class="btn hvr-outline-out button2" onclick="getLocation()">Show in the map </button>#}
                             </div>
                         </div>
-                        {#<button class="btn hvr-outline-out button2" onclick="getLocation()">Show in the map </button>#}
                     </div>
                 </div>
-            </div>
-        </div>
 
-    </div>
+            </div>
 {% endblock %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-md-12">
-            {{ ivory_google_map(map) }}
-            {{ ivory_google_api([map]) }}
-        </div>
-    </div>
+<div class="new_arrivals_agile_w3ls_info">
+   <div class="container">
+        <h3 class="wthree_text_info">News <span>Feed</span></h3>
+        <div id="horizontalTab">
+            <div class="row">
+                <div class="col-md-12 col-sm-2 text-center">
 
-    <h3 class="wthree_text_info">News <span>Feed</span></h3>
-    <div id="horizontalTab">
-        <div class="row">
-            <div class="col-md-12 col-sm-2 text-center">
-
-            </div>
-            <div class="resp-tabs-container">
-                {% for product in products %}
-                    <div class="col-sm-4 col-md-4 col-lg-4 mt-4 product-men">
-                        <div class="card">
-                            <img class="card-img-top" src="{{ asset('images/products/'  ~ product.ImageName) }}">
-                            <div class="card-block text-center">
-                                <h4 class="card-title mt-3">{{ product.name }}</h4>
-                                <div class="meta">
-                                    <a>{{ product.address.shopOwner.companyName }}
-                                        Address: {{ product.address.address }}</a>
+                </div>
+                <div class="resp-tabs-container">
+                    {% for product in products %}
+                        <div class="col-sm-4 col-md-4 col-lg-4 mt-4 product-men">
+                            <div class="card">
+                                <img class="card-img-top" src="{{ asset('images/products/'  ~ product.ImageName) }}">
+                                <div class="card-block text-center">
+                                    <h4 class="card-title mt-3">{{ product.name }}</h4>
+                                    <div class="meta">
+                                        <a>{{ product.address.shopOwner.companyName }}
+                                            Address: {{ product.address.address }}</a>
+                                    </div>
+                                    <div class="card-text">
+                                        {{ product.description }}
+                                    </div>
                                 </div>
-                                <div class="card-text">
-                                    {{ product.description }}
+                                <div class="card-footer text-center">
+                                    <small>Collection time today: <strong>{{ product.dateFrom|date("h:m") }}
+                                            - {{ product.dateTo|date("h:m") }}</strong></small>
                                 </div>
-                            </div>
-                            <div class="card-footer text-center">
-                                <small>Collection time today: <strong>{{ product.dateFrom|date("h:m") }}
-                                        - {{ product.dateTo|date("h:m") }}</strong></small>
-                            </div>
-                            <div class="card-footer text-center">
-                                <small>Left: <strong>{{ product.portions }}</strong> portions for: <strong><span
-                                                class="item_price">${{ product.price }}</span></strong></small>
-                                <button style="color:white;"
-                                        class="btn snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                    SHOW IN THE MAP
-                                </button>
+                                <div class="card-footer text-center">
+                                    <small>Left: <strong>{{ product.portions }}</strong> portions for: <strong><span
+                                                    class="item_price">${{ product.price }}</span></strong></small>
+                                    <button style="color:white;"
+                                            class="btn snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                        SHOW IN THE MAP
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
 
-                <div class="clearfix"></div>
+                    <div class="clearfix"></div>
+                </div>
             </div>
         </div>
+     </div>
+  </div
+{% endblock %}
+
+{% block footer %}
+    <!-- footer -->
+    <div class="footer">
+        <div class="footer_agile_inner_info_w3l">
+            <p class="copy-right">&copy 2017 Discounted food app. All rights reserved | THIRD TEAM <3 </p>
+        </div>
     </div>
+    <!-- //footer -->
 {% endblock %}

@@ -19,92 +19,36 @@
     </ul>
 {% endblock %}
 
-{% block index_page %}
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-
-        <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <div class="container">
-                    <div class="carousel-caption">
-                        <h3>The Biggest <span>Sale</span></h3>
-                        <p>Special for today</p>
-                        <br>
-                        <div class="row">
-                            <div style="border-radius: 25px;background-color:rgba(0,0,0,0.7);padding-top:55px;padding-bottom:80px; padding-left:40px; padding-right: 40px;">
-                                <form method="post" action="#">
-                                    <div class="col-md-6">
-                                        <div class="form-group form-control-lg">
-                                            <input type="text" class="form-control" id="formGroupExampleInput"
-                                                   placeholder="Favorite food">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <select class="form-control form-control-lg">
-                                            <option>Choose city</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <button class="btn btn-success">Search</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        {#<button class="btn hvr-outline-out button2" onclick="getLocation()">Show in the map </button>#}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-{% endblock %}
-
 {% block body %}
-    <div class="row">
-        <div class="col-md-12">
-            {{ ivory_google_map(map) }}
-            {{ ivory_google_api([map]) }}
+    <div class="control-sidebar-light pull-left"
+         style="margin: 0; padding: 0;width: 30%;height: 600px; background-color:black;">
+        <div id='a_div' style="display:none;">
+            <h3 class="text-center" style="color:white;">Address</h3><br><br>
+            <div align="center"><img id='a_image'
+                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1200px-Good_Food_Display_-_NCI_Visuals_Online.jpg"
+                                     style="height:200px; width:200px;"></div>
+            <br><br>
+            <p class="text-center" style="color:white;" id="address">
+                bla bla bla bla bla bla bla blabla bla bla blabla bla bla blabla bla bla blabla bla bla blabla bla bla
+                blabla bla bla blabla bla bla blabla bla bla blabla bla bla blabla bla bla blabla bla bla blabla bla bla
+                blabla bla bla blabla bla bla bla
+            </p>
         </div>
     </div>
-
-    <h3 class="wthree_text_info">News <span>Feed</span></h3>
-    <div id="horizontalTab">
-        <div class="row">
-            <div class="col-md-12 col-sm-2 text-center">
-
-            </div>
-            <div class="resp-tabs-container">
-                {% for product in products %}
-                    <div class="col-sm-4 col-md-4 col-lg-4 mt-4 product-men">
-                        <div class="card">
-                            <img class="card-img-top" src="{{ asset('images/products/'  ~ product.ImageName) }}">
-                            <div class="card-block text-center">
-                                <h4 class="card-title mt-3">{{ product.name }}</h4>
-                                <div class="meta">
-                                    <a>{{ product.address.shopOwner.companyName }}
-                                        Address: {{ product.address.address }}</a>
-                                </div>
-                                <div class="card-text">
-                                    {{ product.description }}
-                                </div>
-                            </div>
-                            <div class="card-footer text-center">
-                                <small>Collection time today: <strong>{{ product.dateFrom|date("h:m") }}
-                                        - {{ product.dateTo|date("h:m") }}</strong></small>
-                            </div>
-                            <div class="card-footer text-center">
-                                <small>Left: <strong>{{ product.portions }}</strong> portions for: <strong><span
-                                                class="item_price">${{ product.price }}</span></strong></small>
-                                <button style="color:white;"
-                                        class="btn snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                    SHOW IN THE MAP
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-
-                <div class="clearfix"></div>
-            </div>
-        </div>
+    <div class="pull-right" style="margin: 0; padding: 0;width: 70%;">
+        {{ ivory_google_map(map) }}
+        {{ ivory_google_api([map]) }}
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        {% for address in addresses %}
+        $(document).on('click', '#{{ address.id }}', function () {
+            var address = document.getElementById('{{ address.id }}a').value;
+            document.getElementById("address").innerHTML = address;
+            var image = document.getElementById('{{ address.id }}i').value;
+            $("#a_image").attr("src", image);
+            document.getElementById('a_div').style.display = 'block';
+        });
+        {% endfor %}
+    </script>
 {% endblock %}

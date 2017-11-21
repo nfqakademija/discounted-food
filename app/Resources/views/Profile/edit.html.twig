@@ -4,10 +4,12 @@
 
 {% block navbar %}
     <ul class="nav navbar-nav menu__list">
-        <li class="menu__item"><a class="menu__link" href="{{ path('homepage') }}">Home <span class="sr-only">(current)</span></a></li>
+        <li class="menu__item"><a class="menu__link" href="{{ path('homepage') }}">Home <span
+                        class="sr-only">(current)</span></a></li>
         <li class="menu__item--current menu__item"><a class="menu__link" href="{{ path('about') }}">About</a></li>
         <li class="menu__item dropdown">
-            <a class="menu__link" href="#" class="dropdown-toggle" data-toggle="dropdown">Suppliers <b class="caret"></b></a>
+            <a class="menu__link" href="#" class="dropdown-toggle" data-toggle="dropdown">Suppliers <b
+                        class="caret"></b></a>
             <ul class="dropdown-menu agile_short_dropdown">
                 <li><a href="#">Maxima</a></li>
                 <li><a href="#">Can can</a></li>
@@ -17,14 +19,16 @@
 {% endblock %}
 
 {% block body %}
-    <h3 class="wthree_text_info"><span>Profile</span></h3>
-    <div id="horizontalTab">
-        <div class = "row">
-            <div class = "col-md-12 col-sm-2 text-center">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Add your shop</div>
-                    <div class="panel-body">
-                        {{ form_start(form) }}
+    <div class="new_arrivals_agile_w3ls_info">
+        <div class="container">
+            <h3 class="wthree_text_info"><span>Profile</span></h3>
+            <div id="horizontalTab">
+                <div class="row">
+                    <div class="col-md-12 col-sm-2 text-center">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Add your shop</div>
+                            <div class="panel-body">
+                                {{ form_start(form) }}
 
                                 <div class="form-group">
                                     {{ form_label(form.address) }}
@@ -32,21 +36,23 @@
                                 </div>
 
                                 {#<div class="form-group">#}
-                                    {#{{ form_label(form.latitude) }}#}
-                                    {#{{ form_widget(form.latitude, {'attr': {'class': 'form-control'}}) }}#}
+                                {#{{ form_label(form.latitude) }}#}
+                                {#{{ form_widget(form.latitude, {'attr': {'class': 'form-control'}}) }}#}
                                 {#</div>#}
 
                                 {#<div class="form-group">#}
-                                    {#{{ form_label(form.longitude) }}#}
-                                    {#{{ form_widget(form.longitude, {'attr': {'class': 'form-control'}}) }}#}
+                                {#{{ form_label(form.longitude) }}#}
+                                {#{{ form_widget(form.longitude, {'attr': {'class': 'form-control'}}) }}#}
                                 {#</div>#}
-                                <button type = "submit" class = "btn btn-success">Edit shop</button>
-                        {{ form_end(form) }}
+                                <button type="submit" class="btn btn-success">Edit shop</button>
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="resp-tabs-container">
+                        <div class="clearfix"></div>
                     </div>
                 </div>
-            </div>
-            <div class="resp-tabs-container">
-                <div class="clearfix"></div>
             </div>
         </div>
     </div>

@@ -9,42 +9,72 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
-  /**
-   * @Route("/", name="homepage")
-   */
-  public function indexAction(Request $request)
-  {
-      $em = $this->getDoctrine()->getManager();
+    /**
+     * @Route("/", name="homepage")
+     */
+    public function indexAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
 
-      $addresses = $em->getRepository('AppBundle:Address')->findAll();
+        $addresses = $em->getRepository('AppBundle:Address')->findAll();
 
-      $repository = $em->getRepository('AppBundle:Product');
-      $products = $repository->findAll();
+        $repository = $em->getRepository('AppBundle:Product');
+        $products = $repository->findAll();
 
-      $repository = $em->getRepository('AppBundle:User');
-      $users = $repository->findAll();
+        $repository = $em->getRepository('AppBundle:User');
+        $users = $repository->findAll();
 
-      $mapGenerator = $this->get('custom_map_generator');
+        $mapGenerator = $this->get('custom_map_generator');
 
-      $map = $mapGenerator->generateMap($addresses);
+        $map = $mapGenerator->generateMap($addresses);
 
 
-      return $this->render('default/index.html.twig',[
-          'addresses' => $addresses,
-          'map' => $map,
-          'products' =>$products,
-          'users' => $users,
-      ]);
-  }
+        return $this->render(
+            'default/index.html.twig',
+            [
+                'addresses' => $addresses,
+                'map' => $map,
+                'products' => $products,
+                'users' => $users,
+            ]
+        );
+    }
 
-  /**
-   * @Route("/about", name="about")
-   */
-  public function aboutAction(Request $request)
-  {
-      // replace this example code with whatever you need
-      return $this->render('About/about.html.twig');
-  }
+    /**
+     * @Route("/about", name="about")
+     */
+    public function aboutAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        return $this->render('About/about.html.twig');
+    }
+
+    /**
+     * @Route("/map", name="map")
+     */
+    public function mapAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $addresses = $em->getRepository('AppBundle:Address')->findAll();
+
+        $repository = $em->getRepository('AppBundle:User');
+        $users = $repository->findAll();
+
+        $mapGenerator = $this->get('custom_map_generator');
+
+        $map = $mapGenerator->generateMap($addresses);
+
+
+        return $this->render(
+            'Map/index.html.twig',
+            [
+                'addresses' => $addresses,
+                'map' => $map,
+                'users' => $users,
+            ]
+        );
+    }
 
     /**
      * @Route("/faker", name="faker")
@@ -53,8 +83,9 @@ class DefaultController extends Controller
     {
         $faker = Factory::create();
 
-        for ($i = 0 ; $i <10 ; $i++ )
+        for ($i = 0; $i < 10; $i++) {
             echo $faker->name.'<br>';
+        }
 
         die;
     }

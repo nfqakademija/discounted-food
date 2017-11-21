@@ -5,20 +5,21 @@
     <title>{% block title %}Welcome{% endblock %}</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
 
     <link rel="shortcut icon" href="{{ asset('favicon.ico?v=2') }}" type="image/x-icon">
     <link rel="icon" href="{{ asset('favicon.ico?v=2') }}" type="image/x-icon">
 
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all"/>
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" media="all"/>
     <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
     <link href="{{ asset('css/cards.css') }}" rel="stylesheet">
     <link href="{{ asset('css/easy-responsive-tabs.css') }}" rel='stylesheet' type='text/css'/>
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
-    <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic'
+          rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -26,17 +27,22 @@
 <div class="header" id="home">
     <div class="container">
         <ul>
-            <li><a href = "{{ path('homepage') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-            <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">info@example.com</a></li>
+            <li><a href="{{ path('homepage') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+            <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a
+                        href="mailto:info@example.com">info@example.com</a></li>
             {% if is_granted('ROLE_USER') %}
-                <li><a href="{{ path('profile_index') }}"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a></li>
-                <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a></li>
+                <li><a href="{{ path('profile_index') }}"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a>
+                </li>
+                <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
+                </li>
             {% else %}
-                <li> <a href="{{ path('fos_user_security_login') }}"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Login </a></li>
-                <li> <a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Register </a></li>
+                <li><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                        Login </a></li>
+                <li><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-pencil-square-o"
+                                                                              aria-hidden="true"></i> Register </a></li>
             {% endif %}
 
-            <h1 style = "color:white;" id="demo"></h1>
+            <h1 style="color:white;" id="demo"></h1>
         </ul>
     </div>
 </div>
@@ -58,19 +64,23 @@
         <!-- header-bot -->
         <div class="col-md-4 agileits-social top_content">
             <ul class="social-nav model-3d-0 footer-social w3_agile_social">
-                <li class="share">Share On : </li>
+                <li class="share">Share On :</li>
                 <li><a href="#" class="facebook">
                         <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
-                        <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
+                        <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                    </a></li>
                 <li><a href="#" class="twitter">
                         <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
-                        <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div></a></li>
+                        <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                    </a></li>
                 <li><a href="#" class="instagram">
                         <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
-                        <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
+                        <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                    </a></li>
                 <li><a href="#" class="pinterest">
                         <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
-                        <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div></a></li>
+                        <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                    </a></li>
             </ul>
         </div>
         <div class="clearfix"></div>
@@ -85,7 +95,8 @@
                 <div class="container-fluid">
 
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
@@ -107,15 +118,12 @@
 
 {% block index_page %}{% endblock %}
 
-<div class="new_arrivals_agile_w3ls_info">
-    <div class="container">
 
-        {% block body %}{% endblock %}
 
-    </div>
-</div>
-<!-- //new_arrivals -->
+{% block body %}{% endblock %}
 
+
+{% block footer %}
 <!-- footer -->
 <div class="footer">
     <div class="footer_agile_inner_info_w3l">
@@ -123,6 +131,7 @@
     </div>
 </div>
 <!-- //footer -->
+{% endblock %}
 
 <!-- js -->
 <script type="text/javascript" src="{{ asset('js/jquery-2.1.4.min.js') }}"></script>
@@ -152,7 +161,7 @@
             width: 'auto', //auto or any width like 600px
             fit: true,   // 100% fit in a container
             closed: 'accordion', // Start closed if in accordion view
-            activate: function(event) { // Callback function if tab is switched
+            activate: function (event) { // Callback function if tab is switched
                 var $tab = $(this);
                 var $info = $('#tabInfo');
                 var $name = $('span', $info);
@@ -179,15 +188,16 @@
 <script type="text/javascript" src="{{ asset('js/move-top.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/jquery.easing.min.js') }}"></script>
 <script type="text/javascript">
-    jQuery(document).ready(function($) {
-        $(".scroll").click(function(event){
+    jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
             event.preventDefault();
-            $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+            $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
         });
     });
 </script>
 <script>
     var x = document.getElementById("demo");
+
     function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
@@ -195,6 +205,7 @@
             x.innerHTML = "Geolocation is not supported by this browser.";
         }
     }
+
     function showPosition(position) {
         x.innerHTML = "Latitude: " + position.coords.latitude +
             "<br>Longitude: " + position.coords.longitude;
@@ -206,8 +217,7 @@
 <script type="text/javascript">
 
 
-
-    $(document).ready(function() {
+    $(document).ready(function () {
         /*
             var defaults = {
             containerID: 'toTop', // fading element id
@@ -217,7 +227,7 @@
             };
         */
 
-        $().UItoTop({ easingType: 'easeOutQuart' });
+        $().UItoTop({easingType: 'easeOutQuart'});
 
     });
 </script>
@@ -228,14 +238,14 @@
 <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-        s1.async=true;
-        s1.src='https://embed.tawk.to/5a006f16bb0c3f433d4c779e/default';
-        s1.charset='UTF-8';
-        s1.setAttribute('crossorigin','*');
-        s0.parentNode.insertBefore(s1,s0);
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/5a006f16bb0c3f433d4c779e/default';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
     })();
 </script>
 <!--End of Tawk.to Script-->
