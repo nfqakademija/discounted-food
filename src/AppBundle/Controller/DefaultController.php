@@ -57,13 +57,13 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $addresses = $em->getRepository('AppBundle:Address')->findAll();
-
+        $products = $em->getRepository('AppBundle:Product')->findAll();
         $repository = $em->getRepository('AppBundle:User');
         $users = $repository->findAll();
 
         $mapGenerator = $this->get('custom_map_generator');
 
-        $map = $mapGenerator->generateMap($addresses);
+        $map = $mapGenerator->generateMap($addresses, $products);
 
 
         return $this->render(

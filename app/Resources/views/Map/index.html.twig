@@ -21,18 +21,35 @@
 
 {% block body %}
     <div class="control-sidebar-light pull-left"
-         style="margin: 0; padding: 0;width: 30%;height: 600px; background-color:black;">
+         style="margin: 0; padding: 0;width: 30%;height: 620px; background-color:black;">
         <div id='a_div' style="display:none;">
-            <h3 class="text-center" style="color:white;">Address</h3><br><br>
+            <h3 class="text-center" style="color:white;" id="company-name">Company</h3><br><br>
             <div align="center"><img id='a_image'
                                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1200px-Good_Food_Display_-_NCI_Visuals_Online.jpg"
                                      style="height:200px; width:200px;"></div>
             <br><br>
+            <div align="center">
+                <strong class="text-center" style="color:white; text-align: center;">Address:</strong>
+            </div>
             <p class="text-center" style="color:white;" id="address">
-                bla bla bla bla bla bla bla blabla bla bla blabla bla bla blabla bla bla blabla bla bla blabla bla bla
-                blabla bla bla blabla bla bla blabla bla bla blabla bla bla blabla bla bla blabla bla bla blabla bla bla
-                blabla bla bla blabla bla bla bla
+
             </p>
+            <br>
+            <hr>
+            <h3 class="text-center" style="color:white;">Products</h3><br><br>
+            <div align="center" id="products" style="overflow:scroll; width:100%;height:150px;">
+                {% for i in 0..100 %}
+                    <div id='products-{{ i }}'></div>
+                {% endfor %}
+                {#<strong style="color:white; text-align: center;">Name:</strong>#}
+                {#<p class="text-center" style="color:white;" id="product-name"></p>#}
+                {#<strong style="color:white; text-align: center;">Description:</strong>#}
+                {#<p class="text-center" style="color:white;" id="product-description"></p>#}
+                {#<strong style="color:white; text-align: center;">Portions:</strong>#}
+                {#<p class="text-center" style="color:white;" id="product-portions"></p>#}
+                {#<strong style="color:white; text-align: center;">Price:</strong>#}
+                {#<p class="text-center" style="color:white;" id="product-price"></p>#}
+            </div>
         </div>
     </div>
     <div class="pull-right" style="margin: 0; padding: 0;width: 70%;">
@@ -47,6 +64,22 @@
             document.getElementById("address").innerHTML = address;
             var image = document.getElementById('{{ address.id }}i').value;
             $("#a_image").attr("src", image);
+            var company = document.getElementById('{{ address.id }}company').value;
+            document.getElementById("company-name").innerHTML = company;
+
+            var i = document.getElementById('{{ address.id }}iterator').value;
+            for (var j = 0; j < i; j++) {
+                document.getElementById('products-' + j).innerHTML = '<strong style="color:white; text-align: center;">Name:</strong><p class="text-center" style="color:white;" id="product-name-' + j + '"></p><strong style="color:white; text-align: center;">Description:</strong><p class="text-center" style="color:white;" id="product-description-' + j + '"></p><strong style="color:white; text-align: center;">Portions:</strong><p class="text-center" style="color:white;" id="product-portions-' + j + '"></p><strong style="color:white; text-align: center;">Price:</strong><p class="text-center" style="color:white;" id="product-price-' + j + '"></p><hr>';
+                var product_name = document.getElementById('{{ address.id }}n-' + j).value;
+                document.getElementById("product-name-" + j).innerHTML = product_name;
+                var product_description = document.getElementById('{{ address.id }}d-' + j).value;
+                document.getElementById("product-description-" + j).innerHTML = product_description;
+                var product_portions = document.getElementById('{{ address.id }}po-' + j).value;
+                document.getElementById("product-portions-" + j).innerHTML = product_portions;
+                var product_price = document.getElementById('{{ address.id }}pr-' + j).value;
+                document.getElementById("product-price-" + j).innerHTML = product_price;
+            }
+
             document.getElementById('a_div').style.display = 'block';
         });
         {% endfor %}
