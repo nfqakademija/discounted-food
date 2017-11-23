@@ -33,6 +33,7 @@ services:
         class: AppBundle\Service\MapGenerator
         public: true
 
+
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:
