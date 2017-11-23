@@ -43,7 +43,7 @@ class MapGenerator
             }
             $infowindow = new InfoWindow(
                 $temp."<button class = 'btn btn-success' id = '".$address->getId(
-                )."' >Peržiūrėti</button><br><input type = 'hidden' id = '".$address->getId(
+                )."' >View offers</button><br><input type = 'hidden' id = '".$address->getId(
                 )."a' value = '".$address->getAddress()."'/><input type = 'hidden' id = '".$address->getId(
                 )."i' value = 'http://retaildesignblog.net/wp-content/uploads/2013/01/Max-Mara-flagship-store-Duccio-Grassi-Architects-Hong-Kong.jpg'/>".$address->getAddress(
                 )."<img width = '100px' height = '100px' src = 'http://retaildesignblog.net/wp-content/uploads/2013/01/Max-Mara-flagship-store-Duccio-Grassi-Architects-Hong-Kong.jpg' /></div > "

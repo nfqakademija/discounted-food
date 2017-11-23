@@ -81,6 +81,10 @@ class ProfileController extends Controller
         $map = $mapGenerator->generateMap($addresses);
 
         $autocomplete = new Autocomplete();
+
+        $autocomplete->setInputId('appbundle_address_address');
+
+
         $placeAutocompleteHelperBuilder = PlaceAutocompleteHelperBuilder::create();
         $placeAutocompleteHelper = $placeAutocompleteHelperBuilder->build();
         $placeAutocompleteHelperBuilder->getFormatter()->setDebug(true);
@@ -88,14 +92,15 @@ class ProfileController extends Controller
 //        $placeAutocompleteHelper->renderHtml($autocomplete);
 //        $placeAutocompleteHelper->renderJavascript($autocomplete);
         $auto =  $placeAutocompleteHelper->render($autocomplete);
-        echo $auto;
+//        echo $auto;
         $apiHelperBuilder = ApiHelperBuilder::create();
         $apiHelper = $apiHelperBuilder->build();
         echo $apiHelper->render([$map, $auto]);
         return $this->render('Profile/profile.html.twig', array(
             'shops' => $addresses,
             'form' => $form->createView(),
-            'map'  => $map
+            'map'  => $map,
+            'autocomplete'  => $autocomplete,
         ));
     }
 

@@ -16,46 +16,76 @@
     <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
     <link href="{{ asset('css/cards.css') }}" rel="stylesheet">
     <link href="{{ asset('css/easy-responsive-tabs.css') }}" rel='stylesheet' type='text/css'/>
-
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
     <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic'
           rel='stylesheet' type='text/css'>
+    {% block customStyleheets %}{% endblock %}
 </head>
 
 <body>
 
-<div class="header" id="home">
+<div class="ban-top">
     <div class="container">
-        <ul>
-            <li><a href="{{ path('homepage') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
-            <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a
-                        href="mailto:info@example.com">info@example.com</a></li>
-            {% if is_granted('ROLE_USER') %}
-                <li><a href="{{ path('profile_index') }}"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a>
-                </li>
-                <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
-                </li>
-            {% else %}
-                <li><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-unlock-alt" aria-hidden="true"></i>
-                        Login </a></li>
-                <li><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-pencil-square-o"
-                                                                              aria-hidden="true"></i> Register </a></li>
-            {% endif %}
+        <div class="top_nav_left">
+            <nav class="navbar navbar-default">
+                <div class="container">
 
-            <h1 style="color:white;" id="demo"></h1>
-        </ul>
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
+
+                        {% block navbar %}{% endblock %}
+
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="clearfix"></div>
     </div>
 </div>
+
+{#OLD NAVBAR#}
+{#<div class="header" id="home">#}
+    {#<div class="container">#}
+        {#<ul>#}
+            {#<li><a href="{{ path('homepage') }}"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>#}
+            {#<li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a#}
+                        {#href="mailto:info@example.com">info@example.com</a></li>#}
+            {#{% if is_granted('ROLE_USER') %}#}
+                {#<li><a href="{{ path('profile_index') }}"><i class="fa fa-user" aria-hidden="true"></i>My Profile</a>#}
+                {#</li>#}
+                {#<li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>#}
+                {#</li>#}
+            {#{% else %}#}
+                {#<li><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-unlock-alt" aria-hidden="true"></i>#}
+                        {#Login </a></li>#}
+                {#<li><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-pencil-square-o"#}
+                                                                              {#aria-hidden="true"></i> Register </a></li>#}
+            {#{% endif %}#}
+
+            {#<h1 style="color:white;" id="demo"></h1>#}
+        {#</ul>#}
+    {#</div>#}
+{#</div>#}
 
 
 <div class="header-bot">
     <div class="header-bot_inner_wthreeinfo_header_mid">
         <div class="col-md-4 header-middle">
-            <form action="#" method="post">
-                <input type="search" name="search" placeholder="Search here..." required="">
-                <input type="submit" value=" ">
-                <div class="clearfix"></div>
-            </form>
+            {#<form action="#" method="post">#}
+                {#<input type="search" name="search" placeholder="Search here..." required="">#}
+                {#<input type="submit" value=" ">#}
+                {#<div class="clearfix"></div>#}
+            {#</form>#}
         </div>
         <!-- header-bot -->
         <div class="col-md-4 logo_agile">
@@ -88,33 +118,33 @@
 </div>
 
 
-<div class="ban-top">
-    <div class="container">
-        <div class="top_nav_left">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
+{#<div class="ban-top">#}
+    {#<div class="container">#}
+        {#<div class="top_nav_left">#}
+            {#<nav class="navbar navbar-default">#}
+                {#<div class="container-fluid">#}
 
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
+                    {#<div class="navbar-header">#}
+                        {#<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"#}
+                                {#data-target="#bs-example-navbar-collapse-1" aria-expanded="false">#}
+                            {#<span class="sr-only">Toggle navigation</span>#}
+                            {#<span class="icon-bar"></span>#}
+                            {#<span class="icon-bar"></span>#}
+                            {#<span class="icon-bar"></span>#}
+                        {#</button>#}
+                    {#</div>#}
+                    {#<!-- Collect the nav links, forms, and other content for toggling -->#}
+                    {#<div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">#}
 
-                        {% block navbar %}{% endblock %}
+                        {#{% block navbar %}{% endblock %}#}
 
-                    </div>
-                </div>
-            </nav>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-</div>
+                    {#</div>#}
+                {#</div>#}
+            {#</nav>#}
+        {#</div>#}
+        {#<div class="clearfix"></div>#}
+    {#</div>#}
+{#</div>#}
 
 {% block index_page %}{% endblock %}
 
