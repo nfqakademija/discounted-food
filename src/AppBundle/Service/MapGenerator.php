@@ -49,7 +49,7 @@ class MapGenerator
                 )."' >View offers</button><br><input type = 'hidden' id = '".$address->getId(
                 )."a' value = '".$address->getAddress()."'/><input type = 'hidden' id = '".$address->getId(
                 )."i' value = 'http://retaildesignblog.net/wp-content/uploads/2013/01/Max-Mara-flagship-store-Duccio-Grassi-Architects-Hong-Kong.jpg'/>".$address->getAddress(
-                )."<img width = '100px' height = '100px' src = 'http://retaildesignblog.net/wp-content/uploads/2013/01/Max-Mara-flagship-store-Duccio-Grassi-Architects-Hong-Kong.jpg' /></div > "
+                )."<img width = '100px' height = '100px' src = '". '../../../web/images/addresses/'.$address->getImageName()."' /></div > "
             );
             $marker->setInfoWindow($infowindow);
 //            $marker->setSymbol(new Symbol(SymbolPath::FORWARD_OPEN_ARROW));

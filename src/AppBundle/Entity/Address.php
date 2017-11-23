@@ -6,7 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToMany;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Address
  *
@@ -31,6 +32,7 @@ class Address
      * @Vich\UploadableField(mapping="address_image", fileNameProperty="imageName", size="imageSize")
      *
      * @var File
+     * @Assert\File(maxSize="2M")
      */
     private $imageFile;
 
@@ -291,6 +293,23 @@ class Address
         $this->products = $products;
     }
 
+    /**
+     * @Assert\Callback
+     * @param ExecutionContextInterface $context
+     */
+    public function validate(ExecutionContextInterface $context, $payload)
+    {
+        // do your own validation
+        if (! in_array($this->imageFile->getMimeType(), array(
+            'image/jpeg',
+            'image/png'
+        ))) {
+            $context
+                ->buildViolation('Wrong file type (only jpg,gif,png allowed)')
+                ->atPath('imageFile')
+                ->addViolation();
+        }
+    }
 
 }
 
