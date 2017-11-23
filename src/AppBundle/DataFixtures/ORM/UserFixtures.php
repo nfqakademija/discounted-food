@@ -39,7 +39,7 @@ class UserFixtures extends Fixture
          $faker = Factory::create();
 
          //creates 100 regular users
-        for($i =0; $i < 50; $i++) {
+        for($i =0; $i < 30; $i++) {
 
             $user = new User();
             $user->setEmail($faker->email);

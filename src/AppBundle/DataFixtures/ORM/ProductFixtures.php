@@ -20,7 +20,7 @@ class ProductFixtures extends Fixture
     {
         $faker = Factory::create();
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             $product = new Product();
             $product->setName('food-name-here');
             $product->setDescription($faker->sentence(4));

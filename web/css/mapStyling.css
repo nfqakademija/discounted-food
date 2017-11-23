@@ -28,3 +28,11 @@
     font-size: 1em;
 }
 
+.map-sidebar-container .product-price {
+    font-size: 2em;
+    color: black;
+}
+
+.map-sidebar-container #offers {
+    margin-bottom: 1em;
+}
