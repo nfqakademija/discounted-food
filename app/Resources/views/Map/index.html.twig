@@ -4,51 +4,62 @@
 
 {% block navbar %}
     <ul class="nav navbar-nav menu__list">
-        <li class="active menu__item menu__item--current"><a class="menu__link" href="{{ path('homepage') }}">Home <span
+        <li class="menu__item"><a class="menu__link" href="{{ path('homepage') }}">Home <span
+                        class="sr-only">(current)</span></a></li>
+        <li class="active menu__item menu__item--current"><a class="menu__link" href="{{ path('map') }}">Show Map<span
                         class="sr-only">(current)</span></a></li>
         <li class=" menu__item"><a class="menu__link" href="{{ path('about') }}">About</a></li>
-        <li class="menu__item dropdown">
-            <a class="menu__link" href="#" class="dropdown-toggle" data-toggle="dropdown">Suppliers <b
-                        class="caret"></b></a>
-            <ul class="dropdown-menu agile_short_dropdown">
-                {% for user in users %}
-                    <li><a href="#">{{ user.companyName }}</a></li>
-                {% endfor %}
-            </ul>
-        </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        {% if is_granted('ROLE_USER') %}
+            <li><a href="{{ path('profile_index') }}"><i class="fa fa-user" aria-hidden="true"></i> Manage Shops</a></li>
+            <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
+            </li>
+        {% else %}
+            <li><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                    Login </a></li>
+            <li><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-pencil-square-o"
+                                                                          aria-hidden="true"></i> Register </a></li>
+        {% endif %}
     </ul>
 {% endblock %}
-
+    {% block customStyleheets %}
+        <link href="{{ asset('css/mapStyling.css') }}" rel="stylesheet">
+    {% endblock %}
 {% block body %}
-    <div class="control-sidebar-light pull-left"
-         style="margin: 0; padding: 0;width: 30%;height: 620px; background-color:black;">
-        <div id='a_div' style="display:none;">
-            <h3 class="text-center" style="color:white;" id="company-name">Company</h3><br><br>
-            <div align="center"><img id='a_image'
-                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1200px-Good_Food_Display_-_NCI_Visuals_Online.jpg"
-                                     style="height:200px; width:200px;"></div>
-            <br><br>
-            <div align="center">
-                <strong class="text-center" style="color:white; text-align: center;">Address:</strong>
-            </div>
-            <p class="text-center" style="color:white;" id="address">
+    <div class="control-sidebar-light pull-left map-sidebar-container">
+        <div id='a_div'>
 
-            </p>
-            <br>
+            {#<div align="center">#}
+                {#<img id='a_image'#}
+                     {#src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1200px-Good_Food_Display_-_NCI_Visuals_Online.jpg"#}
+                 {#>#}
+            {#</div>#}
+
+            {#<div align="center">#}
+                {#<strong class="text-center">Address:</strong>#}
+            {#</div>#}
+            <div class="company-info text-center">
+                <h3 id="company-name">Company</h3>
+                <h6 id="address"></h6>
+            </div>
+
             <hr>
-            <h3 class="text-center" style="color:white;">Products</h3><br><br>
-            <div align="center" id="products" style="overflow:scroll; width:100%;height:150px;">
+
+            <h3 class="text-center">Offers</h3>
+
+            <div align="center" id="products" style="overflow:scroll; width:100%;height:100%;">
                 {% for i in 0..100 %}
                     <div id='products-{{ i }}'></div>
                 {% endfor %}
-                {#<strong style="color:white; text-align: center;">Name:</strong>#}
-                {#<p class="text-center" style="color:white;" id="product-name"></p>#}
-                {#<strong style="color:white; text-align: center;">Description:</strong>#}
-                {#<p class="text-center" style="color:white;" id="product-description"></p>#}
-                {#<strong style="color:white; text-align: center;">Portions:</strong>#}
-                {#<p class="text-center" style="color:white;" id="product-portions"></p>#}
-                {#<strong style="color:white; text-align: center;">Price:</strong>#}
-                {#<p class="text-center" style="color:white;" id="product-price"></p>#}
+                {#<strong text-align: center;">Name:</strong>#}
+                {#<p class="text-center" id="product-name"></p>#}
+                {#<strong text-align: center;">Description:</strong>#}
+                {#<p class="text-center" id="product-description"></p>#}
+                {#<strong text-align: center;">Portions:</strong>#}
+                {#<p class="text-center" id="product-portions"></p>#}
+                {#<strong text-align: center;">Price:</strong>#}
+                {#<p class="text-center" id="product-price"></p>#}
             </div>
         </div>
     </div>
@@ -69,7 +80,22 @@
 
             var i = document.getElementById('{{ address.id }}iterator').value;
             for (var j = 0; j < i; j++) {
-                document.getElementById('products-' + j).innerHTML = '<strong style="color:white; text-align: center;">Name:</strong><p class="text-center" style="color:white;" id="product-name-' + j + '"></p><strong style="color:white; text-align: center;">Description:</strong><p class="text-center" style="color:white;" id="product-description-' + j + '"></p><strong style="color:white; text-align: center;">Portions:</strong><p class="text-center" style="color:white;" id="product-portions-' + j + '"></p><strong style="color:white; text-align: center;">Price:</strong><p class="text-center" style="color:white;" id="product-price-' + j + '"></p><hr>';
+                document.getElementById('products-' + j).innerHTML =
+//                    '<strong >Name:</strong>' +
+                    '<div class="row">' +
+                        '<div class="col-md-6">' +
+                            '<p class="product-name" id="product-name-' + j + '"></p>' +
+        //                    '<strong >Description:</strong>' +
+                            '<p class="product-description" id="product-description-' + j + '"></p>' +
+                        '</div>' +
+                        '<div class="row"><div class="col-md-6">' +
+                            '<strong  >Portions left:</strong>' +
+                            '<p class="text-center product-portions" id="product-portions-' + j + '">' +
+                            '</p>' +
+                            '<strong>' + 'Price:</strong>' +
+                            '<a class="btn btn-success text-center product-price" id="product-price-' + j + '"></a><hr>' +
+                        '</div>' +
+                    '</div>';
                 var product_name = document.getElementById('{{ address.id }}n-' + j).value;
                 document.getElementById("product-name-" + j).innerHTML = product_name;
                 var product_description = document.getElementById('{{ address.id }}d-' + j).value;

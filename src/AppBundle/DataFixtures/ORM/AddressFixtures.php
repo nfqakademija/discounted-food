@@ -22,8 +22,8 @@ class AddressFixtures extends Fixture
 
         for ($i = 0; $i < 50; $i++) {
             $address = new Address();
-            $address->setLatitude($faker->latitude);
-            $address->setLongitude($faker->longitude);
+            $address->setLatitude($faker->randomFloat(5, 54, 56));
+            $address->setLongitude($faker->randomFloat(5, 23, 27));
             $address->setAddress($faker->address);
             $address->setShopOwner($this->getReference('user' . $i));
             $address->setImageName('store.jpg');

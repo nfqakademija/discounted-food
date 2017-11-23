@@ -8,7 +8,7 @@ html, body{
 	margin:0;
 	font-size: 100%;
 	background: #fff;
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Roboto', sans-serif;
 }
 body a {
 	text-decoration:none;
@@ -31,7 +31,7 @@ input[type="button"],input[type="submit"]{
 
 h1,h2,h3,h4,h5,h6{
 	margin:0;
-font-family: 'Open Sans', sans-serif;
+font-family: 'Roboto', sans-serif;
 }	
 p{
 	margin:0;

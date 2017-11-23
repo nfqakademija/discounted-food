@@ -15,7 +15,10 @@ class AddressType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('address')->remove('latitude')->remove('longitude')->add('imageFile', VichImageType::class);
+        $builder->add('address')
+            ->remove('latitude')
+            ->remove('longitude')
+            ->add('imageFile', VichImageType::class, array('required' => false));
     }
     
     /**
