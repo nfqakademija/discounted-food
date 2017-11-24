@@ -62,8 +62,6 @@ class ProductController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('profile_index');
         }
 
         return $this->render('Product/edit.html.twig', array(

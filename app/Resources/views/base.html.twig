@@ -20,6 +20,10 @@
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
     <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic'
           rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_green.css">
+
+
     {% block customStyleheets %}{% endblock %}
 </head>
 
@@ -259,6 +263,7 @@
 
 <!-- for bootstrap working -->
 <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
+
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
     var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
@@ -272,5 +277,7 @@
     })();
 </script>
 <!--End of Tawk.to Script-->
+
+{% block customScripts %}{% endblock %}
 </body>
 </html>

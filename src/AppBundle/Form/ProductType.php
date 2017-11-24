@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use AppBundle\Entity\Product;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,12 +18,17 @@ class ProductType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')->add('addressId', HiddenType::class)->add('description')->add('dateFrom', DateType::class, array(
-            'widget' => 'choice',
-        ))->add('dateTo', DateType::class, array(
-            'widget' => 'choice',
-        ))->add('portions')->add('price')
-            ->add('imageFile', VichImageType::class, array('required' => false, 'label' => 'Food photo' ));
+        $builder
+            ->add('addressId', HiddenType::class)
+            ->add('name')
+            ->add('description')
+            ->add('portions')
+            ->add('price')
+            ->add('dateFrom',DateTimeType::class, array(
+                'widget' => 'single_text', 'label' => 'Pick a date when food offer starts'))
+            ->add('dateTo',DateTimeType::class, array(
+                'widget' => 'single_text', 'label' => 'Pick a date when food offer expires'))
+            ->add('imageFile', VichImageType::class, array('required' => true, 'label' => 'Food photo' ));
     }
     
     /**

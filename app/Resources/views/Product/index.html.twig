@@ -39,7 +39,7 @@
                         </div>
                     {% endfor %}
 
-                    <div class="col-md-12 col-sm-2 text-center">
+                    <div class="col-md-8 col-md-offset-2 col-sm-2 text-center">
                         <div class="panel panel-success">
                             <div class="panel-heading">Add your product</div>
                             <div class="panel-body">
@@ -58,6 +58,18 @@
                                 </div>
 
                                 <div class="form-group">
+                                    {{ form_errors(form.portions) }}
+                                    {{ form_label(form.portions) }}
+                                    {{ form_widget(form.portions, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_errors(form.price) }}
+                                    {{ form_label(form.price) }}
+                                    {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+
+                                <div class="form-group">
                                     {{ form_errors(form.dateFrom) }}
                                     {{ form_label(form.dateFrom) }}
                                     {{ form_widget(form.dateFrom) }}
@@ -71,17 +83,6 @@
                                     {{ form_widget(form.dateTo, {'attr': {'class': 'form-control'}}) }}
                                 </div>
 
-                                <div class="form-group">
-                                    {{ form_errors(form.portions) }}
-                                    {{ form_label(form.portions) }}
-                                    {{ form_widget(form.portions, {'attr': {'class': 'form-control'}}) }}
-                                </div>
-
-                                <div class="form-group">
-                                    {{ form_errors(form.price) }}
-                                    {{ form_label(form.price) }}
-                                    {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
-                                </div>
                                 <div class="form-group">
                                     {{ form_errors(form.imageFile) }}
                                     {{ form_label(form.imageFile) }}
@@ -102,7 +103,7 @@
             <h3 class="wthree_text_info">All <span>Products</span></h3>
             <div id="horizontalTab">
                 <div class="row">
-                    <div class="col-md-12 col-sm-2 text-center">
+                        <div class="col-md-12 col-sm-2 text-center">
 
                     </div>
                     <div class="resp-tabs-container">
@@ -123,8 +124,11 @@
                                         </div>
                                     </div>
                                     <div class="card-footer text-center">
-                                        <small>Collection time today: <strong>{{ product.dateFrom|date("y/m/d h:m:s") }}
-                                                - {{ product.dateTo|date("y/m/d h:m:s") }}</strong></small>
+                                        <small>Collection time:</small>
+                                        <p>
+                                           <strong>{{ product.dateFrom|date('Y-m-d H:i:s') }}
+                                               - {{ product.dateTo|date('Y-m-d H:i:s') }}</strong>
+                                        </p>
                                     </div>
                                     <div class="card-footer text-center">
                                         <small>Left: <strong>{{ product.portions }}</strong> portions for: <strong><span
@@ -166,4 +170,16 @@
         </div>
     </div>
     <!-- //footer -->
+{% endblock %}
+
+{% block customScripts %}
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        $('#appbundle_product_dateTo').flatpickr({
+            enableTime: true
+        });
+        $('#appbundle_product_dateFrom').flatpickr({
+            enableTime: true
+        });
+    </script>
 {% endblock %}
