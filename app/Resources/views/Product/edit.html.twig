@@ -48,20 +48,6 @@
                                 </div>
 
                                 <div class="form-group">
-                                    {{ form_errors(form.dateFrom) }}
-                                    {{ form_label(form.dateFrom) }}
-                                    {{ form_widget(form.dateFrom) }}
-                                    {#{{ form_widget(form.dateFrom, {'attr': {'class': 'form-control'}}) }}#}
-                                </div>
-
-                                <div class="form-group">
-                                    {{ form_errors(form.dateTo) }}
-                                    {{ form_label(form.dateTo) }}
-                                    {{ form_widget(form.dateTo) }}
-                                    {#{{ form_widget(form.dateTo, {'attr': {'class': 'form-control'}}) }}#}
-                                </div>
-
-                                <div class="form-group">
                                     {{ form_errors(form.portions) }}
                                     {{ form_label(form.portions) }}
                                     {{ form_widget(form.portions, {'attr': {'class': 'form-control'}}) }}
@@ -72,6 +58,19 @@
                                     {{ form_label(form.price) }}
                                     {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
                                 </div>
+
+                                <div class="form-group">
+                                    {{ form_errors(form.dateFrom) }}
+                                    {{ form_label(form.dateFrom) }}
+                                    {{ form_widget(form.dateFrom) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ form_errors(form.dateTo) }}
+                                    {{ form_label(form.dateTo) }}
+                                    {{ form_widget(form.dateTo) }}
+                                </div>
+
                                 <button type="submit" class="btn btn-success">Update Product</button>
                                 {{ form_end(form) }}
                             </div>
@@ -94,4 +93,16 @@
         </div>
     </div>
     <!-- //footer -->
+{% endblock %}
+
+{% block customScripts %}
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        $('#appbundle_product_dateTo').flatpickr({
+            enableTime: true
+        });
+        $('#appbundle_product_dateFrom').flatpickr({
+            enableTime: true
+        });
+    </script>
 {% endblock %}
