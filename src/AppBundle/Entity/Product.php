@@ -4,9 +4,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Product
@@ -32,7 +31,7 @@ class Product
      * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName", size="imageSize")
      *
      * @var File
-     * @Assert\File(maxSize="2M")
+     * @Assert\File(maxSize="2M", mimeTypes={"image/jpeg", "image/png"}, mimeTypesMessage = "Please upload a photo in jpeg or png format")
      */
     private $imageFile;
 
@@ -389,22 +388,5 @@ class Product
         $this->address = $address;
     }
 
-    /**
-     * @Assert\Callback
-     * @param ExecutionContextInterface $context
-     */
-    public function validate(ExecutionContextInterface $context, $payload)
-    {
-        // do your own validation
-        if (! in_array($this->imageFile->getMimeType(), array(
-            'image/jpeg',
-            'image/png'
-        ))) {
-            $context
-                ->buildViolation('Wrong file type (only jpg,gif,png allowed)')
-                ->atPath('imageFile')
-                ->addViolation();
-        }
-    }
 }
 
