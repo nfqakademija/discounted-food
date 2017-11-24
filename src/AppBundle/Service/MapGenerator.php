@@ -4,8 +4,11 @@ namespace AppBundle\Service;
 
 use Ivory\GoogleMap\Base\Coordinate;
 use Ivory\GoogleMap\Map;
+use Ivory\GoogleMap\Overlay\Icon;
 use Ivory\GoogleMap\Overlay\InfoWindow;
 use Ivory\GoogleMap\Overlay\Marker;
+use Ivory\GoogleMap\Overlay\Symbol;
+use Ivory\GoogleMap\Overlay\SymbolPath;
 
 class MapGenerator
 {
@@ -49,6 +52,8 @@ class MapGenerator
                 )."<img width = '100px' height = '100px' src = '". '../../../web/images/addresses/'.$address->getImageName()."' /></div > "
             );
             $marker->setInfoWindow($infowindow);
+//            $marker->setSymbol(new Symbol(SymbolPath::FORWARD_OPEN_ARROW));
+//            $marker->setIcon(new Icon('https://pasteboard.co/GUZqrTG.vnd.microsoft.icon'));
             $temp = '';
         }
 
