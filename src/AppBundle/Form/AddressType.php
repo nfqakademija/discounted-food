@@ -18,7 +18,7 @@ class AddressType extends AbstractType
         $builder->add('address')
             ->remove('latitude')
             ->remove('longitude')
-            ->add('imageFile', VichImageType::class, array('required' => false));
+            ->add('imageFile', VichImageType::class, array('required' => false, 'label' => 'Shop photo' ));
     }
     
     /**

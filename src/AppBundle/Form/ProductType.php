@@ -21,7 +21,8 @@ class ProductType extends AbstractType
             'widget' => 'choice',
         ))->add('dateTo', DateType::class, array(
             'widget' => 'choice',
-        ))->add('portions')->add('price')->add('imageFile', VichImageType::class);
+        ))->add('portions')->add('price')
+            ->add('imageFile', VichImageType::class, array('required' => false, 'label' => 'Food photo' ));
     }
     
     /**

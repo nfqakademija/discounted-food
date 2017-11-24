@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToMany;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -31,6 +32,7 @@ class Address
      * @Vich\UploadableField(mapping="address_image", fileNameProperty="imageName", size="imageSize")
      *
      * @var File
+     * @Assert\File(maxSize="2M", mimeTypes={"image/jpeg", "image/png"}, mimeTypesMessage = "Please upload a photo in jpeg or png format")
      */
     private $imageFile;
 
@@ -290,7 +292,6 @@ class Address
     {
         $this->products = $products;
     }
-
 
 }
 

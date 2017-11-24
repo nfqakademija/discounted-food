@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Welcome{% endblock %}
+{% block title %}Dicounted Food{% endblock %}
 
 {% block navbar %}
     <ul class="nav navbar-nav menu__list">
@@ -41,6 +41,11 @@
                                     {{ form_label(form.address) }}
                                     {{ form_widget(form.address, {'attr': {'class': 'form-control'}}) }}
                                 </div>
+                                <div class="form-group">
+                                    {{ form_errors(form.imageFile) }}
+                                    {{ form_label(form.imageFile) }}
+                                    {{ form_widget(form.imageFile, {'attr': {'class': 'form-control'}}) }}
+                                </div>
 
                                 {#<div class="form-group">#}
                                 {#{{ form_errors(form.latitude) }}#}
@@ -69,6 +74,7 @@
             </div>
             <br>
 
+            <br>
             <div id="horizontalTab">
                 <div class="row">
                     <div class="col-md-12 col-sm-2 text-center">
