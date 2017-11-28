@@ -12,6 +12,5 @@ class AddressRepository extends \Doctrine\ORM\EntityRepository
 {
     public function getAddress(Request $request)
     {
-
     }
 }

@@ -24,9 +24,9 @@ class ProductType extends AbstractType
             ->add('description')
             ->add('portions')
             ->add('price')
-            ->add('dateFrom',DateTimeType::class, array(
+            ->add('dateFrom', DateTimeType::class, array(
                 'widget' => 'single_text', 'label' => 'Pick a date when food offer starts'))
-            ->add('dateTo',DateTimeType::class, array(
+            ->add('dateTo', DateTimeType::class, array(
                 'widget' => 'single_text', 'label' => 'Pick a date when food offer expires'))
             ->add('imageFile', VichImageType::class, array('required' => true, 'label' => 'Food photo' ));
     }
@@ -48,6 +48,4 @@ class ProductType extends AbstractType
     {
         return 'appbundle_product';
     }
-
-
 }

@@ -3,25 +3,18 @@
 namespace AppBundle\Controller\Profile;
 
 use AppBundle\Entity\Address;
-use AppBundle\Service\MapGenerator;
-use Faker\Factory;
+use AppBundle\Form\AddressType;
 use Http\Adapter\Guzzle6\Client;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
-use Ivory\GoogleMap\Base\Coordinate;
 use Ivory\GoogleMap\Helper\Builder\ApiHelperBuilder;
 use Ivory\GoogleMap\Helper\Builder\PlaceAutocompleteHelperBuilder;
-use Ivory\GoogleMap\Map;
-use Ivory\GoogleMap\Overlay\Marker;
 use Ivory\GoogleMap\Place\Autocomplete;
 use Ivory\GoogleMap\Service\Geocoder\GeocoderService;
 use Ivory\GoogleMap\Service\Geocoder\Request\GeocoderAddressRequest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Form\AddressType;
 
 /**
  * @Route("/profile", name="profile")
@@ -62,8 +55,8 @@ class ProfileController extends Controller
                 $address->setAddress($addressName);
                 $address->setLatitude($lat);
                 $address->setLongitude($lon);
+            }
 
-            };
             $em->persist($address);
             $em->flush();
 
@@ -150,7 +143,4 @@ class ProfileController extends Controller
         );
         return $this->redirectToRoute('profile_index');
     }
-
-
-
 }

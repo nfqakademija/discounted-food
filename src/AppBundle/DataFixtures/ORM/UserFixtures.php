@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: t0000678
- * Date: 11/19/17
- * Time: 7:47 PM
- */
 
 namespace AppBundle\DataFixtures\ORM;
-
 
 use AppBundle\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -16,7 +9,8 @@ use Faker\Factory;
 
 class UserFixtures extends Fixture
 {
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
 
         //creates one admin user
         $userManager = $this->container->get('fos_user.user_manager');
@@ -39,11 +33,10 @@ class UserFixtures extends Fixture
          $faker = Factory::create();
 
          //creates 100 regular users
-        for($i =0; $i < 30; $i++) {
-
+        for ($i =0; $i < 30; $i++) {
             $user = new User();
             $user->setEmail($faker->email);
-            $user->setUsername( $faker->userName);
+            $user->setUsername($faker->userName);
             $user->setCompanyName($faker->company);
             $user->setLegalEntityCode($faker->randomDigit);
             $user->setPhone($faker->phoneNumber);
@@ -52,7 +45,7 @@ class UserFixtures extends Fixture
 
             $manager->persist($user);
             $manager->flush();
-            $this->addReference('user'.$i , $user);
+            $this->addReference('user'.$i, $user);
         }
     }
 }

@@ -8,7 +8,6 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-
 use AppBundle\Entity\Address;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -30,7 +29,7 @@ class AddressFixtures extends Fixture
             $address->setImageSize(2000);
             $address->setUpdatedAt($faker->dateTime());
             $manager->persist($address);
-            $this->addReference('address'.$i , $address);
+            $this->addReference('address'.$i, $address);
         }
 
         $manager->flush();
