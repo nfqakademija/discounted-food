@@ -13,6 +13,9 @@ env:
 
 before-install:
     - composer self-update
+    
+script:
+  - vendor/bin/phpcs -p --standard=PSR2 --extensions=php ./src
 
 install:
     - composer install
