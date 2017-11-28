@@ -31,7 +31,8 @@ class Product
      * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName", size="imageSize")
      *
      * @var File
-     * @Assert\File(maxSize="2M", mimeTypes={"image/jpeg", "image/png"}, mimeTypesMessage = "Please upload a photo in jpeg or png format")
+     * @Assert\File(maxSize="2M", mimeTypes={"image/jpeg", "image/png"},
+     *              mimeTypesMessage = "Please upload a photo in jpeg or png format")
      */
     private $imageFile;
 
@@ -387,6 +388,4 @@ class Product
     {
         $this->address = $address;
     }
-
 }
-

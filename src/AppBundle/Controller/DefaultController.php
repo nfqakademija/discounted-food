@@ -14,6 +14,10 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+
+        $breadcrumbs->addItem("Home", $this->get("router")->generate("homepage"));
+
         $em = $this->getDoctrine()->getManager();
 
         $addresses = $em->getRepository('AppBundle:Address')->findAll();
@@ -94,5 +98,4 @@ class DefaultController extends Controller
     {
         return $this->redirectToRoute('homepage');
     }
-
 }

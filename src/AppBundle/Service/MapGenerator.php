@@ -27,29 +27,30 @@ class MapGenerator
             $map->getOverlayManager()->addMarker($marker);
             if ($products !== null) {
                 foreach ($products as $product) {
-                    if ($product->getAddressId() == $address->getId()) {
-                        $temp .= "<input type = 'hidden' id = '".$address->getId(
-                            )."n-".$i."' value = '".$product->getName(
-                            )."'/><input type = 'hidden' id = '".$address->getId(
-                            )."d-".$i."' value = '".$product->getDescription(
-                            )."'/><input type = 'hidden' id = '".$address->getId(
-                            )."pr-".$i."' value = '".$product->getPrice(
-                            )."'/><input type = 'hidden' id = '".$address->getId(
-                            )."po-".$i."' value = '".$product->getPortions()."'/>";
+                    if ($product->getAddressId() === $address->getId()) {
+                        $temp.= "<input type = 'hidden' id = '".$address->getId()
+                            ."n-".$i."' value = '".$product->getName()
+                            ."'/><input type = 'hidden' id = '".$address->getId()
+                            ."d-".$i."' value = '".$product->getDescription()
+                            ."'/><input type = 'hidden' id = '".$address->getId()
+                            ."pr-".$i."' value = '".$product->getPrice()
+                            ."'/><input type = 'hidden' id = '".$address->getId()
+                            ."po-".$i."' value = '".$product->getPortions()."'/>";
                         $i++;
                     }
                 }
-                $temp .= "<input type = 'hidden' id = '".$address->getId()."iterator' value = '".$i."'/>";
-                $temp .= "<input type = 'hidden' id = '".$address->getId()."company' value = '".$address->getShopOwner(
-                    )->getCompanyName()."'/>";
+                $temp.= "<input type = 'hidden' id = '".$address->getId()."iterator' value = '".$i."'/>";
+                $temp.= "<input type = 'hidden' id = '".$address->getId()."company' value = '".$address->getShopOwner()
+                        ->getCompanyName()."'/>";
                 $i = 0;
             }
             $infowindow = new InfoWindow(
                 $temp."<button class = 'btn btn-success' id = '".$address->getId(
                 )."' >View offers</button><br><input type = 'hidden' id = '".$address->getId(
                 )."a' value = '".$address->getAddress()."'/><input type = 'hidden' id = '".$address->getId(
-                )."i' value = 'http://retaildesignblog.net/wp-content/uploads/2013/01/Max-Mara-flagship-store-Duccio-Grassi-Architects-Hong-Kong.jpg'/>".$address->getAddress(
-                )."<img width = '100px' height = '100px' src = '". '../../../web/images/addresses/'.$address->getImageName()."' /></div > "
+                )."i' value = 'https://ibb.co/c53Nnm'/>".$address->getAddress(
+                )."<img width = '100px' height = '100px' 
+                src = '". '../../../web/images/addresses/'.$address->getImageName()."' /></div > "
             );
             $marker->setInfoWindow($infowindow);
 //            $marker->setSymbol(new Symbol(SymbolPath::FORWARD_OPEN_ARROW));
@@ -59,6 +60,4 @@ class MapGenerator
 
         return $map;
     }
-
-
-}   
+}

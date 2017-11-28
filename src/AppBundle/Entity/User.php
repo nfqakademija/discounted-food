@@ -119,7 +119,4 @@ class User extends BaseUser
     {
         $this->addresses = $addresses;
     }
-
-
-
 }

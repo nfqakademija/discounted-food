@@ -3,12 +3,11 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class RegistrationShopOwnerController extends Controller
 {
 
-    public function RegisterAction()
+    public function registerAction()
     {
         return $this->container
             ->get('pugx_multi_user.registration_manager')
@@ -18,5 +17,4 @@ class RegistrationShopOwnerController extends Controller
             // ...
 //        ));
     }
-
 }

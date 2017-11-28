@@ -40,6 +40,4 @@ class ShopOwner extends User
     {
         $this->title = $title;
     }
-
-
 }

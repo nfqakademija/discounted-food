@@ -23,10 +23,14 @@ class ProductController extends Controller
      */
     public function newAction(Request $request, Address $address)
     {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+
+        $breadcrumbs->addItem("Home", $this->get("router")->generate("profile_item_show", ["%id%" => 31]));
+
         $em = $this->getDoctrine()->getManager();
 
         $repository = $em->getRepository('AppBundle:Product');
-        $products = $repository->findBy( array('addressId' => $address->getId()));
+        $products = $repository->findBy(array('addressId' => $address->getId()));
 
         $product = new Product();
         $product->setAddress($address);
@@ -84,7 +88,4 @@ class ProductController extends Controller
         $em->flush();
         return $this->redirectToRoute('profile_index');
     }
-
-
-
 }
