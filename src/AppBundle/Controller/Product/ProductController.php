@@ -23,10 +23,6 @@ class ProductController extends Controller
      */
     public function newAction(Request $request, Address $address)
     {
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-
-        $breadcrumbs->addItem("Home", $this->get("router")->generate("profile_item_show", ["%id%" => 31]));
-
         $em = $this->getDoctrine()->getManager();
 
         $repository = $em->getRepository('AppBundle:Product');

@@ -26,8 +26,9 @@
 {% block body %}
     <div class="new_arrivals_agile_w3ls_info">
         <div class="container">
-            <h3 class="wthree_text_info"><span>Products of {{ app.user.companyName }}
-                    in Address {{ shops.Address }}</span></h3>
+            <h3 class="wthree_text_info">
+                <span>Products of {{ app.user.companyName }} in Address {{ shops.Address }}</span>
+            </h3>
             <div id="horizontalTab">
                 <div class="row">
 
@@ -101,10 +102,18 @@
             </div>
 
             <h3 class="wthree_text_info">All <span>Products</span></h3>
+
+            <h5 class="text-center">From store at {{ shops.Address }}</h5>
+            <br>
+
             <div id="horizontalTab">
                 <div class="row">
-                        <div class="col-md-12 col-sm-2 text-center">
 
+                    <div class="col-md-12 col-sm-2 text-center">
+                        {% if products is empty %}
+                            <br>
+                            <h6 class="text-center">You haven't added any products yet</h6>
+                        {% endif %}
                     </div>
                     <div class="resp-tabs-container">
 

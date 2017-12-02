@@ -16,17 +16,38 @@
             </li>
         {% else %}
             <li><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-unlock-alt" aria-hidden="true"></i>
-                    Login </a></li>
-            <li><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-pencil-square-o"
-                                                                          aria-hidden="true"></i> Register </a></li>
+                    Login </a>
+            </li>
+            <li><a href="{{ path('fos_user_registration_register') }}">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Register </a>
+            </li>
         {% endif %}
     </ul>
 {% endblock %}
 
 {% block body %}
+
     <div class="new_arrivals_agile_w3ls_info">
         <div class="container">
             <h3 class="wthree_text_info"><span>Yours Shops Map</span></h3>
+
+            <div class="row">
+                {% for message in app.flashes('notice') %}
+                    <div class="alert alert-success col-md-6 col-md-offset-3">
+                        <p class="text-center">
+                            <b>{{ message }}</b>
+                        </p>
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('error') %}
+                    <div class="alert alert-danger col-md-6 col-md-offset-3">
+                        <p class="text-center">
+                            <b>{{ message }}</b>
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+
             <div id="horizontalTab">
                 <div class="row">
 
@@ -80,19 +101,22 @@
                     <div class="col-md-12 col-sm-2 text-center">
                         <h2>Added shops</h2>
                     </div>
-                    {% for message in app.flashes('notice') %}
-                        <div class="alert alert-success col-md-6 col-md-offset-3">
-                            <p class="text-center">
-                                <b>{{ message }}</b>
-                            </p>
-                        </div>
-                    {% endfor %}
+
                     <div class="resp-tabs-container">
+
+                        {% if shops is empty %}
+                            <br>
+                            <h6 class="text-center">You haven't added any shops yet</h6>
+                        {% endif %}
 
                         {% for shop in shops %}
                             <div class="col-sm-3 col-md-3 col-lg-3 mt-3 product-men">
                                 <div class="card">
-                                    <img class="card-img-top" src="{{ asset('images/addresses/'  ~ shop.ImageName) }}">
+                                    {% if shop.ImageName is not null %}
+                                        <img class="card-img-top" src="{{ asset('images/addresses/'  ~ shop.ImageName) }}">
+                                    {% else %}
+                                        <img class="card-img-top" src="http://www.studiomatthews.com/wp-content/uploads/2015/09/NoShop_StudioMatthews_01.jpeg">
+                                    {% endif %}
                                     <div class="card-block text-center">
                                         <h4 class="card-title mt-3">{{ app.user.companyName }} </h4>
                                         <div class="meta">

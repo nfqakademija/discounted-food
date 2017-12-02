@@ -43,8 +43,17 @@ class ProfileController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $geocoder = new GeocoderService(new Client(), new GuzzleMessageFactory());
             $request = new GeocoderAddressRequest($address->getAddress());
+
             $response = $geocoder->geocode($request);
-            $results = $response->getResults();
+
+            if ($response->getStatus() === 'ZERO_RESULTS') {
+                $this->addFlash(
+                    'error',
+                    'Invalid address supplied!'
+                );
+                return $this->redirectToRoute('profile_index');
+            }
+             $results = $response->getResults();
 
             $em = $this->getDoctrine()->getManager();
 
@@ -73,27 +82,27 @@ class ProfileController extends Controller
 
         $map = $mapGenerator->generateMap($addresses);
 
-        $autocomplete = new Autocomplete();
+//        $autocomplete = new Autocomplete();
+//
+//        $autocomplete->setInputId('appbundle_address_address');
 
-        $autocomplete->setInputId('appbundle_address_address');
+//        $placeAutocompleteHelperBuilder = PlaceAutocompleteHelperBuilder::create();
+//        $placeAutocompleteHelper = $placeAutocompleteHelperBuilder->build();
+//        $placeAutocompleteHelperBuilder->getFormatter()->setDebug(true);
+//        $placeAutocompleteHelperBuilder->getFormatter()->setIndentationStep(4);
+////        $placeAutocompleteHelper->renderHtml($autocomplete);
+////        $placeAutocompleteHelper->renderJavascript($autocomplete);
+//        $auto =  $placeAutocompleteHelper->render($autocomplete);
+////        echo $auto;
+//        $apiHelperBuilder = ApiHelperBuilder::create();
+//        $apiHelper = $apiHelperBuilder->build();
+//        echo $apiHelper->render([$map, $auto]);
 
-
-        $placeAutocompleteHelperBuilder = PlaceAutocompleteHelperBuilder::create();
-        $placeAutocompleteHelper = $placeAutocompleteHelperBuilder->build();
-        $placeAutocompleteHelperBuilder->getFormatter()->setDebug(true);
-        $placeAutocompleteHelperBuilder->getFormatter()->setIndentationStep(4);
-//        $placeAutocompleteHelper->renderHtml($autocomplete);
-//        $placeAutocompleteHelper->renderJavascript($autocomplete);
-        $auto =  $placeAutocompleteHelper->render($autocomplete);
-//        echo $auto;
-        $apiHelperBuilder = ApiHelperBuilder::create();
-        $apiHelper = $apiHelperBuilder->build();
-        echo $apiHelper->render([$map, $auto]);
         return $this->render('Profile/profile.html.twig', array(
             'shops' => $addresses,
             'form' => $form->createView(),
             'map'  => $map,
-            'autocomplete'  => $autocomplete,
+//            'autocomplete'  => $autocomplete,
         ));
     }
 
