@@ -55,6 +55,11 @@ class DefaultController extends Controller
      */
     public function mapAction(Request $request)
     {
+        //*************** take lat and long *************************
+        $lat = $request->request->get('lattitude');
+        $long = $request->request->get('logitutde');
+        //var_dump($lat);
+
         $em = $this->getDoctrine()->getManager();
 
         $addresses = $em->getRepository('AppBundle:Address')->findAll();

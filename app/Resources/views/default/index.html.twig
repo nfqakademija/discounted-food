@@ -12,7 +12,8 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
         {% if is_granted('ROLE_USER') %}
-            <li><a href="{{ path('profile_index') }}"><i class="fa fa-user" aria-hidden="true"></i> Manage Shops</a></li>
+            <li><a href="{{ path('profile_index') }}"><i class="fa fa-user" aria-hidden="true"></i> Manage Shops</a>
+            </li>
             <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
             </li>
         {% else %}
@@ -27,88 +28,133 @@
 {% block index_page %}
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
-                <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <div class="container">
-                            <div class="carousel-caption">
-                                <h3>Search <span>Food</span></h3>
-                                {#<p>Special for today</p>#}
-                                <br>
-                                <div class="row">
-                                    <div style="border-radius: 25px;background-color:rgba(0,0,0,0.7);padding-top:55px;padding-bottom:80px; padding-left:40px; padding-right: 40px;">
-                                        <form method="post" action="#">
-                                            <div class="col-md-6">
-                                                <div class="form-group form-control-lg">
-                                                    <input type="text" class="form-control" id="formGroupExampleInput"
-                                                           placeholder="Favorite food">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <select class="form-control form-control-lg">
-                                                    <option>Choose city</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-1">
-                                                <button class="btn btn-success">Search</button>
-                                            </div>
-                                        </form>
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h3>Search <span>Food</span></h3>
+                        {#<p>Special for today</p>#}
+                        <br>
+                        <div class="row">
+                            <div style="border-radius: 25px;background-color:rgba(0,0,0,0.7);padding-top:55px;padding-bottom:80px; padding-left:40px; padding-right: 40px;">
+                                <form method="post" action="{{ path('map') }}">
+                                    <div class="col-md-6">
+                                        <div class="form-group form-control-lg">
+                                            <input type="text" class="form-control" id="formGroupExampleInput"
+                                                   placeholder="Favorite food">
+                                        </div>
                                     </div>
-                                </div>
-                                {#<button class="btn hvr-outline-out button2" onclick="getLocation()">Show in the map </button>#}
+                                    <div class="col-md-5">
+                                        <select class="form-control form-control-lg">
+                                            <option>Choose city</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <input type="hidden" name="lattitude" id="lattitude" value="">
+                                        <input type="hidden" name="logitutde" id="longitude" value="">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button class="btn btn-success" id="search--button">Search</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
+                        {#<button class="btn hvr-outline-out button2" onclick="getLocation()">Show in the map </button>#}
                     </div>
-                </div>
-
-            </div>
-{% endblock %}
-
-{% block body %}
-<div class="new_arrivals_agile_w3ls_info">
-   <div class="container">
-        <h3 class="wthree_text_info">Available <span>Offers</span></h3>
-        <div id="horizontalTab">
-            <div class="row">
-                <div class="col-md-12 col-sm-2 text-center">
-
-                </div>
-                <div class="resp-tabs-container">
-                    {% for product in products %}
-                        <div class="col-sm-4 col-md-4 col-lg-4 mt-4 product-men" style="height: 450px">
-                            <div class="card">
-                                <img class="card-img-top" src="{{ asset('images/products/'  ~ product.ImageName) }}">
-                                <div class="card-block text-center">
-                                    <h4 class="card-title mt-3">{{ product.name }}</h4>
-                                    <div class="meta">
-                                        <a>{{ product.address.shopOwner.companyName }}
-                                            Address: {{ product.address.address }}</a>
-                                    </div>
-                                    <div class="card-text">
-                                        {{ product.description }}
-                                    </div>
-                                </div>
-                                <div class="card-footer text-center">
-                                    <small>Collection time today: <strong>{{ product.dateFrom|date("h:m") }}
-                                            - {{ product.dateTo|date("h:m") }}</strong></small>
-                                </div>
-                                <div class="card-footer text-center">
-                                    <small>Left: <strong>{{ product.portions }}</strong> portions for: <strong><span
-                                                    class="item_price">${{ product.price }}</span></strong></small>
-                                    <button style="color:white;"
-                                            class="btn snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        SHOW IN THE MAP
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-
-                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
-     </div>
-  </div
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(window).on("load", function () {
+            getLocation();
+
+            function getLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition, showError);
+                } else {
+                    console.log("Geolocation is not supported by this browser.");
+                }
+            }
+
+            function showPosition(position) {
+                document.getElementById('longitude').value = position.coords.latitude;
+                document.getElementById('lattitude').value = position.coords.longitude;
+                alert(position.coords.latitude);
+                alert(position.coords.longitude);
+            }
+
+            function showError(error) {
+                switch (error.code) {
+                    case error.PERMISSION_DENIED:
+                        console.log("User denied the request for Geolocation.");
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        console.log("Location information is unavailable.");
+                        break;
+                    case error.TIMEOUT:
+                        console.log("The request to get user location timed out.");
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        console.log("An unknown error occurred.");
+                        break;
+                }
+            }
+
+        })
+
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="new_arrivals_agile_w3ls_info">
+        <div class="container">
+            <h3 class="wthree_text_info">Available <span>Offers</span></h3>
+            <div id="horizontalTab">
+                <div class="row">
+                    <div class="col-md-12 col-sm-2 text-center">
+
+                    </div>
+                    <div class="resp-tabs-container">
+                        {% for product in products %}
+                            <div class="col-sm-4 col-md-4 col-lg-4 mt-4 product-men" style="height: 450px">
+                                <div class="card">
+                                    <img class="card-img-top"
+                                         src="{{ asset('images/products/'  ~ product.ImageName) }}">
+                                    <div class="card-block text-center">
+                                        <h4 class="card-title mt-3">{{ product.name }}</h4>
+                                        <div class="meta">
+                                            <a>{{ product.address.shopOwner.companyName }}
+                                                Address: {{ product.address.address }}</a>
+                                        </div>
+                                        <div class="card-text">
+                                            {{ product.description }}
+                                        </div>
+                                    </div>
+                                    <div class="card-footer text-center">
+                                        <small>Collection time today: <strong>{{ product.dateFrom|date("h:m") }}
+                                                - {{ product.dateTo|date("h:m") }}</strong></small>
+                                    </div>
+                                    <div class="card-footer text-center">
+                                        <small>Left: <strong>{{ product.portions }}</strong> portions for: <strong><span
+                                                        class="item_price">${{ product.price }}</span></strong></small>
+                                        <button style="color:white;"
+                                                class="btn snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                            SHOW IN THE MAP
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div
 {% endblock %}
 
 {% block footer %}
