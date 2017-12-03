@@ -33,6 +33,7 @@ class ProductController extends Controller
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+//            var_dump($form->getData());die;
             $em->persist($form->getData());
             $em->flush();
             $this->addFlash(
@@ -61,6 +62,10 @@ class ProductController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->addFlash(
+                'notice',
+                'Product updated!'
+            );
             $this->getDoctrine()->getManager()->flush();
         }
 

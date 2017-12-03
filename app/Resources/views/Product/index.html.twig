@@ -90,6 +90,32 @@
                                     {{ form_widget(form.imageFile) }}
                                 </div>
 
+                                <div class="form-group">
+
+                                    <h5>Select food types</h5>
+
+                                    {{ form_errors(form.meal) }}
+                                    {{ form_label(form.meal) }}
+                                    {{ form_widget(form.meal) }}
+
+                                    {{ form_errors(form.dessert) }}
+                                    {{ form_label(form.dessert) }}
+                                    {{ form_widget(form.dessert) }}
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    {{ form_errors(form.vegan) }}
+                                    {{ form_label(form.vegan) }}
+                                    {{ form_widget(form.vegan) }}
+
+                                    {{ form_errors(form.vegetarian) }}
+                                    {{ form_label(form.vegetarian) }}
+                                    {{ form_widget(form.vegetarian) }}
+
+                                </div>
+
                                 <button type="submit" class="btn btn-success">Add new product</button>
                                 {{ form_end(form) }}
                             </div>
@@ -121,8 +147,13 @@
                             <div class="col-sm-3 col-md-3 col-lg-3 mt-3 product-men">
                                 <div class="card">
 
-                                    <img class="card-img-top"
-                                         src="{{ asset('images/products/'  ~ product.ImageName) }}">
+                                    {% if product.ImageName is not null %}
+                                        <img class="card-img-top"
+                                             src="{{ asset('images/products/'  ~ product.ImageName) }}">
+                                    {% else %}
+                                        <img class="card-img-top"
+                                             src="{{ asset('images/products/foodNoImage.jpg') }}">
+                                    {% endif %}
                                     <div class="card-block text-center">
                                         <h4 class="card-title mt-3">{{ product.name }}</h4>
                                         <div class="meta">
