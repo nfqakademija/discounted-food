@@ -31,6 +31,15 @@ class ProductFixtures extends Fixture
             $product->setImageName('food.jpg');
             $product->setImageSize(2000);
             $product->setUpdatedAt($faker->dateTime());
+
+            if ($i % 2 === 0) {
+                $product->setVegetarian(1);
+                $product->setMeal(1);
+            } else {
+                $product->setDessert(1);
+                $product->setVegan(1);
+            }
+
             $manager->persist($product);
         }
 
