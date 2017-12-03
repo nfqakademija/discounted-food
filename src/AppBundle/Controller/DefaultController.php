@@ -77,20 +77,6 @@ class DefaultController extends Controller
         );
     }
 
-    /**
-     * @Route("/faker", name="faker")
-     */
-    public function fakerAction(Request $request)
-    {
-        $faker = Factory::create();
-
-        for ($i = 0; $i < 10; $i++) {
-            echo $faker->name.'<br>';
-        }
-
-        die;
-    }
-
     public function registerAction()
     {
         return $this->redirectToRoute('homepage');
