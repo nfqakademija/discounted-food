@@ -21,7 +21,14 @@ class MapGenerator
         $map->setMapOption('zoom', 12);
         $map->setMapOption(
             'styles',
-            array(array('featureType' => 'water', 'stylers' => array(array('color' => '#00FF00'))), array('stylers' => array(array('hue' => '#00ffe6', 'saturation' => '-20'))))
+            array(
+                array('featureType' => 'water',
+                    'stylers' => array(
+                        array('color' => '#00FF00'))), array('stylers' => array(
+                            array('hue' => '#00ffe6', 'saturation' => '-20')
+                        )
+                )
+            )
         );
         $map->setCenter(new Coordinate(54.687157, 25.279652));
         $temp = '';
