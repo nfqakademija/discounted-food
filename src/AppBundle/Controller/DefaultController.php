@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
-use Faker\Factory;
+use Ivory\GoogleMap\Base\Coordinate;
+use Ivory\GoogleMap\Overlay\Icon;
+use Ivory\GoogleMap\Overlay\Marker;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,7 +42,7 @@ class DefaultController extends Controller
             );
         }
 
-        
+
         $repository = $em->getRepository('AppBundle:User');
         $users = $repository->findAll();
 
@@ -56,7 +58,7 @@ class DefaultController extends Controller
                 'map' => $map,
                 'products' => $products,
                 'users' => $users,
-                'foodFilterForm' => $foodFilterForm->createView()
+                'foodFilterForm' => $foodFilterForm->createView(),
             ]
         );
     }
@@ -75,6 +77,10 @@ class DefaultController extends Controller
      */
     public function mapAction(Request $request)
     {
+        //*************** take lat and long *************************
+        $lat = $request->request->get('lattitude');
+        $long = $request->request->get('logitutde');
+
         $em = $this->getDoctrine()->getManager();
 
         $addresses = $em->getRepository('AppBundle:Address')->findAll();
@@ -85,7 +91,11 @@ class DefaultController extends Controller
         $mapGenerator = $this->get('custom_map_generator');
 
         $map = $mapGenerator->generateMap($addresses, $products);
-
+        $map->setCenter(new Coordinate($long, $lat));
+        $marker = new Marker(new Coordinate($long, $lat));
+        $marker->setIcon(new Icon('https://i.imgur.com/pXpB7BR.png'));
+        $map->getOverlayManager()->addMarker($marker);
+        $map->setMapOption('zoom', 14);
 
         return $this->render(
             'Map/index.html.twig',
