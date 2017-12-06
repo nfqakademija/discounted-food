@@ -33,28 +33,29 @@ class ProductController extends Controller
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-//            var_dump($form->getData());die;
             $em->persist($form->getData());
             $em->flush();
-            $this->addFlash(
-                'notice',
-                'New product added!'
-            );
+
+            $this->addFlash('notice', 'New product added!');
+
             return $this->redirect($request->getUri());
         }
 
-        return $this->render('Product/index.html.twig', array(
-            'shops' => $address,
-            'products' => $products,
-            'form' => $form->createView(),
-        ));
+        return $this->render(
+            'Product/index.html.twig',
+            array(
+                'shops' => $address,
+                'products' => $products,
+                'form' => $form->createView(),
+            )
+        );
     }
 
     /**
      * Displays a form to edit an existing product entity.
      *
      * @Route("/{id}/edit", name="product_edit")
-     * @Method({"GET", "POST"})
+     * @Method({"GET",      "POST"})
      */
     public function editAction(Request $request, Product $product)
     {
@@ -62,17 +63,16 @@ class ProductController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->addFlash(
-                'notice',
-                'Product updated!'
-            );
+            $this->addFlash('notice', 'Product updated!');
             $this->getDoctrine()->getManager()->flush();
         }
 
-        return $this->render('Product/edit.html.twig', array(
+        return $this->render(
+            'Product/edit.html.twig', array(
             'product' => $product,
             'form' => $editForm->createView(),
-        ));
+            )
+        );
     }
 
 

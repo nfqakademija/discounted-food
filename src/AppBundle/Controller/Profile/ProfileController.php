@@ -25,7 +25,7 @@ class ProfileController extends Controller
     /**
      * Creates a new address entity.
      *
-     * @Route("/", name="profile_index")
+     * @Route("/",     name="profile_index")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -82,35 +82,37 @@ class ProfileController extends Controller
 
         $map = $mapGenerator->generateMap($addresses);
 
-//        $autocomplete = new Autocomplete();
-//
-//        $autocomplete->setInputId('appbundle_address_address');
+        //        $autocomplete = new Autocomplete();
+        //
+        //        $autocomplete->setInputId('appbundle_address_address');
 
-//        $placeAutocompleteHelperBuilder = PlaceAutocompleteHelperBuilder::create();
-//        $placeAutocompleteHelper = $placeAutocompleteHelperBuilder->build();
-//        $placeAutocompleteHelperBuilder->getFormatter()->setDebug(true);
-//        $placeAutocompleteHelperBuilder->getFormatter()->setIndentationStep(4);
-////        $placeAutocompleteHelper->renderHtml($autocomplete);
-////        $placeAutocompleteHelper->renderJavascript($autocomplete);
-//        $auto =  $placeAutocompleteHelper->render($autocomplete);
-////        echo $auto;
-//        $apiHelperBuilder = ApiHelperBuilder::create();
-//        $apiHelper = $apiHelperBuilder->build();
-//        echo $apiHelper->render([$map, $auto]);
+        //        $placeAutocompleteHelperBuilder = PlaceAutocompleteHelperBuilder::create();
+        //        $placeAutocompleteHelper = $placeAutocompleteHelperBuilder->build();
+        //        $placeAutocompleteHelperBuilder->getFormatter()->setDebug(true);
+        //        $placeAutocompleteHelperBuilder->getFormatter()->setIndentationStep(4);
+        ////        $placeAutocompleteHelper->renderHtml($autocomplete);
+        ////        $placeAutocompleteHelper->renderJavascript($autocomplete);
+        //        $auto =  $placeAutocompleteHelper->render($autocomplete);
+        ////        echo $auto;
+        //        $apiHelperBuilder = ApiHelperBuilder::create();
+        //        $apiHelper = $apiHelperBuilder->build();
+        //        echo $apiHelper->render([$map, $auto]);
 
-        return $this->render('Profile/profile.html.twig', array(
+        return $this->render(
+            'Profile/profile.html.twig', array(
             'shops' => $addresses,
             'form' => $form->createView(),
             'map'  => $map,
-//            'autocomplete'  => $autocomplete,
-        ));
+            //            'autocomplete'  => $autocomplete,
+            )
+        );
     }
 
     /**
      * Displays a form to edit an existing address entity.
      *
      * @Route("/{id}/edit", name="profile_edit")
-     * @Method({"GET", "POST"})
+     * @Method({"GET",      "POST"})
      */
     public function editAction(Request $request, Address $address)
     {
@@ -127,10 +129,12 @@ class ProfileController extends Controller
             return $this->redirectToRoute('profile_index');
         }
 
-        return $this->render('Profile/edit.html.twig', array(
+        return $this->render(
+            'Profile/edit.html.twig', array(
             'shops' => $address,
             'form' => $editForm->createView(),
-        ));
+            )
+        );
     }
 
 

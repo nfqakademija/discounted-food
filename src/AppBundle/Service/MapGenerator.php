@@ -19,10 +19,7 @@ class MapGenerator
         $map->setStylesheetOption('height', '620px');
         $map->setStylesheetOption('width', '100%');
         $map->setMapOption('zoom', 12);
-        $map->setMapOption('styles', array(
-            array('featureType' => 'water', 'stylers' => array(array('color' => '#00FF00'))),
-            array('stylers' => array(array('hue' => '#00ffe6', 'saturation' => '-20')))
-        ));
+        $map->setMapOption('styles', array(array('featureType' => 'water', 'stylers' => array(array('color' => '#00FF00'))), array('stylers' => array(array('hue' => '#00ffe6', 'saturation' => '-20')))));
         $map->setCenter(new Coordinate(54.687157, 25.279652));
         $temp = '';
         $i = 0;
@@ -46,7 +43,7 @@ class MapGenerator
                 }
                 $temp.= "<input type = 'hidden' id = '".$address->getId()."iterator' value = '".$i."'/>";
                 $temp.= "<input type = 'hidden' id = '".$address->getId()."company' value = '".$address->getShopOwner()
-                        ->getCompanyName()."'/>";
+                    ->getCompanyName()."'/>";
                 $i = 0;
             }
             $infowindow = new InfoWindow(
@@ -58,8 +55,8 @@ class MapGenerator
                 src = '". '../../../web/images/addresses/'.$address->getImageName()."' /></div > "
             );
             $marker->setInfoWindow($infowindow);
-//            $marker->setSymbol(new Symbol(SymbolPath::FORWARD_OPEN_ARROW));
-//            $marker->setIcon(new Icon('https://pasteboard.co/GUZqrTG.vnd.microsoft.icon'));
+            //            $marker->setSymbol(new Symbol(SymbolPath::FORWARD_OPEN_ARROW));
+            //            $marker->setIcon(new Icon('https://pasteboard.co/GUZqrTG.vnd.microsoft.icon'));
             $temp = '';
         }
 
