@@ -14,13 +14,34 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-
         $em = $this->getDoctrine()->getManager();
 
         $addresses = $em->getRepository('AppBundle:Address')->findAll();
 
         $repository = $em->getRepository('AppBundle:Product');
         $products = $repository->findAll();
+
+
+        $foodFilterForm = $this->createForm('AppBundle\Form\FoodFilterType');
+
+        $foodFilterForm->handleRequest($request);
+
+        if ($foodFilterForm->isSubmitted() && $foodFilterForm->isValid()) {
+            $data = $foodFilterForm->getData();
+
+            foreach ($data as $index => $value) {
+                if ($data[$index] === false) {
+                    unset($data[$index]);
+                }
+            }
+
+            $products = $repository->findBy(
+                $data
+            );
+
+        }
+
+
 
         $repository = $em->getRepository('AppBundle:User');
         $users = $repository->findAll();
@@ -37,6 +58,7 @@ class DefaultController extends Controller
                 'map' => $map,
                 'products' => $products,
                 'users' => $users,
+                'foodFilterForm' => $foodFilterForm->createView()
             ]
         );
     }
