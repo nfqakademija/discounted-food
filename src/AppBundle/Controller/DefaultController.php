@@ -38,11 +38,9 @@ class DefaultController extends Controller
             $products = $repository->findBy(
                 $data
             );
-
         }
 
-
-
+        
         $repository = $em->getRepository('AppBundle:User');
         $users = $repository->findAll();
 
