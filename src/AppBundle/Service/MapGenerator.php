@@ -19,11 +19,16 @@ class MapGenerator
         $map->setStylesheetOption('height', '620px');
         $map->setStylesheetOption('width', '100%');
         $map->setMapOption('zoom', 12);
+        $map->setMapOption('styles', array(
+            array('featureType' => 'water', 'stylers' => array(array('color' => '#00FF00'))),
+            array('stylers' => array(array('hue' => '#00ffe6', 'saturation' => '-20')))
+        ));
         $map->setCenter(new Coordinate(54.687157, 25.279652));
         $temp = '';
         $i = 0;
         foreach ($addresses as $address) {
             $marker = new Marker(new Coordinate($address->getLatitude(), $address->getLongitude()));
+            $marker->setIcon(new Icon('https://i.imgur.com/B8URPHY.png'));
             $map->getOverlayManager()->addMarker($marker);
             if ($products !== null) {
                 foreach ($products as $product) {

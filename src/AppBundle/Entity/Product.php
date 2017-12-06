@@ -197,6 +197,26 @@ class Product
     private $price;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true, options={"default" : 0})
+     */
+    private $vegan;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true, options={"default" : 0})
+     */
+    private $vegetarian;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true, options={"default" : 0})
+     */
+    private $meal;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true, options={"default" : 0})
+     */
+    private $dessert;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Address", inversedBy="products")
      * @ORM\JoinColumn(name="address_id", referencedColumnName="id")
      */
@@ -356,6 +376,71 @@ class Product
     {
         return $this->price;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getVegan()
+    {
+        return $this->vegan;
+    }
+
+    /**
+     * @param mixed $vegan
+     */
+    public function setVegan($vegan)
+    {
+        $this->vegan = $vegan;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVegetarian()
+    {
+        return $this->vegetarian;
+    }
+
+    /**
+     * @param mixed $vegetarian
+     */
+    public function setVegetarian($vegetarian)
+    {
+        $this->vegetarian = $vegetarian;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMeal()
+    {
+        return $this->meal;
+    }
+
+    /**
+     * @param mixed $meal
+     */
+    public function setMeal($meal)
+    {
+        $this->meal = $meal;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDessert()
+    {
+        return $this->dessert;
+    }
+
+    /**
+     * @param mixed $dessert
+     */
+    public function setDessert($dessert)
+    {
+        $this->dessert = $dessert;
+    }
+
 
     /**
      * @return int

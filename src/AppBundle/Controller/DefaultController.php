@@ -2,8 +2,9 @@
 
 namespace AppBundle\Controller;
 
-use Faker\Factory;
 use Ivory\GoogleMap\Base\Coordinate;
+use Ivory\GoogleMap\Overlay\Icon;
+use Ivory\GoogleMap\Overlay\Marker;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,13 +16,32 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-
         $em = $this->getDoctrine()->getManager();
 
         $addresses = $em->getRepository('AppBundle:Address')->findAll();
 
         $repository = $em->getRepository('AppBundle:Product');
         $products = $repository->findAll();
+
+
+        $foodFilterForm = $this->createForm('AppBundle\Form\FoodFilterType');
+
+        $foodFilterForm->handleRequest($request);
+
+        if ($foodFilterForm->isSubmitted() && $foodFilterForm->isValid()) {
+            $data = $foodFilterForm->getData();
+
+            foreach ($data as $index => $value) {
+                if ($data[$index] === false) {
+                    unset($data[$index]);
+                }
+            }
+
+            $products = $repository->findBy(
+                $data
+            );
+        }
+
 
         $repository = $em->getRepository('AppBundle:User');
         $users = $repository->findAll();
@@ -38,6 +58,7 @@ class DefaultController extends Controller
                 'map' => $map,
                 'products' => $products,
                 'users' => $users,
+                'foodFilterForm' => $foodFilterForm->createView(),
             ]
         );
     }
@@ -71,6 +92,10 @@ class DefaultController extends Controller
 
         $map = $mapGenerator->generateMap($addresses, $products);
         $map->setCenter(new Coordinate($long, $lat));
+        $marker = new Marker(new Coordinate($long, $lat));
+        $marker->setIcon(new Icon('https://i.imgur.com/pXpB7BR.png'));
+        $map->getOverlayManager()->addMarker($marker);
+        $map->setMapOption('zoom', 14);
 
         return $this->render(
             'Map/index.html.twig',
@@ -80,20 +105,6 @@ class DefaultController extends Controller
                 'users' => $users,
             ]
         );
-    }
-
-    /**
-     * @Route("/faker", name="faker")
-     */
-    public function fakerAction(Request $request)
-    {
-        $faker = Factory::create();
-
-        for ($i = 0; $i < 10; $i++) {
-            echo $faker->name.'<br>';
-        }
-
-        die;
     }
 
     public function registerAction()
