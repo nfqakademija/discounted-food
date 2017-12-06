@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use Faker\Factory;
+use Ivory\GoogleMap\Base\Coordinate;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,7 +59,6 @@ class DefaultController extends Controller
         //*************** take lat and long *************************
         $lat = $request->request->get('lattitude');
         $long = $request->request->get('logitutde');
-        //var_dump($lat);
 
         $em = $this->getDoctrine()->getManager();
 
@@ -70,7 +70,7 @@ class DefaultController extends Controller
         $mapGenerator = $this->get('custom_map_generator');
 
         $map = $mapGenerator->generateMap($addresses, $products);
-
+        $map->setCenter(new Coordinate($long, $lat));
 
         return $this->render(
             'Map/index.html.twig',
