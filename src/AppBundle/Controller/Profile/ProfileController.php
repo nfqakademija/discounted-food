@@ -99,10 +99,11 @@ class ProfileController extends Controller
         //        echo $apiHelper->render([$map, $auto]);
 
         return $this->render(
-            'Profile/profile.html.twig', array(
-            'shops' => $addresses,
-            'form' => $form->createView(),
-            'map'  => $map,
+            'Profile/profile.html.twig',
+            array(
+                'shops' => $addresses,
+                'form' => $form->createView(),
+                'map'  => $map,
             //            'autocomplete'  => $autocomplete,
             )
         );
@@ -130,9 +131,10 @@ class ProfileController extends Controller
         }
 
         return $this->render(
-            'Profile/edit.html.twig', array(
-            'shops' => $address,
-            'form' => $editForm->createView(),
+            'Profile/edit.html.twig',
+            array(
+                'shops' => $address,
+                'form' => $editForm->createView(),
             )
         );
     }

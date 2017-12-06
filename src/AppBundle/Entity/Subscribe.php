@@ -63,4 +63,3 @@ class Subscribe
         return $this->email;
     }
 }
-
