@@ -36,25 +36,27 @@
                                 <br>
                                 <div class="row">
                                     <div style="border-radius: 25px;background-color:rgba(0,0,0,0.7);padding-top:55px;padding-bottom:80px; padding-left:40px; padding-right: 40px;">
-                                        <form method="post" action="#">
-                                            <div class="col-md-6">
-                                                <div class="form-group form-control-lg">
-                                                    <input type="text" class="form-control" id="formGroupExampleInput"
-                                                           placeholder="Favorite food">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <select class="form-control form-control-lg">
-                                                    <option>Choose city</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-1">
-                                                <button class="btn btn-success">Search</button>
-                                            </div>
-                                        </form>
+
+                                        {{ form_start(foodFilterForm) }}
+                                            {{ form_label(foodFilterForm.meal) }}
+                                            {{ form_errors(foodFilterForm.meal) }}
+                                            {{ form_widget(foodFilterForm.meal) }}
+
+                                            {{ form_label(foodFilterForm.dessert) }}
+                                            {{ form_errors(foodFilterForm.dessert) }}
+                                            {{ form_widget(foodFilterForm.dessert) }}
+
+                                            {{ form_label(foodFilterForm.vegan) }}
+                                            {{ form_errors(foodFilterForm.vegan) }}
+                                            {{ form_widget(foodFilterForm.vegan) }}
+
+                                            {{ form_label(foodFilterForm.vegetarian) }}
+                                            {{ form_errors(foodFilterForm.vegetarian) }}
+                                            {{ form_widget(foodFilterForm.vegetarian) }}
+
+                                        {{ form_end(foodFilterForm) }}
                                     </div>
                                 </div>
-                                {#<button class="btn hvr-outline-out button2" onclick="getLocation()">Show in the map </button>#}
                             </div>
                         </div>
                     </div>
