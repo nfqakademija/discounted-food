@@ -9,6 +9,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use FOS\UserBundle\Form\Type\RegistrationFormType as BaseRegistrationFormType;
 
@@ -16,7 +17,9 @@ class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('companyName')->add('legalEntityCode')->add('phone');
+        $builder
+            ->add('companyName', TextType::class, array('required' => true))
+            ->add('legalEntityCode')->add('phone', TextType::class, array('required' => true));
     }
 
     public function getParent()
