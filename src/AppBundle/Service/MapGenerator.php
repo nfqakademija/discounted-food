@@ -20,8 +20,8 @@ class MapGenerator
         $map->setStylesheetOption('width', '100%');
         $map->setMapOption('zoom', 12);
         $map->setMapOption('styles', array(
-            array('featureType' => 'water', 'stylers' => array(array('color' => '#00FF00'))),
-            array('stylers' => array(array('hue' => '#00ffe6', 'saturation' => '-20')))
+            array('featureType' => 'water', 'stylers' => array(array('color' => '#e9e9e9'))),
+            array('stylers' => array(array('hue' => 'red', 'saturation' => '-20')))
         ));
         $map->setCenter(new Coordinate(54.687157, 25.279652));
         $temp = '';
@@ -50,12 +50,11 @@ class MapGenerator
                 $i = 0;
             }
             $infowindow = new InfoWindow(
-                $temp."<button class = 'btn btn-success' id = '".$address->getId(
-                )."' >View offers</button><br><input type = 'hidden' id = '".$address->getId(
+                $temp."<input type = 'hidden' id = '".$address->getId(
                 )."a' value = '".$address->getAddress()."'/><input type = 'hidden' id = '".$address->getId(
                 )."i' value = 'https://ibb.co/c53Nnm'/>".$address->getAddress(
-                )."<img width = '100px' height = '100px' 
-                src = '". '../../../web/images/addresses/'.$address->getImageName()."' /></div > "
+                )."<br><br><button class = 'btn btn-success btn-block' id = '".$address->getId(
+                )."' >View offers</button></div >"
             );
             $marker->setInfoWindow($infowindow);
 //            $marker->setSymbol(new Symbol(SymbolPath::FORWARD_OPEN_ARROW));

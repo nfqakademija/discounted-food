@@ -15,11 +15,10 @@ before-install:
     - composer self-update
 
 script:
-  - vendor/bin/phpcs -p --standard=PSR2 --extensions=php ./src
+    - vendor/bin/phpcs -p --standard=PSR2 --extensions=php ./src
 
 install:
     - composer install
-    - cp app/config/parameters.yml.dist app/config/parameters.yml
     - php bin/console doctrine:database:create --env=test
     - php bin/console doctrine:schema:create --env=test
 

@@ -47,14 +47,15 @@ class ProfileController extends Controller
             $response = $geocoder->geocode($request);
 
             if ($response->getStatus() === 'ZERO_RESULTS') {
+                $invalidAddress = $address->getAddress();
                 $this->addFlash(
                     'error',
-                    'Invalid address supplied!'
+                    "$invalidAddress is not a valid address!"
                 );
                 return $this->redirectToRoute('profile_index');
             }
              $results = $response->getResults();
-
+            return 1;die;
             $em = $this->getDoctrine()->getManager();
 
             foreach ($results as $result) {
