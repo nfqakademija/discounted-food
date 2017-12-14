@@ -1,18 +1,16 @@
 .map-sidebar-container {
     margin: 0;
     padding: 0;
-    width: 30%;
-    height: 620px;
-    background-color:whitesmoke;
+    background-color: whitesmoke;
 }
 
 .map-sidebar-container #a_div {
-    display:none;
+    display: none;
 }
 
 .map-sidebar-container #a_image {
-    height:150px;
-    width:150px;
+    height: 150px;
+    width: 150px;
 }
 
 .map-sidebar-container .company-info {

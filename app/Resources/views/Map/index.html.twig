@@ -12,7 +12,8 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
         {% if is_granted('ROLE_USER') %}
-            <li><a href="{{ path('profile_index') }}"><i class="fa fa-user" aria-hidden="true"></i> Manage Shops</a></li>
+            <li><a href="{{ path('profile_index') }}"><i class="fa fa-user" aria-hidden="true"></i> Manage Shops</a>
+            </li>
             <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
             </li>
         {% else %}
@@ -27,18 +28,14 @@
         <link href="{{ asset('css/mapStyling.css') }}" rel="stylesheet">
     {% endblock %}
 {% block body %}
-    <div class="control-sidebar-light pull-left map-sidebar-container">
+
+    <div class="pull-right col-xs-12" style="margin: 0; padding: 0;">
+        {{ ivory_google_map(map) }}
+        {{ ivory_google_api([map]) }}
+    </div>
+
+    <div class="control-sidebar-light pull-left map-sidebar-container col-xs-12 col-md-12">
         <div id='a_div'>
-
-            {#<div align="center">#}
-                {#<img id='a_image'#}
-                     {#src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1200px-Good_Food_Display_-_NCI_Visuals_Online.jpg"#}
-                 {#>#}
-            {#</div>#}
-
-            {#<div align="center">#}
-                {#<strong class="text-center">Address:</strong>#}
-            {#</div>#}
             <div class="company-info text-center">
                 <h3 id="company-name">Company</h3>
                 <h6 id="address"></h6>
@@ -52,21 +49,12 @@
                 {% for i in 0..100 %}
                     <div id='products-{{ i }}'></div>
                 {% endfor %}
-                {#<strong text-align: center;">Name:</strong>#}
-                {#<p class="text-center" id="product-name"></p>#}
-                {#<strong text-align: center;">Description:</strong>#}
-                {#<p class="text-center" id="product-description"></p>#}
-                {#<strong text-align: center;">Portions:</strong>#}
-                {#<p class="text-center" id="product-portions"></p>#}
-                {#<strong text-align: center;">Price:</strong>#}
-                {#<p class="text-center" id="product-price"></p>#}
             </div>
         </div>
     </div>
-    <div class="pull-right" style="margin: 0; padding: 0;width: 70%;">
-        {{ ivory_google_map(map) }}
-        {{ ivory_google_api([map]) }}
-    </div>
+
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
         {% for address in addresses %}
@@ -81,21 +69,20 @@
             var i = document.getElementById('{{ address.id }}iterator').value;
             for (var j = 0; j < i; j++) {
                 document.getElementById('products-' + j).innerHTML =
-//                    '<strong >Name:</strong>' +
                     '<div class="row">' +
-                        '<div class="col-md-6">' +
-                            '<p class="product-name" id="product-name-' + j + '"></p>' +
-        //                    '<strong >Description:</strong>' +
-                            '<p class="product-description" id="product-description-' + j + '"></p>' +
-                        '</div>' +
-                        '<div class="row"><div class="col-md-6">' +
+                    '<div class="col-md-6">' +
+                    '<p class="product-name" id="product-name-' + j + '"></p>' +
+                    //                    '<strong >Description:</strong>' +
+                    '<p class="product-description" id="product-description-' + j + '"></p>' +
+                    '</div>' +
+                    '<div class="row"><div class="col-md-6">' +
 
-                            '<strong  ><i class="fa fa-cutlery" aria-hidden="true"></i> Portions left: </strong>' +
-                            '<p class="text-center product-portions" id="product-portions-' + j + '">' +
-                            '</p>' +
-                            '<strong>' + 'Price: </strong>' +
-                            '<a class="text-center product-price" id="product-price-' + j + '"></a><i class="fa fa-eur" aria-hidden="true"></i><hr>' +
-                        '</div>' +
+                    '<strong  ><i class="fa fa-cutlery" aria-hidden="true"></i> Portions left: </strong>' +
+                    '<p class="text-center product-portions" id="product-portions-' + j + '">' +
+                    '</p>' +
+                    '<strong>' + 'Price: </strong>' +
+                    '<a class="text-center product-price" id="product-price-' + j + '"></a><i class="fa fa-eur" aria-hidden="true"></i><hr>' +
+                    '</div>' +
                     '</div>';
                 var product_name = document.getElementById('{{ address.id }}n-' + j).value;
                 document.getElementById("product-name-" + j).innerHTML = product_name;
