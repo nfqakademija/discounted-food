@@ -54,8 +54,8 @@ class ProfileController extends Controller
                 );
                 return $this->redirectToRoute('profile_index');
             }
-             $results = $response->getResults();
-            return 1;die;
+
+            $results = $response->getResults();
             $em = $this->getDoctrine()->getManager();
 
             foreach ($results as $result) {
