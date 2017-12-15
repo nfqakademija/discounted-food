@@ -30,6 +30,7 @@ class DefaultController extends Controller
 
         if ($foodFilterForm->isSubmitted() && $foodFilterForm->isValid()) {
             $data = $foodFilterForm->getData();
+//            var_dump($data);die;
 
             foreach ($data as $index => $value) {
                 if ($data[$index] === false) {

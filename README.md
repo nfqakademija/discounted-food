@@ -5,7 +5,7 @@
 Discounted Food
 ========================
 
-[![Build Status](https://travis-ci.org/mantas-kemesius/Discounted_food_app.svg?branch=master)](https://travis-ci.org/mantas-kemesius/Discounted_food_app/)
+[![Build Status](https://travis-ci.org/nfqakademija/discounted-food.svg?branch=master)](https://travis-ci.org/nfqakademija/discounted-food)
 
 # Project Description
 Discounted Food is a demo application created during NFQ Academy. 
@@ -20,7 +20,6 @@ Keywords: php, symfony, doctrine, mysql.
   $ git clone <project>
   $ cd path/to/<project>
   $ composer install 
-  $ cp app/config/parameters.yml.dist app/config/parameters.yml
   $ php bin/console doctrine:database:create
   $ php bin/console doctrine:schema:update --force
 ```
