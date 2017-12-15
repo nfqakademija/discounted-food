@@ -20,7 +20,6 @@ Keywords: php, symfony, doctrine, mysql.
   $ git clone <project>
   $ cd path/to/<project>
   $ composer install 
-  $ cp app/config/parameters.yml.dist app/config/parameters.yml
   $ php bin/console doctrine:database:create
   $ php bin/console doctrine:schema:update --force
 ```
