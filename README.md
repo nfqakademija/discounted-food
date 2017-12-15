@@ -5,7 +5,7 @@
 Discounted Food
 ========================
 
-[![Build Status](https://travis-ci.org/mantas-kemesius/Discounted_food_app.svg?branch=master)](https://travis-ci.org/mantas-kemesius/Discounted_food_app/)
+[![Build Status](https://travis-ci.org/nfqakademija/discounted-food.svg?branch=master)](https://travis-ci.org/nfqakademija/discounted-food)
 
 # Project Description
 Discounted Food is a demo application created during NFQ Academy. 
