@@ -104,43 +104,72 @@
 
 {% block footer %}
 {% endblock %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<script>
+    $(window).on("load", function () {
+        getLocation();
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }
+        }
+
+        function showPosition(position) {
+            $.ajax({
+                url: '{{ path('set_location') }}',
+                type: 'POST', // performing a POST request
+                data: {
+                    lattitude: position.coords.latitude, longitude: position.coords.longitude,
+                },
+                success: function (data) {
+                }
+            });
+        }
+
+        $('select').on('change', function () {
+            var location = this.value;
+            var latt, long;
+
+            if (location === 'Vilnius') {
+                latt = 54.687156;
+                long = 25.279651;
+            }
+            if (location === 'Kaunas') {
+                latt = 54.898521;
+                long = 23.903597;
+            }
+            if (location === 'Klaipėda') {
+                latt = 55.703295;
+                long = 21.14428;
+            }
+            if (location === 'Šiauliai') {
+                latt = 55.934909;
+                long = 23.313682;
+            }
+            if (location === 'Panevėžys') {
+                latt = 55.734791;
+                long = 24.357477;
+            }
+            if (location === 'Current location') {
+                latt = null;
+                long = null;
+            }
+
+            document.getElementById('longitude').value = long;
+            document.getElementById('lattitude').value = latt;
+        })
+
+    })
+
+</script>
 <!-- js -->
 <script type="text/javascript" src="{{ asset('js/jquery-2.1.4.min.js') }}"></script>
 <!-- //js -->
 <script src="{{ asset('js/modernizr.custom.js') }}"></script>
-<script>
-    var x = document.getElementById("demo");
-
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        }
-    }
-
-    function showPosition(position) {
-        x.innerHTML = "Latitude: " + position.coords.latitude +
-            "<br>Longitude: " + position.coords.longitude;
-
-
-    }
-</script>
 <!-- for bootstrap working -->
 <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
-
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-    (function () {
-        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-        s1.async = true;
-        s1.src = 'https://embed.tawk.to/5a006f16bb0c3f433d4c779e/default';
-        s1.charset = 'UTF-8';
-        s1.setAttribute('crossorigin', '*');
-        s0.parentNode.insertBefore(s1, s0);
-    })();
-</script>
-<!--End of Tawk.to Script-->
 
 {% block customScripts %}{% endblock %}
 </body>

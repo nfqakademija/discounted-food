@@ -68,19 +68,24 @@
                                             <div class="col-md-6">
                                                 <div class="form-group form-control-lg">
                                                     <input type="text" class="form-control"
-                                                           id="formGroupExampleInput"
+                                                           id="food-name"
                                                            placeholder="Favorite food">
                                                 </div>
                                             </div>
                                             <div class="col-md-5">
-                                                <select class="form-control form-control-lg">
-                                                    <option>Choose city</option>
+                                                <select class="form-control form-control-lg" id="location-place">
+                                                    <option>Current location</option>
+                                                    <option>Vilnius</option>
+                                                    <option>Kaunas</option>
+                                                    <option>Šiauliai</option>
+                                                    <option>Klaipėda</option>
+                                                    <option>Panevėžys</option>
                                                 </select>
                                             </div>
                                             <div>
                                                 <input type="hidden" name="lattitude" id="lattitude"
                                                        value="">
-                                                <input type="hidden" name="logitutde" id="longitude"
+                                                <input type="hidden" name="longitude" id="longitude"
                                                        value="">
                                             </div>
                                             <div class="col-md-1">
@@ -99,44 +104,6 @@
 
             </div>
 
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-            <script>
-                $(window).on("load", function () {
-                    getLocation();
-
-                    function getLocation() {
-                        if (navigator.geolocation) {
-                            navigator.geolocation.getCurrentPosition(showPosition, showError);
-                        } else {
-                            console.log("Geolocation is not supported by this browser.");
-                        }
-                    }
-
-                    function showPosition(position) {
-                        document.getElementById('longitude').value = position.coords.latitude;
-                        document.getElementById('lattitude').value = position.coords.longitude;
-                    }
-
-                    function showError(error) {
-                        switch (error.code) {
-                            case error.PERMISSION_DENIED:
-                                console.log("User denied the request for Geolocation.");
-                                break;
-                            case error.POSITION_UNAVAILABLE:
-                                console.log("Location information is unavailable.");
-                                break;
-                            case error.TIMEOUT:
-                                console.log("The request to get user location timed out.");
-                                break;
-                            case error.UNKNOWN_ERROR:
-                                console.log("An unknown error occurred.");
-                                break;
-                        }
-                    }
-
-                })
-
-            </script>
         {% endblock %}
 
         {% block body %}
@@ -307,5 +274,4 @@
                         <3 </p>
                 </div>
             </div>
-            <!-- //footer -->
         {% endblock %}
