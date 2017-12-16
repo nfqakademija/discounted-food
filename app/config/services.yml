@@ -32,6 +32,9 @@ services:
     custom_map_generator:
         class: AppBundle\Service\MapGenerator
         public: true
+    custom_search_map_generator:
+            class: AppBundle\Service\SearchMapGenerator
+            public: true
 
 
     # add more services, or override services that need manual wiring

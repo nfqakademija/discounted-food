@@ -10,4 +10,17 @@ namespace AppBundle\Repository;
  */
 class ProductRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @return array
+     */
+    public function getFindAllFoodQueryBuilder($name)
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->select('u');
+        $qb
+            ->andWhere('u.name LIKE :food')
+            ->setParameter('food', '%'.$name.'%');
+
+        return $qb->getQuery()->getResult();
+    }
 }
