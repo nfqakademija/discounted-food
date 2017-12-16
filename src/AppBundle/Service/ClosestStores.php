@@ -22,7 +22,7 @@ class ClosestStores
                 foreach ($products as $product) {
                     if ($product->getAddressId() === $address->getId()) {
                         $closestProducts[$counter]['distance'] = $this->distance($lat, $long, $currentLat, $currentLong, "K");
-                        $closestProducts[$counter]['prdouct_name'] = $product->getName();
+                        $closestProducts[$counter]['product_name'] = $product->getName();
                         $closestProducts[$counter]['description'] = $product->getDescription();
                         $closestProducts[$counter]['price'] = $product->getPrice();
                         $closestProducts[$counter]['portions'] = $product->getPortions();
