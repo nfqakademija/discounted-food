@@ -9,6 +9,10 @@
     display: none;
 }
 
+.map-sidebar-container #b_div {
+
+}
+
 .map-sidebar-container #a_image {
     height: 150px;
     width: 150px;
@@ -28,7 +32,12 @@
 }
 
 .map-sidebar-container .product-price {
-    font-size: 2em;
+    font-size: 1.4em;
+    color: black;
+}
+
+.map-sidebar-container .product-portions {
+    font-size: 1.4em;
     color: black;
 }
 

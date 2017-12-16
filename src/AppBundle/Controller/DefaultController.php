@@ -31,7 +31,6 @@ class DefaultController extends Controller
 
         if ($foodFilterForm->isSubmitted() && $foodFilterForm->isValid()) {
             $data = $foodFilterForm->getData();
-//            var_dump($data);die;
 
             foreach ($data as $index => $value) {
                 if ($data[$index] === false) {
@@ -84,15 +83,24 @@ class DefaultController extends Controller
 
         $latPost = $request->request->get('lattitude');
         $longPost = $request->request->get('longitude');
+        $foodName = $request->request->get('foodName');
 
         $em = $this->getDoctrine()->getManager();
-
+        if ($foodName == null) {
+            $products = $em->getRepository('AppBundle:Product')->findAll();
+        } else {
+            $products = $em->getRepository('AppBundle:Product')->getFindAllFoodQueryBuilder($foodName);
+        }
         $addresses = $em->getRepository('AppBundle:Address')->findAll();
-        $products = $em->getRepository('AppBundle:Product')->findAll();
+
         $repository = $em->getRepository('AppBundle:User');
         $users = $repository->findAll();
 
-        $mapGenerator = $this->get('custom_map_generator');
+        if ($foodName == null) {
+            $mapGenerator = $this->get('custom_map_generator');
+        } else {
+            $mapGenerator = $this->get('custom_search_map_generator');
+        }
 
         $map = $mapGenerator->generateMap($addresses, $products);
 
@@ -129,10 +137,8 @@ class DefaultController extends Controller
     {
         $lat = $request->request->get('lattitude');
         $long = $request->request->get('longitude');
-        var_dump($lat." ".$long);
 
         $session = new Session();
-
         $session->set('lattitude', $lat);
         $session->set('longitude', $long);
         die;
