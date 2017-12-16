@@ -140,7 +140,6 @@ class ProfileController extends Controller
         } else {
             throw $this->createNotFoundException('Unauthorized action');
         }
-
     }
 
 
