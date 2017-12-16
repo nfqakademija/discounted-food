@@ -34,7 +34,6 @@ class SearchMapGenerator
             if ($products !== null) {
                 foreach ($products as $product) {
                     if ($product->getAddressId() === $address->getId()) {
-
                         $marker = new Marker(new Coordinate($address->getLatitude(), $address->getLongitude()));
                         $marker->setIcon(new Icon('https://i.imgur.com/B8URPHY.png'));
                         $map->getOverlayManager()->addMarker($marker);
@@ -49,9 +48,7 @@ class SearchMapGenerator
                         $i++;
                         $temp .= "<input type = 'hidden' id = '".$address->getId()."iterator' value = '".$i."'/>";
                         $temp .= "<input type = 'hidden' id = '".$address->getId(
-                            )."company' value = '".$address->getShopOwner()
-                                ->getCompanyName()."'/>";
-
+                            )."company' value = '".$address->getShopOwner()->getCompanyName()."'/>";
                         $infowindow = new InfoWindow(
                             $temp."<input type = 'hidden' id = '".$address->getId()."a' value = '".$address->getAddress(
                             )."'/><input type = 'hidden' id = '".$address->getId(
