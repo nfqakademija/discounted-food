@@ -11,9 +11,31 @@ use Ivory\GoogleMap\Overlay\Marker;
 class ClosestStores
 {
 
-    public function getMostClosest(array $products = null)
+    public function getMostClosest(array $addresses, array $products = null, $currentLat, $currentLong)
     {
-        return 0;
+        $counter = 0;
+        $closestProducts=[];
+        foreach ($addresses as $address) {
+            $lat = $address->getLatitude();
+            $long = $address->getLongitude();
+            if ($products !== null) {
+                foreach ($products as $product) {
+                    if ($product->getAddressId() === $address->getId()) {
+                        $closestProducts[$counter]['distance'] = $this->distance($lat, $long, $currentLat, $currentLong, "K");
+                        $closestProducts[$counter]['prdouct_name'] = $product->getName();
+                        $closestProducts[$counter]['description'] = $product->getDescription();
+                        $closestProducts[$counter]['price'] = $product->getPrice();
+                        $closestProducts[$counter]['portions'] = $product->getPortions();
+                        $closestProducts[$counter]['company_name'] = $address->getShopOwner()->getCompanyName();
+                        $closestProducts[$counter]['address'] = $address->getAddress();
+                        $counter++;
+                    }
+                }
+            }
+        }
+        echo"<pre>";
+        var_dump($closestProducts);
+        echo"</pre>";
     }
     /**
      * @param $lat1
