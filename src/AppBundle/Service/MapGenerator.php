@@ -60,8 +60,6 @@ class MapGenerator
                 )."' >View offers</button></div >"
             );
             $marker->setInfoWindow($infowindow);
-//            $marker->setSymbol(new Symbol(SymbolPath::FORWARD_OPEN_ARROW));
-//            $marker->setIcon(new Icon('https://pasteboard.co/GUZqrTG.vnd.microsoft.icon'));
             $temp = '';
         }
 

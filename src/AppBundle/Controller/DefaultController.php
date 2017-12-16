@@ -8,6 +8,7 @@ use Ivory\GoogleMap\Overlay\Marker;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class DefaultController extends Controller
 {
@@ -77,9 +78,12 @@ class DefaultController extends Controller
      */
     public function mapAction(Request $request)
     {
-        //*************** take lat and long *************************
-        $lat = $request->request->get('lattitude');
-        $long = $request->request->get('logitutde');
+        $session = new Session();
+        $lat = $session->get('lattitude');
+        $long = $session->get('longitude');
+
+        $latPost = $request->request->get('lattitude');
+        $longPost = $request->request->get('longitude');
 
         $em = $this->getDoctrine()->getManager();
 
@@ -91,11 +95,22 @@ class DefaultController extends Controller
         $mapGenerator = $this->get('custom_map_generator');
 
         $map = $mapGenerator->generateMap($addresses, $products);
-        $map->setCenter(new Coordinate($long, $lat));
-        $marker = new Marker(new Coordinate($long, $lat));
-        $marker->setIcon(new Icon('https://i.imgur.com/pXpB7BR.png'));
-        $map->getOverlayManager()->addMarker($marker);
-        $map->setMapOption('zoom', 14);
+
+        if ($latPost != null && $longPost != null) {
+            $map->setCenter(new Coordinate($latPost, $longPost));
+            $map->setMapOption('zoom', 13);
+        } else {
+            if ($lat != null && $long != null) {
+                $map->setCenter(new Coordinate($lat, $long));
+                $marker = new Marker(new Coordinate($lat, $long));
+                $marker->setIcon(new Icon('https://i.imgur.com/pXpB7BR.png'));
+                $map->getOverlayManager()->addMarker($marker);
+                $map->setMapOption('zoom', 14);
+            } else {
+                $map->setCenter(new Coordinate(54.687157, 25.279652));
+                $map->setMapOption('zoom', 13);
+            }
+        }
 
         return $this->render(
             'Map/index.html.twig',
@@ -106,6 +121,23 @@ class DefaultController extends Controller
             ]
         );
     }
+
+    /**
+     * @Route("/get/location", name="set_location")
+     */
+    public function locationAction(Request $request)
+    {
+        $lat = $request->request->get('lattitude');
+        $long = $request->request->get('longitude');
+        var_dump($lat." ".$long);
+
+        $session = new Session();
+
+        $session->set('lattitude', $lat);
+        $session->set('longitude', $long);
+        die;
+    }
+
 
     public function registerAction()
     {
