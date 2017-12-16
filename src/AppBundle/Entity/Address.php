@@ -176,7 +176,7 @@ class Address
     private $shop_owner;
 
     /**
-     * @OneToMany(targetEntity="AppBundle\Entity\Product", mappedBy="address")
+     * @OneToMany(targetEntity="AppBundle\Entity\Product", mappedBy="address", cascade={"remove"})
      */
     private $products;
 
