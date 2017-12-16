@@ -86,7 +86,7 @@ class DefaultController extends Controller
         $foodName = $request->request->get('foodName');
 
         $em = $this->getDoctrine()->getManager();
-        if ($foodName === null) {
+        if ($foodName == null) {
             $products = $em->getRepository('AppBundle:Product')->findAll();
         } else {
             $products = $em->getRepository('AppBundle:Product')->getFindAllFoodQueryBuilder($foodName);
@@ -96,7 +96,11 @@ class DefaultController extends Controller
         $repository = $em->getRepository('AppBundle:User');
         $users = $repository->findAll();
 
-        $mapGenerator = $this->get('custom_search_map_generator');
+        if ($foodName == null) {
+            $mapGenerator = $this->get('custom_map_generator');
+        } else {
+            $mapGenerator = $this->get('custom_search_map_generator');
+        }
 
         $map = $mapGenerator->generateMap($addresses, $products);
 
