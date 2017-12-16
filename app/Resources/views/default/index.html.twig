@@ -62,7 +62,7 @@
                                             {#<p>Special for today</p>#}
                                             <br>
                                             <div class="row">
-                                                <div style="border-radius: 25px;background-color:rgba(0,0,0,0.7);padding-top:55px;padding-bottom:80px; padding-left:40px; padding-right: 40px;">
+                                                <div style="margin-top:40px;" class="col-md-12">
                                                     <form method="post" action="{{ path('map') }}">
                                                         <div class="col-md-6">
                                                             <div class="form-group form-control-lg">
@@ -88,82 +88,8 @@
                                                         </div>
                                                     </form>
                                                 </div>
-                                                <div style="border-radius: 25px;background-color:rgba(0,0,0,0.7);padding-top:55px;padding-bottom:80px; padding-left:40px; padding-right: 40px;">
 
-                                                    {{ form_start(foodFilterForm) }}
 
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            {{ form_widget(foodFilterForm.meal) }}
-                                                            <div class="btn-group">
-                                                                <label for="appbundle_food_filter_meal"
-                                                                       class="btn btn-success">
-                                                                    <span class="glyphicon glyphicon-ok"></span>
-                                                                    <span class="glyphicon glyphicon-remove"></span>
-                                                                </label>
-                                                                <label for="appbundle_food_filter_meal"
-                                                                       class="btn btn-default active">
-                                                                    Meal
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            {{ form_widget(foodFilterForm.dessert) }}
-                                                            <div class="btn-group">
-                                                                <label for="appbundle_food_filter_dessert"
-                                                                       class="btn btn-success">
-                                                                    <span class="glyphicon glyphicon-ok"></span>
-                                                                    <span class="glyphicon glyphicon-remove"></span>
-                                                                </label>
-                                                                <label for="appbundle_food_filter_dessert"
-                                                                       class="btn btn-default active">
-                                                                    Dessert
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            {{ form_widget(foodFilterForm.vegan) }}
-                                                            <div class="btn-group">
-                                                                <label for="appbundle_food_filter_vegan"
-                                                                       class="btn btn-success">
-                                                                    <span class="glyphicon glyphicon-ok"></span>
-                                                                    <span class="glyphicon glyphicon-remove"></span>
-                                                                </label>
-                                                                <label for="appbundle_food_filter_vegan"
-                                                                       class="btn btn-default active">
-                                                                    Vegan
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-2">
-                                                        <div class="form-group">
-                                                            {{ form_widget(foodFilterForm.vegetarian) }}
-                                                            <div class="btn-group">
-                                                                <label for="appbundle_food_filter_vegetarian"
-                                                                       class="btn btn-success">
-                                                                    <span class="glyphicon glyphicon-ok"></span>
-                                                                    <span class="glyphicon glyphicon-remove"></span>
-                                                                </label>
-                                                                <label for="appbundle_food_filter_vegetarian"
-                                                                       class="btn btn-default active">
-                                                                    Vegetarian
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    {{ form_widget(foodFilterForm.filter, {'label' : 'Filter by Category'}) }}
-
-                                                    {{ form_end(foodFilterForm) }}
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -218,13 +144,94 @@
                                 <h3 class="wthree_text_info">Available <span>Offers</span></h3>
                                 <div id="horizontalTab">
                                     <div class="row">
-                                        <div class="col-md-12 col-sm-2 text-center">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
 
+                                                <div class="col-md-12">
+
+                                                    {{ form_start(foodFilterForm) }}
+
+                                                    <div class="col-md-2 text-center">
+                                                        <div class="form-group">
+                                                            {{ form_widget(foodFilterForm.meal) }}
+                                                            <div class="btn-group">
+                                                                <label for="appbundle_food_filter_meal"
+                                                                       class="btn btn-success">
+                                                                    <span class="glyphicon glyphicon-ok"></span>
+                                                                    <span class="glyphicon glyphicon-remove"></span>
+                                                                </label>
+                                                                <label for="appbundle_food_filter_meal"
+                                                                       class="btn btn-default active">
+                                                                    Meal
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2 text-center">
+                                                        <div class="form-group">
+                                                            {{ form_widget(foodFilterForm.dessert) }}
+                                                            <div class="btn-group">
+                                                                <label for="appbundle_food_filter_dessert"
+                                                                       class="btn btn-success">
+                                                                    <span class="glyphicon glyphicon-ok"></span>
+                                                                    <span class="glyphicon glyphicon-remove"></span>
+                                                                </label>
+                                                                <label for="appbundle_food_filter_dessert"
+                                                                       class="btn btn-default active">
+                                                                    Dessert
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2 text-center">
+                                                        <div class="form-group">
+                                                            {{ form_widget(foodFilterForm.vegan) }}
+                                                            <div class="btn-group">
+                                                                <label for="appbundle_food_filter_vegan"
+                                                                       class="btn btn-success">
+                                                                    <span class="glyphicon glyphicon-ok"></span>
+                                                                    <span class="glyphicon glyphicon-remove"></span>
+                                                                </label>
+                                                                <label for="appbundle_food_filter_vegan"
+                                                                       class="btn btn-default active">
+                                                                    Vegan
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2 text-center">
+                                                        <div class="form-group">
+                                                            {{ form_widget(foodFilterForm.vegetarian) }}
+                                                            <div class="btn-group">
+                                                                <label for="appbundle_food_filter_vegetarian"
+                                                                       class="btn btn-success">
+                                                                    <span class="glyphicon glyphicon-ok"></span>
+                                                                    <span class="glyphicon glyphicon-remove"></span>
+                                                                </label>
+                                                                <label for="appbundle_food_filter_vegetarian"
+                                                                       class="btn btn-default active">
+                                                                    Vegetarian
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4 text-center">
+                                                        {{ form_widget(foodFilterForm.filter, {'label' : 'Filter by Category'}) }}
+                                                    </div>
+                                                    {{ form_end(foodFilterForm) }}
+                                                </div>
+                                            </div>
                                         </div>
+
                                         <div class="resp-tabs-container">
                                             {% for product in products %}
+
                                                 <div class="col-sm-4 col-md-4 col-lg-4 mt-4 product-men"
-                                                     style="height: 450px;margin-bottom: 50px;margin-top: 10em">
+                                                     style="height: 450px;margin-bottom: 150px; position:relative;">
                                                     <div class="card">
                                                         {% if product.ImageName is not null %}
                                                             <img style="width:360px;height:240px;"
