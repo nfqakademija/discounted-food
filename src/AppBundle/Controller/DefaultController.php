@@ -30,6 +30,7 @@ class DefaultController extends Controller
 
         if ($foodFilterForm->isSubmitted() && $foodFilterForm->isValid()) {
             $data = $foodFilterForm->getData();
+//            var_dump($data);die;
 
             foreach ($data as $index => $value) {
                 if ($data[$index] === false) {
@@ -64,11 +65,10 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/about", name="about")
+     * @Route("/aboutus", name="about")
      */
     public function aboutAction(Request $request)
     {
-        // replace this example code with whatever you need
         return $this->render('About/about.html.twig');
     }
 

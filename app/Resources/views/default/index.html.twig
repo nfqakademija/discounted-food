@@ -1,217 +1,296 @@
 {% extends 'base.html.twig' %}
+        {% block customStyleheets %}
+            <style>
+                .form-group input[type="checkbox"] {
+                    display: none;
+                }
 
-{% block title %}Discounted food{% endblock %}
+                .form-group input[type="checkbox"] + .btn-group > label span:first-child {
+                    display: none;
+                }
 
-{% block navbar %}
-    <ul class="nav navbar-nav menu__list">
-        <li class="active menu__item menu__item--current"><a class="menu__link" href="{{ path('homepage') }}">Home<span
-                        class="sr-only">(current)</span></a></li>
-        <li class="menu__item"><a class="menu__link" href="{{ path('map') }}">Show Map<span
-                        class="sr-only">(current)</span></a></li>
-        <li class=" menu__item"><a class="menu__link" href="{{ path('about') }}">About</a></li>
-    </ul>
+                .form-group input[type="checkbox"] + .btn-group > label span:last-child {
+                    display: inline-block;
+                }
 
-    <ul class="nav navbar-nav navbar-right">
-        {% if is_granted('ROLE_USER') %}
-            <li><a href="{{ path('profile_index') }}"><i class="fa fa-user" aria-hidden="true"></i>
-                    Manage Shops</a></li>
-            <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"
-                                                                    aria-hidden="true"></i>Logout</a>
-            </li>
-        {% else %}
-            <li><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-unlock-alt"
-                                                                   aria-hidden="true"></i>
-                    Login </a></li>
-            <li><a href="{{ path('fos_user_registration_register') }}"><i
-                            class="fa fa-pencil-square-o"
-                            aria-hidden="true"></i> Register </a></li>
-        {% endif %}
-    </ul>
+                .form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+                    display: inline-block;
+                }
 
-{% endblock %}
+                .form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+                    display: none;
+                }
+            </style>
+        {% endblock %}
+        {% block title %}Discounted food{% endblock %}
+                    {% block navbar %}
+                        <ul class="nav navbar-nav menu__list">
+                            <li class="active menu__item menu__item--current"><a class="menu__link"
+                                                                                 href="{{ path('homepage') }}">Home
+                                    <span
+                                            class="sr-only">(current)</span></a></li>
+                            <li class="menu__item"><a class="menu__link" href="{{ path('map') }}">Show Map<span
+                                            class="sr-only">(current)</span></a></li>
+                            <li class=" menu__item"><a class="menu__link" href="{{ path('about') }}">About</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if is_granted('ROLE_USER') %}
+                                <li><a href="{{ path('profile_index') }}"><i class="fa fa-user" aria-hidden="true"></i>
+                                        Manage Shops</a></li>
+                                <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out"
+                                                                                        aria-hidden="true"></i>Logout</a>
+                                </li>
+                            {% else %}
+                                <li><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-unlock-alt"
+                                                                                       aria-hidden="true"></i>
+                                        Login </a></li>
+                                <li><a href="{{ path('fos_user_registration_register') }}"><i
+                                                class="fa fa-pencil-square-o"
+                                                aria-hidden="true"></i> Register </a></li>
+                            {% endif %}
+                        </ul>
+                    {% endblock %}
 
-    {% block index_page %}
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    {% block index_page %}
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
-            <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h3>Search <span>Food</span></h3>
-                            <br>
-                            <div class="row">
-                                <div style="margin-top:50px;">
-                                    <form method="post" action="{{ path('map') }}">
-                                        <div class="col-md-6 col-xs-12">
-                                            <div class="form-group form-control-lg">
-                                                <input type="text" class="form-control"
-                                                       id="formGroupExampleInput"
-                                                       placeholder="Favorite food">
+                            <div class="carousel-inner" role="listbox">
+                                <div class="item active">
+                                    <div class="container">
+                                        <div class="carousel-caption">
+                                            <h3>Search <span>Food</span></h3>
+                                            {#<p>Special for today</p>#}
+                                            <br>
+                                            <div class="row">
+                                                <div style="border-radius: 25px;background-color:rgba(0,0,0,0.7);padding-top:55px;padding-bottom:80px; padding-left:40px; padding-right: 40px;">
+                                                    <form method="post" action="{{ path('map') }}">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group form-control-lg">
+                                                                <input type="text" class="form-control"
+                                                                       id="formGroupExampleInput"
+                                                                       placeholder="Favorite food">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <select class="form-control form-control-lg">
+                                                                <option>Choose city</option>
+                                                            </select>
+                                                        </div>
+                                                        <div>
+                                                            <input type="hidden" name="lattitude" id="lattitude"
+                                                                   value="">
+                                                            <input type="hidden" name="logitutde" id="longitude"
+                                                                   value="">
+                                                        </div>
+                                                        <div class="col-md-1">
+                                                            <button class="btn btn-success" id="search--button">Search
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div style="border-radius: 25px;background-color:rgba(0,0,0,0.7);padding-top:55px;padding-bottom:80px; padding-left:40px; padding-right: 40px;">
+
+                                                    {{ form_start(foodFilterForm) }}
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            {{ form_widget(foodFilterForm.meal) }}
+                                                            <div class="btn-group">
+                                                                <label for="appbundle_food_filter_meal"
+                                                                       class="btn btn-success">
+                                                                    <span class="glyphicon glyphicon-ok"></span>
+                                                                    <span class="glyphicon glyphicon-remove"></span>
+                                                                </label>
+                                                                <label for="appbundle_food_filter_meal"
+                                                                       class="btn btn-default active">
+                                                                    Meal
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            {{ form_widget(foodFilterForm.dessert) }}
+                                                            <div class="btn-group">
+                                                                <label for="appbundle_food_filter_dessert"
+                                                                       class="btn btn-success">
+                                                                    <span class="glyphicon glyphicon-ok"></span>
+                                                                    <span class="glyphicon glyphicon-remove"></span>
+                                                                </label>
+                                                                <label for="appbundle_food_filter_dessert"
+                                                                       class="btn btn-default active">
+                                                                    Dessert
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            {{ form_widget(foodFilterForm.vegan) }}
+                                                            <div class="btn-group">
+                                                                <label for="appbundle_food_filter_vegan"
+                                                                       class="btn btn-success">
+                                                                    <span class="glyphicon glyphicon-ok"></span>
+                                                                    <span class="glyphicon glyphicon-remove"></span>
+                                                                </label>
+                                                                <label for="appbundle_food_filter_vegan"
+                                                                       class="btn btn-default active">
+                                                                    Vegan
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            {{ form_widget(foodFilterForm.vegetarian) }}
+                                                            <div class="btn-group">
+                                                                <label for="appbundle_food_filter_vegetarian"
+                                                                       class="btn btn-success">
+                                                                    <span class="glyphicon glyphicon-ok"></span>
+                                                                    <span class="glyphicon glyphicon-remove"></span>
+                                                                </label>
+                                                                <label for="appbundle_food_filter_vegetarian"
+                                                                       class="btn btn-default active">
+                                                                    Vegetarian
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    {{ form_widget(foodFilterForm.filter, {'label' : 'Filter by Category'}) }}
+
+                                                    {{ form_end(foodFilterForm) }}
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-5 col-xs-12">
-                                            <select class="form-control form-control-lg">
-                                                <option>Choose city</option>
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <input type="hidden" name="lattitude" id="lattitude"
-                                                   value="">
-                                            <input type="hidden" name="logitutde" id="longitude"
-                                                   value="">
-                                        </div>
-                                        <div class="col-md-1 col-xs-12">
-                                            <button class="btn btn-success" id="search--button">Search
-                                            </button>
-                                        </div>
-                                    </form>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script>
-            $(window).on("load", function () {
-                getLocation();
-
-                function getLocation() {
-                    if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(showPosition, showError);
-                    } else {
-                        console.log("Geolocation is not supported by this browser.");
-                    }
-                }
-
-                function showPosition(position) {
-                    document.getElementById('longitude').value = position.coords.latitude;
-                    document.getElementById('lattitude').value = position.coords.longitude;
-                }
-
-                function showError(error) {
-                    switch (error.code) {
-                        case error.PERMISSION_DENIED:
-                            console.log("User denied the request for Geolocation.");
-                            break;
-                        case error.POSITION_UNAVAILABLE:
-                            console.log("Location information is unavailable.");
-                            break;
-                        case error.TIMEOUT:
-                            console.log("The request to get user location timed out.");
-                            break;
-                        case error.UNKNOWN_ERROR:
-                            console.log("An unknown error occurred.");
-                            break;
-                    }
-                }
-
-            })
-
-        </script>
-    {% endblock %}
-
-{% block body %}
-    <div class="new_arrivals_agile_w3ls_info">
-        <div class="container">
-            <h3 class="wthree_text_info">Available <span>Offers</span></h3>
-            <div id="horizontalTab">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 text-center">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                {{ form_start(foodFilterForm) }}
-                                {{ form_label(foodFilterForm.meal) }}
-                                {{ form_errors(foodFilterForm.meal) }}
-                                {{ form_widget(foodFilterForm.meal) }}
-
-                                {{ form_label(foodFilterForm.dessert) }}
-                                {{ form_errors(foodFilterForm.dessert) }}
-                                {{ form_widget(foodFilterForm.dessert) }}
-
-                                {{ form_label(foodFilterForm.vegan) }}
-                                {{ form_errors(foodFilterForm.vegan) }}
-                                {{ form_widget(foodFilterForm.vegan) }}
-
-                                {{ form_label(foodFilterForm.vegetarian) }}
-                                {{ form_errors(foodFilterForm.vegetarian) }}
-                                {{ form_widget(foodFilterForm.vegetarian) }}
-                                <br><br>
-                                {{ form_end(foodFilterForm) }}
-                            </div>
-                        </div>
-                    </div>
-                    {% for product in products %}
-                        <div class="col-sm-4 col-md-4 col-lg-4 mt-4 product-men"
-                             style="height: 450px;margin-bottom: 50px;margin-top: 10em">
-                            <div class="card">
-                                {% if product.ImageName is not null %}
-                                    <img style="width:360px;height:240px;"
-                                         class="card-img-top img-responsive"
-                                         src="{{ asset('images/products/'  ~ product.ImageName) }}">
-                                {% else %}
-                                    <img style="width:360px;height:240px;"
-                                         class="card-img-top img-responsive"
-                                         src="{{ asset('images/products/foodNoImage.jpg') }}">
-                                {% endif %}
-                                <div class="card-block text-center">
-                                    <h4 class="card-title mt-3">{{ product.name }}</h4>
-                                    <div class="meta">
-                                        <a>{{ product.address.shopOwner.companyName }}
-                                            Address: {{ product.address.address }}</a>
-                                    </div>
-                                    <div class="card-text">
-                                        {{ product.description }}
                                     </div>
                                 </div>
-                                <div class="card-footer text-center">
-                                    <small>Collection time today:
-                                        <strong>{{ product.dateFrom|date("h:m") }}
-                                            - {{ product.dateTo|date("h:m") }}</strong></small>
-                                </div>
-                                <div class="card-footer text-center">
-                                    {% if product.vegan %}
-                                        <button type="button" class="btn btn-success"><span
-                                                    class="badge">VEGAN</span></button>
-                                    {% endif %}
-                                    {% if product.vegetarian %}
-                                        <button type="button" class="btn btn-success"><span
-                                                    class="badge">VEGETARIAN</span></button>
-                                    {% endif %}
-                                </div>
-                                <div class="card-footer text-center">
-                                    {% if product.meal %}
-                                        <button type="button" class="btn btn-success"><span
-                                                    class="badge">MEAL</span></button>
-                                    {% endif %}
-                                    {% if product.dessert %}
-                                        <button type="button" class="btn btn-success"><span
-                                                    class="badge">DESSERT</span></button>
-                                    {% endif %}
-                                </div>
-                                <div class="card-footer text-center">
-                                    <small>Left: <strong>{{ product.portions }}</strong>
-                                        portions for: <strong><span
-                                                    class="item_price">${{ product.price }}</span></strong>
-                                    </small>
-                                    <button style="color:white;"
-                                            class="btn snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                        SHOW IN THE MAP
-                                    </button>
+                            </div>
+
+                        </div>
+
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+                        <script>
+                            $(window).on("load", function () {
+                                getLocation();
+
+                                function getLocation() {
+                                    if (navigator.geolocation) {
+                                        navigator.geolocation.getCurrentPosition(showPosition, showError);
+                                    } else {
+                                        console.log("Geolocation is not supported by this browser.");
+                                    }
+                                }
+
+                                function showPosition(position) {
+                                    document.getElementById('longitude').value = position.coords.latitude;
+                                    document.getElementById('lattitude').value = position.coords.longitude;
+                                }
+
+                                function showError(error) {
+                                    switch (error.code) {
+                                        case error.PERMISSION_DENIED:
+                                            console.log("User denied the request for Geolocation.");
+                                            break;
+                                        case error.POSITION_UNAVAILABLE:
+                                            console.log("Location information is unavailable.");
+                                            break;
+                                        case error.TIMEOUT:
+                                            console.log("The request to get user location timed out.");
+                                            break;
+                                        case error.UNKNOWN_ERROR:
+                                            console.log("An unknown error occurred.");
+                                            break;
+                                    }
+                                }
+
+                            })
+
+                        </script>
+                    {% endblock %}
+
+                    {% block body %}
+                        <div class="new_arrivals_agile_w3ls_info">
+                            <div class="container">
+                                <h3 class="wthree_text_info">Available <span>Offers</span></h3>
+                                <div id="horizontalTab">
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-2 text-center">
+
+                                        </div>
+                                        <div class="resp-tabs-container">
+                                            {% for product in products %}
+                                                <div class="col-sm-4 col-md-4 col-lg-4 mt-4 product-men"
+                                                     style="height: 450px;margin-bottom: 50px;margin-top: 10em">
+                                                    <div class="card">
+                                                        {% if product.ImageName is not null %}
+                                                            <img style="width:360px;height:240px;"
+                                                                 class="card-img-top img-responsive"
+                                                                 src="{{ asset('images/products/'  ~ product.ImageName) }}">
+                                                        {% else %}
+                                                            <img style="width:360px;height:240px;"
+                                                                 class="card-img-top img-responsive"
+                                                                 src="{{ asset('images/products/foodNoImage.jpg') }}">
+                                                        {% endif %}
+                                                        <div class="card-block text-center">
+                                                            <h4 class="card-title mt-3">{{ product.name }}</h4>
+                                                            <div class="meta">
+                                                                <a>{{ product.address.shopOwner.companyName }}
+                                                                    Address: {{ product.address.address }}</a>
+                                                            </div>
+                                                            <div class="card-text">
+                                                                {{ product.description }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-footer text-center">
+                                                            <small>Collection time today:
+                                                                <strong>{{ product.dateFrom|date("h:m") }}
+                                                                    - {{ product.dateTo|date("h:m") }}</strong></small>
+                                                        </div>
+                                                        <div class="card-footer text-center">
+                                                            {% if product.vegan %}
+                                                                <button type="button" class="btn btn-success"><span
+                                                                            class="badge">VEGAN</span></button>
+                                                            {% endif %}
+                                                            {% if product.vegetarian %}
+                                                                <button type="button" class="btn btn-success"><span
+                                                                            class="badge">VEGETARIAN</span></button>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="card-footer text-center">
+                                                            {% if product.meal %}
+                                                                <button type="button" class="btn btn-success"><span
+                                                                            class="badge">MEAL</span></button>
+                                                            {% endif %}
+                                                            {% if product.dessert %}
+                                                                <button type="button" class="btn btn-success"><span
+                                                                            class="badge">DESSERT</span></button>
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="card-footer text-center">
+                                                            <small>Left: <strong>{{ product.portions }}</strong>
+                                                                portions for: <strong><span
+                                                                            class="item_price">${{ product.price }}</span></strong>
+                                                            </small>
+                                                            <button style="color:white;"
+                                                                    class="btn snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                                                SHOW IN THE MAP
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
-
-                </div>
-            </div>
-        </div>
-    </div
-{% endblock %}
+                        </div
+                    {% endblock %}
 
                     {% block footer %}
                         <div class="footer">

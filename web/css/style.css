@@ -417,6 +417,10 @@ i.fa.fa-shopping-bag.top_logo_agile_bag {
     float: left;
 }
 
+.navbar {
+    overflow: hidden;
+}
+
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
     background: none;
 }

@@ -7,8 +7,6 @@ use Ivory\GoogleMap\Map;
 use Ivory\GoogleMap\Overlay\Icon;
 use Ivory\GoogleMap\Overlay\InfoWindow;
 use Ivory\GoogleMap\Overlay\Marker;
-use Ivory\GoogleMap\Overlay\Symbol;
-use Ivory\GoogleMap\Overlay\SymbolPath;
 
 class MapGenerator
 {
@@ -19,11 +17,13 @@ class MapGenerator
         $map->setStylesheetOption('height', '750px');
         $map->setStylesheetOption('width', '100%');
         $map->setMapOption('zoom', 12);
+
+
         $map->setMapOption(
             'styles',
             [
-                ['featureType' => 'water', 'stylers' => [['color' => '#00FF00']]],
-                ['stylers' => [['hue' => '#00ffe6', 'saturation' => '-20']]],
+                ['featureType' => 'water', 'stylers' => [['color' => '#e9e9e9']]],
+                ['stylers' => [['hue' => 'red', 'saturation' => '-20']]],
             ]
         );
         $map->setCenter(new Coordinate(54.687157, 25.279652));
@@ -53,11 +53,11 @@ class MapGenerator
                 $i = 0;
             }
             $infowindow = new InfoWindow(
-                $temp."<button class = 'btn btn-success' id = '".$address->getId(
-                )."' >View offers</button><br><input type = 'hidden' id = '".$address->getId(
-                )."a' value = '".$address->getAddress()."'/><input type = 'hidden' id = '".$address->getId(
-                )."i' value = 'https://ibb.co/c53Nnm'/>".$address->getAddress()."<img width = '100px' height = '100px' 
-                src = '".'../../../web/images/addresses/'.$address->getImageName()."' /></div > "
+                $temp."<input type = 'hidden' id = '".$address->getId()."a' value = '".$address->getAddress(
+                )."'/><input type = 'hidden' id = '".$address->getId(
+                )."i' value = 'https://ibb.co/c53Nnm'/>".$address->getAddress(
+                )."<br><br><button class = 'btn btn-success btn-block' id = '".$address->getId(
+                )."' >View offers</button></div >"
             );
             $marker->setInfoWindow($infowindow);
 //            $marker->setSymbol(new Symbol(SymbolPath::FORWARD_OPEN_ARROW));

@@ -12,7 +12,11 @@ class FoodFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('meal', CheckboxType::class, array('required' => false, 'label' => 'Meal'))
+            ->add(
+                'meal',
+                CheckboxType::class,
+                array('required' => false, 'label' => 'Meal','attr' => array("autocomplete" => "off"))
+            )
             ->add('dessert', CheckboxType::class, array('required' => false, 'label' => 'Dessert'))
             ->add('vegan', CheckboxType::class, array('required' => false, 'label' => 'Vegan'))
             ->add('vegetarian', CheckboxType::class, array('required' => false, 'label' => 'Vegetarian'))
