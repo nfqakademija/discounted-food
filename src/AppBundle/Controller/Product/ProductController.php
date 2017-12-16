@@ -33,7 +33,6 @@ class ProductController extends Controller
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-//            var_dump($form->getData());die;
             $em->persist($form->getData());
             $em->flush();
             $this->addFlash(
@@ -58,21 +57,29 @@ class ProductController extends Controller
      */
     public function editAction(Request $request, Product $product)
     {
-        $editForm = $this->createForm('AppBundle\Form\ProductType', $product);
-        $editForm->handleRequest($request);
+        $authUserId = $this->getUser()->getId();
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->addFlash(
-                'notice',
-                'Product updated!'
-            );
-            $this->getDoctrine()->getManager()->flush();
+        $productOwnerId = $product->getAddress()->getShopOwner()->getId();
+
+        if ($authUserId === $productOwnerId) {
+            $editForm = $this->createForm('AppBundle\Form\ProductType', $product);
+            $editForm->handleRequest($request);
+
+            if ($editForm->isSubmitted() && $editForm->isValid()) {
+                $this->addFlash(
+                    'notice',
+                    'Product updated!'
+                );
+                $this->getDoctrine()->getManager()->flush();
+            }
+
+            return $this->render('Product/edit.html.twig', array(
+                'product' => $product,
+                'form' => $editForm->createView(),
+            ));
+        } else {
+            throw $this->createNotFoundException('Unauthorized action');
         }
-
-        return $this->render('Product/edit.html.twig', array(
-            'product' => $product,
-            'form' => $editForm->createView(),
-        ));
     }
 
 
@@ -84,9 +91,17 @@ class ProductController extends Controller
      */
     public function deleteAction(Request $request, Product $product)
     {
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($product);
-        $em->flush();
-        return $this->redirectToRoute('profile_index');
+        $authUserId = $this->getUser()->getId();
+
+        $productOwnerId = $product->getAddress()->getShopOwner()->getId();
+
+        if ($authUserId === $productOwnerId) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($product);
+            $em->flush();
+            return $this->redirectToRoute('profile_index');
+        } else {
+            throw $this->createNotFoundException('Unauthorized action');
+        }
     }
 }

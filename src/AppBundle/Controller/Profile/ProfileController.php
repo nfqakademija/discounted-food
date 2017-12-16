@@ -115,23 +115,32 @@ class ProfileController extends Controller
      */
     public function editAction(Request $request, Address $address)
     {
-        $editForm = $this->createForm('AppBundle\Form\AddressType', $address);
-        $editForm->handleRequest($request);
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        $authUserId = $this->getUser()->getId();
 
-            $this->addFlash(
-                'notice',
-                'Shop updated!'
-            );
+        $addressOwnerId = $address->getShopOwner()->getId();
 
-            return $this->redirectToRoute('profile_index');
+        if ($authUserId === $addressOwnerId) {
+            $editForm = $this->createForm('AppBundle\Form\AddressType', $address);
+            $editForm->handleRequest($request);
+            if ($editForm->isSubmitted() && $editForm->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
+
+                $this->addFlash(
+                    'notice',
+                    'Shop updated!'
+                );
+
+                return $this->redirectToRoute('profile_index');
+            }
+
+            return $this->render('Profile/edit.html.twig', array(
+                'shops' => $address,
+                'form' => $editForm->createView(),
+            ));
+        } else {
+            throw $this->createNotFoundException('Unauthorized action');
         }
 
-        return $this->render('Profile/edit.html.twig', array(
-            'shops' => $address,
-            'form' => $editForm->createView(),
-        ));
     }
 
 
@@ -143,14 +152,23 @@ class ProfileController extends Controller
      */
     public function deleteAction(Request $request, Address $address)
     {
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($address);
-        $em->flush();
+        $authUserId = $this->getUser()->getId();
 
-        $this->addFlash(
-            'notice',
-            'Shop deleted!'
-        );
-        return $this->redirectToRoute('profile_index');
+        $addressOwnerId = $address->getShopOwner()->getId();
+
+        if ($authUserId === $addressOwnerId) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($address);
+            $em->flush();
+
+            $this->addFlash(
+                'notice',
+                'Shop deleted!'
+            );
+
+            return $this->redirectToRoute('profile_index');
+        } else {
+            throw $this->createNotFoundException('Unauthorized action');
+        }
     }
 }
