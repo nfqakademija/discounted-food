@@ -186,6 +186,7 @@ class Product
      * @var int
      *
      * @ORM\Column(name="portions", type="integer")
+     * @Assert\GreaterThan(0)
      */
     private $portions;
 
@@ -193,6 +194,7 @@ class Product
      * @var float
      *
      * @ORM\Column(name="price", type="float")
+     * @Assert\GreaterThan(0)
      */
     private $price;
 
