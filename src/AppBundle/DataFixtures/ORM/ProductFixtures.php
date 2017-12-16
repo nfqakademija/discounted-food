@@ -19,25 +19,59 @@ class ProductFixtures extends Fixture
     {
         $faker = Factory::create();
 
-        for ($i = 0; $i < 30; $i++) {
+        $foodPhotos = ['burger', 'cake', 'omelette', 'pancakes', 'pizza', 'quinoa', 'spaghetti'];
+
+        $photoIndex = 0;
+
+        for ($i = 0; $i < 100; $i++) {
             $product = new Product();
-            $product->setName('food-name-here');
+
             $product->setDescription($faker->sentence(4));
-            $product->setPortions($faker->numberBetween(1, 15));
+            $product->setPortions($faker->numberBetween(1, 10));
             $product->setPrice($faker->numberBetween(1, 8));
             $product->setDateFrom($faker->dateTime());
             $product->setDateTo($faker->dateTime());
             $product->setAddress($this->getReference('address' . $i));
-            $product->setImageName('food.jpg');
+
+            if ($photoIndex === 7) {
+                $photoIndex = 0;
+            }
+
+            $product->setName($foodPhotos[$photoIndex]);
+            $product->setImageName($foodPhotos[$photoIndex] . '.jpg');
+
+            $photoIndex++;
+
             $product->setImageSize(2000);
             $product->setUpdatedAt($faker->dateTime());
 
-            if ($i % 2 === 0) {
-                $product->setVegetarian(1);
-                $product->setMeal(1);
-            } else {
-                $product->setDessert(1);
-                $product->setVegan(1);
+            switch ($photoIndex) {
+                case 1:
+                    $product->setMeal(1);
+                    break;
+                case 2:
+                    $product->setDessert(1);
+                    $product->setVegan(1);
+                    $product->setVegetarian(1);
+                    break;
+                case 3:
+                    $product->setMeal(1);
+                    break;
+                case 4:
+                    $product->setVegetarian(1);
+                    $product->setDessert(1);
+                    break;
+                case 5:
+                    $product->setMeal(1);
+                    break;
+                case 6:
+                    $product->setVegan(1);
+                    $product->setMeal(1);
+                    break;
+                case 7:
+                    $product->setVegetarian(1);
+                    $product->setMeal(1);
+                    break;
             }
 
             $manager->persist($product);
