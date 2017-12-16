@@ -33,7 +33,7 @@ class AddressFixtures extends Fixture
                 $address->setLongitude($faker->randomFloat(5, 23.85, 23.95));
             } elseif ($i >= 40 && $i < 60) {
                 //siauliai
-                $address->setLatitude($faker->randomFloat(5,  55.9,  55.99));
+                $address->setLatitude($faker->randomFloat(5, 55.9, 55.99));
                 $address->setLongitude($faker->randomFloat(5, 23.25, 23.36));
             } elseif ($i >= 60 && $i < 80) {
                 //klaipeda
