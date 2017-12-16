@@ -47,9 +47,11 @@ class SearchMapGenerator
                             ."po-".$i."' value = '".$product->getPortions()."'/>";
                         $i++;
                         $temp .= "<input type = 'hidden' id = '".$address->getId()."iterator' value = '".$i."'/>";
-                        $temp .= "<input type = 'hidden' id = '".$address->getId(
-                            )."company' value = '".$address->getShopOwner()->getCompanyName()."'/>";
-                        $infowindow = new InfoWindow($temp."<input type = 'hidden' id = '".$address->getId()."a' value = '".$address->getAddress(
+                        $temp .= "<input type = 'hidden' id = '".$address->getId()
+                            ."company' value = '".$address->getShopOwner()
+                                ->getCompanyName()."'/>";
+                        $infowindow = new InfoWindow(
+                            $temp."<input type = 'hidden' id = '".$address->getId()."a' value = '".$address->getAddress(
                             )."'/><input type = 'hidden' id = '".$address->getId(
                             )."i' value = 'https://ibb.co/c53Nnm'/>".$address->getAddress(
                             )."<br><br><button class = 'btn btn-success btn-block' id = '".$address->getId(
