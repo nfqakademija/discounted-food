@@ -2,7 +2,6 @@
 
 namespace AppBundle\Service;
 
-use AppBundle\Entity\Address;
 use AppBundle\Entity\Product;
 
 class ClosestStores
@@ -21,7 +20,6 @@ class ClosestStores
     {
         $storesCounter = 0;
         $productsCounter = 0;
-        $closestAddress = new Address();
         $closestProducts = new Product();
         $stores = [];
 
@@ -31,16 +29,16 @@ class ClosestStores
             if ($products !== null) {
 
                 $stores[$storesCounter]['companyName'] = $address->getShopOwner()->getCompanyName();
-                $closestAddress->setAddress($address->getAddress());
-                $stores[$storesCounter]['distance'] = $this->distance($lat, $long, $currentLat, $currentLong, 'K');
+                $stores[$storesCounter]['address'] = $address->getAddress();
+                $stores[$storesCounter]['distance'] = round($this->distance($lat, $long, $currentLat, $currentLong, 'K'),2);
 
                 foreach ($products as $product) {
                     if ($product->getAddressId() === $address->getId()) {
-                        $closestProducts->setName($product->getName());
-                        $closestProducts->setDescription($product->getDescription());
-                        $closestProducts->setPrice($product->getPrice());
-                        $closestProducts->setPortions($product->getPortions());
-                        $stores[$storesCounter]['products'][$productsCounter] = $closestProducts;
+                        $stores[$storesCounter]['products'][$productsCounter]['name'] = $product->getName();
+                        $stores[$storesCounter]['products'][$productsCounter]['description'] = $product->getDescription(
+                        );
+                        $stores[$storesCounter]['products'][$productsCounter]['price'] = $product->getPrice();
+                        $stores[$storesCounter]['products'][$productsCounter]['portions'] = $product->getPortions();
                         $productsCounter++;
                     }
                 }

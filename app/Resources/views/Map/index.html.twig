@@ -52,6 +52,62 @@
                     {% endfor %}
                 </div>
             </div>
+
+
+            <div id='b_div' style="max-height: 750px;overflow-y:auto;overflow-x:hidden;">
+                {% for store in stores %}
+                    <hr style="border-top: 4px solid #0c0c0c;">
+                    <div class="company-info2 text-center"
+                         style="max-width:100%;height:100px;margin:0; padding:0;">
+                        <h3 class="company-name2">{{ store.companyName }}</h3>
+                        <h6 class="address2">{{ store.address }}</h6>
+                        <br>
+                        <h4>
+                            <strong>Distance:</strong><br>
+                            {{ store.distance }} kilometers
+                        </h4>
+                    </div>
+                    <br>
+                    <h3 class="text-center offers2">Offers</h3>
+                    <hr style="border-top: 1px solid #ccc;">
+                    {% for product in store.products %}
+                        <div align="center" class="products2"
+                             style="max-width:100%;height:200px;overflow-y:auto;overflow-x:hidden;margin:0; padding:0;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2 class="product-name" style="font-size:22px;">
+                                        {{ product.name }}
+                                    </h2>
+                                </div>
+                                <br><br>
+                                <div class="col-md-12">
+                                    <p class="product-description">
+                                        {{ product.description }}
+                                    </p>
+                                </div>
+                                <div class="col-md-12">
+                                    <br>
+                                    <div class="col-md-6">
+                                        <strong>Portions left: </strong>
+                                        <br>
+                                        <p class="text-center product-portions">
+                                            {{ product.portions }}
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>Price: </strong>
+                                        <br>
+                                        <p class="text-center product-price">{{ product.price }}</p>
+                                        <i class="fa fa-eur" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr style="border-top: 1px solid #ccc;">
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 
@@ -59,6 +115,7 @@
     <script>
         {% for address in addresses %}
         $(document).on('click', '#{{ address.id }}', function () {
+            document.getElementById('b_div').style.display = "none";
             var address = document.getElementById('{{ address.id }}a').value;
             document.getElementById("address").innerHTML = address;
             var image = document.getElementById('{{ address.id }}i').value;
