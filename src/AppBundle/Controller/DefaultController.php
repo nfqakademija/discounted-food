@@ -84,12 +84,17 @@ class DefaultController extends Controller
         $latPost = $request->request->get('lattitude');
         $longPost = $request->request->get('longitude');
         $foodName = $request->request->get('foodName');
+        $alone = $request->request->get('alone');
 
         $em = $this->getDoctrine()->getManager();
+
         if ($foodName == null) {
             $products = $em->getRepository('AppBundle:Product')->findAll();
         } else {
             $products = $em->getRepository('AppBundle:Product')->getFindAllFoodQueryBuilder($foodName);
+        }
+        if ($alone != null) {
+            $products = $em->getRepository('AppBundle:Product')->getById($alone);
         }
 
         $addresses = $em->getRepository('AppBundle:Address')->findAll();
@@ -102,10 +107,14 @@ class DefaultController extends Controller
         } else {
             $mapGenerator = $this->get('custom_search_map_generator');
         }
+        if ($alone !== null) {
+            echo"veikia";
+            $mapGenerator = $this->get('custom_search_map_generator');
+        }
 
         $map = $mapGenerator->generateMap($addresses, $products);
 
-        if ($latPost != null && $longPost != null) {
+        if ($latPost !== null && $longPost !== null) {
             $map->setCenter(new Coordinate($latPost, $longPost));
             $lat = $latPost;
             $long = $longPost;
@@ -117,6 +126,7 @@ class DefaultController extends Controller
                 $marker->setIcon(new Icon('https://i.imgur.com/pXpB7BR.png'));
                 $map->getOverlayManager()->addMarker($marker);
                 $map->setMapOption('zoom', 14);
+
             } else {
                 $map->setCenter(new Coordinate(54.687157, 25.279652));
                 $lat = 54.687157;
@@ -124,8 +134,11 @@ class DefaultController extends Controller
                 $map->setMapOption('zoom', 13);
             }
         }
-
-        $countOfStores = 6;
+        if (count($products) < 2) {
+            $countOfStores = count($products);
+        } else {
+            $countOfStores = 6;
+        }
         $closestStores = $this->get('closest_stores');
         $closestProducts = $closestStores->getMostClosest($addresses, $products, $lat, $long, $countOfStores);
 

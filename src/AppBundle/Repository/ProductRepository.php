@@ -23,4 +23,15 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function getById($id)
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->select('u');
+        $qb
+            ->andWhere('u.id LIKE :id')
+            ->setParameter('id', $id);
+
+        return $qb->getQuery()->getResult();
+    }
 }
