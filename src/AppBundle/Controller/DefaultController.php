@@ -125,7 +125,6 @@ class DefaultController extends Controller
                 $marker->setIcon(new Icon('https://i.imgur.com/pXpB7BR.png'));
                 $map->getOverlayManager()->addMarker($marker);
                 $map->setMapOption('zoom', 14);
-
             } else {
                 $map->setCenter(new Coordinate(54.687157, 25.279652));
                 $lat = 54.687157;
