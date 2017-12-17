@@ -91,6 +91,7 @@ class DefaultController extends Controller
         } else {
             $products = $em->getRepository('AppBundle:Product')->getFindAllFoodQueryBuilder($foodName);
         }
+
         $addresses = $em->getRepository('AppBundle:Address')->findAll();
 
         $repository = $em->getRepository('AppBundle:User');
@@ -106,6 +107,8 @@ class DefaultController extends Controller
 
         if ($latPost != null && $longPost != null) {
             $map->setCenter(new Coordinate($latPost, $longPost));
+            $lat = $latPost;
+            $long = $longPost;
             $map->setMapOption('zoom', 13);
         } else {
             if ($lat != null && $long != null) {
@@ -116,9 +119,15 @@ class DefaultController extends Controller
                 $map->setMapOption('zoom', 14);
             } else {
                 $map->setCenter(new Coordinate(54.687157, 25.279652));
+                $lat = 54.687157;
+                $long = 25.279652;
                 $map->setMapOption('zoom', 13);
             }
         }
+
+        $countOfStores = 6;
+        $closestStores = $this->get('closest_stores');
+        $closestProducts = $closestStores->getMostClosest($addresses, $products, $lat, $long, $countOfStores);
 
         return $this->render(
             'Map/index.html.twig',
@@ -126,6 +135,7 @@ class DefaultController extends Controller
                 'addresses' => $addresses,
                 'map' => $map,
                 'users' => $users,
+                'stores' => $closestProducts,
             ]
         );
     }

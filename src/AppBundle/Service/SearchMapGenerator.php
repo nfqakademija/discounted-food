@@ -11,6 +11,12 @@ use Ivory\GoogleMap\Overlay\Marker;
 class SearchMapGenerator
 {
 
+    /**
+     * @param array      $addresses
+     * @param array|null $products
+     *
+     * @return Map
+     */
     public function generateMap(array $addresses, array $products = null): Map
     {
         $map = new Map();
@@ -29,7 +35,6 @@ class SearchMapGenerator
         $map->setCenter(new Coordinate(54.687157, 25.279652));
         $temp = '';
         $i = 0;
-        $j = 0;
         foreach ($addresses as $address) {
             if ($products !== null) {
                 foreach ($products as $product) {

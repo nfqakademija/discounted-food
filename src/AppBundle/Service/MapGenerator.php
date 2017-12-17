@@ -11,6 +11,12 @@ use Ivory\GoogleMap\Overlay\Marker;
 class MapGenerator
 {
 
+    /**
+     * @param array      $addresses
+     * @param array|null $products
+     *
+     * @return Map
+     */
     public function generateMap(array $addresses, array $products = null): Map
     {
         $map = new Map();

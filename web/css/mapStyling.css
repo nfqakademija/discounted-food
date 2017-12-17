@@ -22,6 +22,10 @@
     padding: 20px;
 }
 
+.map-sidebar-container .company-info2 {
+    padding: 5px;
+}
+
 .map-sidebar-container .company-info #company-name {
     padding: 10px;
 }
