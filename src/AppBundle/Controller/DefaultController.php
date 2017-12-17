@@ -108,13 +108,12 @@ class DefaultController extends Controller
             $mapGenerator = $this->get('custom_search_map_generator');
         }
         if ($alone !== null) {
-            echo"veikia";
             $mapGenerator = $this->get('custom_search_map_generator');
         }
 
         $map = $mapGenerator->generateMap($addresses, $products);
 
-        if ($latPost !== null && $longPost !== null) {
+        if ($latPost != null && $longPost != null) {
             $map->setCenter(new Coordinate($latPost, $longPost));
             $lat = $latPost;
             $long = $longPost;
@@ -134,6 +133,7 @@ class DefaultController extends Controller
                 $map->setMapOption('zoom', 13);
             }
         }
+
         if (count($products) < 2) {
             $countOfStores = count($products);
         } else {
