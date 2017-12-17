@@ -26,9 +26,9 @@ class ProductType extends AbstractType
             ->add('portions')
             ->add('price')
             ->add('dateFrom', DateTimeType::class, array(
-                'widget' => 'single_text', 'label' => 'Pick a date when food offer starts'))
+                'widget' => 'single_text', 'label' => 'Pick a date when food offer starts', 'required' => true))
             ->add('dateTo', DateTimeType::class, array(
-                'widget' => 'single_text', 'label' => 'Pick a date when food offer expires'))
+                'widget' => 'single_text', 'label' => 'Pick a date when food offer expires', 'required' => true))
             ->add('imageFile', VichImageType::class, array('required' => false, 'label' => 'Food photo' ));
 
         $builder

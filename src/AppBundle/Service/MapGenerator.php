@@ -17,7 +17,7 @@ class MapGenerator
      *
      * @return Map
      */
-    public function generateMap(array $addresses, array $products = null): Map
+    public function generateMap(array $addresses, array $products = null, $currentRoute = null): Map
     {
         $map = new Map();
         $map->setStylesheetOption('height', '750px');
@@ -58,13 +58,26 @@ class MapGenerator
                         ->getCompanyName()."'/>";
                 $i = 0;
             }
-            $infowindow = new InfoWindow(
-                $temp."<input type = 'hidden' id = '".$address->getId()."a' value = '".$address->getAddress(
-                )."'/><input type = 'hidden' id = '".$address->getId(
-                )."i' value = 'https://ibb.co/c53Nnm'/>".$address->getAddress(
-                )."<br><br><button class = 'btn btn-success btn-block' id = '".$address->getId(
-                )."' >View offers</button></div >"
-            );
+
+            if ($currentRoute == 'profile_index') {
+                $infowindow = new InfoWindow(
+                    $temp."<input type = 'hidden' id = '".$address->getId()."a' value = '".$address->getAddress(
+                    )."'/><input type = 'hidden' id = '".$address->getId(
+                    )."i' value = 'https://ibb.co/c53Nnm'/>".$address->getAddress(
+                    )."<br></div>"
+                );
+            } else {
+                $infowindow = new InfoWindow(
+                    $temp."<input type = 'hidden' id = '".$address->getId()."a' value = '".$address->getAddress(
+                    )."'/><input type = 'hidden' id = '".$address->getId(
+                    )."i' value = 'https://ibb.co/c53Nnm'/>".$address->getAddress(
+                    )."<br><br><button class = 'btn btn-success btn-block' id = '".$address->getId(
+                    )."' >View offers</button></div>"
+                );
+            }
+
+
+
             $marker->setInfoWindow($infowindow);
             $temp = '';
         }
