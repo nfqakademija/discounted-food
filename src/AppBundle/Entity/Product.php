@@ -172,6 +172,7 @@ class Product
      * @var \DateTime
      *
      * @ORM\Column(name="date_from", type="datetime")
+     * @Assert\NotBlank()
      */
     private $dateFrom;
 
@@ -179,6 +180,7 @@ class Product
      * @var \DateTime
      *
      * @ORM\Column(name="date_to", type="datetime")
+     * @Assert\NotBlank()
      */
     private $dateTo;
 

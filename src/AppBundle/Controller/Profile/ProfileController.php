@@ -47,9 +47,10 @@ class ProfileController extends Controller
             $response = $geocoder->geocode($request);
 
             if ($response->getStatus() === 'OVER_QUERY_LIMIT') {
-                $geocoder = new GeocoderService(new Client(), new GuzzleMessageFactory());
-                $request = new GeocoderAddressRequest($address->getAddress());
-                $response = $geocoder->geocode($request);
+                $this->addFlash(
+                    'error',
+                    "Query limit reached, please, retry in a few seconds!"
+                );
             }
 
             if ($response->getStatus() === 'ZERO_RESULTS') {
