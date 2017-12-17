@@ -46,6 +46,12 @@ class ProfileController extends Controller
 
             $response = $geocoder->geocode($request);
 
+            if ($response->getStatus() === 'OVER_QUERY_LIMIT') {
+                $geocoder = new GeocoderService(new Client(), new GuzzleMessageFactory());
+                $request = new GeocoderAddressRequest($address->getAddress());
+                $response = $geocoder->geocode($request);
+            }
+
             if ($response->getStatus() === 'ZERO_RESULTS') {
                 $invalidAddress = $address->getAddress();
                 $this->addFlash(
@@ -81,7 +87,11 @@ class ProfileController extends Controller
 
         $mapGenerator = $this->get('custom_map_generator');
 
-        $map = $mapGenerator->generateMap($addresses);
+        $currentRouteName = $this->container->get('request_stack')->getMasterRequest()->get('_route');
+
+        dump($currentRouteName);
+
+        $map = $mapGenerator->generateMap($addresses, null, $currentRouteName);
 
 //        $autocomplete = new Autocomplete();
 //
