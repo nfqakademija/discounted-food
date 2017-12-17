@@ -84,12 +84,17 @@ class DefaultController extends Controller
         $latPost = $request->request->get('lattitude');
         $longPost = $request->request->get('longitude');
         $foodName = $request->request->get('foodName');
+        $alone = $request->request->get('alone');
 
         $em = $this->getDoctrine()->getManager();
+
         if ($foodName == null) {
             $products = $em->getRepository('AppBundle:Product')->findAll();
         } else {
             $products = $em->getRepository('AppBundle:Product')->getFindAllFoodQueryBuilder($foodName);
+        }
+        if ($alone != null) {
+            $products = $em->getRepository('AppBundle:Product')->getById($alone);
         }
 
         $addresses = $em->getRepository('AppBundle:Address')->findAll();
@@ -100,6 +105,9 @@ class DefaultController extends Controller
         if ($foodName == null) {
             $mapGenerator = $this->get('custom_map_generator');
         } else {
+            $mapGenerator = $this->get('custom_search_map_generator');
+        }
+        if ($alone !== null) {
             $mapGenerator = $this->get('custom_search_map_generator');
         }
 
@@ -125,7 +133,11 @@ class DefaultController extends Controller
             }
         }
 
-        $countOfStores = 6;
+        if (count($products) < 2) {
+            $countOfStores = count($products);
+        } else {
+            $countOfStores = 6;
+        }
         $closestStores = $this->get('closest_stores');
         $closestProducts = $closestStores->getMostClosest($addresses, $products, $lat, $long, $countOfStores);
 

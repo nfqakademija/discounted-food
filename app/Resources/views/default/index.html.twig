@@ -250,10 +250,18 @@
                                                     portions for: <strong><span
                                                                 class="item_price">${{ product.price }}</span></strong>
                                                 </small>
-                                                <button style="color:white;"
-                                                        class="btn snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-                                                    SHOW IN THE MAP
-                                                </button>
+                                                <form action="{{ path('map') }}" method="post">
+                                                    <input type="hidden" name="lattitude"
+                                                           value="{{ product.address.latitude }}">
+                                                    <input type="hidden" name="longitude"
+                                                           value="{{ product.address.longitude }}" >
+                                                    <input type="hidden" name="alone"
+                                                           value="{{ product.id }}">
+                                                    <button style="color:white;"
+                                                            class="btn snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+                                                        SHOW IN THE MAP
+                                                    </button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

@@ -61,11 +61,13 @@
                          style="max-width:100%;height:100px;margin:0; padding:0;">
                         <h3 class="company-name2">{{ store.companyName }}</h3>
                         <h6 class="address2">{{ store.address }}</h6>
-                        <br>
-                        <h4>
-                            <strong>Distance:</strong><br>
-                            {{ store.distance }} kilometers
-                        </h4>
+                        {% if store.distance != null %}
+                            <br>
+                            <h4>
+                                <strong>Distance:</strong><br>
+                                {{ store.distance }} kilometers
+                            </h4>
+                        {% endif %}
                     </div>
                     <br>
                     <h3 class="text-center offers2">Offers</h3>
@@ -97,8 +99,8 @@
                                     <div class="col-md-6">
                                         <strong>Price: </strong>
                                         <br>
-                                        <p class="text-center product-price">{{ product.price }}</p>
-                                        <i class="fa fa-eur" aria-hidden="true"></i>
+                                        <a class="text-center product-price">{{ product.price }}</a> <i
+                                                class="fa fa-eur" aria-hidden="true"></i>
                                     </div>
                                 </div>
                             </div>
