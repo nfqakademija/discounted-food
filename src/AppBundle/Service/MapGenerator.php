@@ -71,5 +71,4 @@ class MapGenerator
 
         return $map;
     }
-
 }

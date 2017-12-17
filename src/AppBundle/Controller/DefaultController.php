@@ -119,6 +119,8 @@ class DefaultController extends Controller
                 $map->setMapOption('zoom', 14);
             } else {
                 $map->setCenter(new Coordinate(54.687157, 25.279652));
+                $lat = 54.687157;
+                $long = 25.279652;
                 $map->setMapOption('zoom', 13);
             }
         }

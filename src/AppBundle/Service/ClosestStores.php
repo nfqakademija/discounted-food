@@ -8,7 +8,7 @@ class ClosestStores
 {
 
     /**
-     * @param array      $addresses
+     * @param array $addresses
      * @param array|null $products
      * @param            $currentLat
      * @param            $currentLong
@@ -27,11 +27,12 @@ class ClosestStores
             $lat = $address->getLatitude();
             $long = $address->getLongitude();
             if ($products !== null) {
-
                 $stores[$storesCounter]['companyName'] = $address->getShopOwner()->getCompanyName();
                 $stores[$storesCounter]['address'] = $address->getAddress();
-                $stores[$storesCounter]['distance'] = round($this->distance($lat, $long, $currentLat, $currentLong, 'K'),2);
-
+                $stores[$storesCounter]['distance'] = round(
+                    $this->distance($lat, $long, $currentLat, $currentLong, 'K'),
+                    2
+                );
                 foreach ($products as $product) {
                     if ($product->getAddressId() === $address->getId()) {
                         $stores[$storesCounter]['products'][$productsCounter]['name'] = $product->getName();
