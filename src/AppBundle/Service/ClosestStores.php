@@ -13,8 +13,11 @@ class ClosestStores
      * @param array|null $products
      * @param            $currentLat
      * @param            $currentLong
+     * @param            $countOfStores
+     *
+     * @return array
      */
-    public function getMostClosest(array $addresses, array $products = null, $currentLat, $currentLong)
+    public function getMostClosest(array $addresses, array $products = null, $currentLat, $currentLong, $countOfStores)
     {
         $storesCounter = 0;
         $productsCounter = 0;
@@ -45,7 +48,7 @@ class ClosestStores
             }
         }
 
-        return $this->sortByKilometers($stores);
+        return $this->sortByKilometers($stores, $storesCounter, $countOfStores);
     }
 
     /**
@@ -80,11 +83,24 @@ class ClosestStores
         }
     }
 
-    public function sortByKilometers($stores)
+    public function sortByKilometers($stores, $counter, $returnCount): array
     {
-        echo "<pre>";
-        var_dump($stores);
-        echo "</pre>";
-        die;
+        for ($i = 0; $i < $counter; $i++) {
+            for ($j = 0; $j < $counter - 1; $j++) {
+                if ($stores[$j]['distance'] > $stores[$j + 1]['distance']) {
+                    $temp = $stores[$j];
+                    $stores[$j] = $stores[$j + 1];
+                    $stores[$j + 1] = $temp;
+                }
+            }
+        }
+
+        $stores2 = [];
+        for ($i = 0; $i < $returnCount; $i++) {
+            $stores2[$counter] = $stores[$i];
+            $counter++;
+        }
+
+        return $stores2;
     }
 }

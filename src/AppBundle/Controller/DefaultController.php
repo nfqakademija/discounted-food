@@ -123,8 +123,13 @@ class DefaultController extends Controller
             }
         }
 
+        $countOfStores = 6;
         $closestStores = $this->get('closest_stores');
-        $closestProducts = $closestStores->getMostClosest($addresses, $products, $lat, $long);
+        $closestProducts = $closestStores->getMostClosest($addresses, $products, $lat, $long, $countOfStores);
+        echo "<pre>";
+        var_dump($closestProducts);
+        echo "</pre>";
+        die;
 
         return $this->render(
             'Map/index.html.twig',
@@ -132,7 +137,7 @@ class DefaultController extends Controller
                 'addresses' => $addresses,
                 'map' => $map,
                 'users' => $users,
-                'stores' => $closestStores,
+                'stores' => $closestProducts,
             ]
         );
     }
