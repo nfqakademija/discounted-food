@@ -1,14 +1,14 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<br><br>
 {% if error %}
     <div class="alert alert-danger"><strong>Error!</strong> {{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
 
+<h3 class="wthree_text_info">Login <span>for shop owners</span></h3>
 
 <div class="panel panel-info" >
     <div class="panel-heading">
-        <div class="panel-title">Sign In</div>
+        <div style="height:17px;" class="panel-title"></div>
         <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="{{ path('fos_user_resetting_request') }}">Forgot password?</a></div>
     </div>
 
@@ -31,17 +31,6 @@
                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                 <input type="password" id="password" name="_password" placeholder="password" class="form-control" required="required" />
             </div>
-
-
-
-            <div class="input-group">
-                <div class="checkbox">
-                    <label>
-                        <input id="emember_me" type="checkbox" name="_remember_me" value="on"> Remember me
-                    </label>
-                </div>
-            </div>
-
 
             <div style="margin-top:10px" class="form-group">
                 <!-- Button -->

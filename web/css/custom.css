@@ -1,3 +1,7 @@
 .navbar-default .navbar-nav > li > a {
     color: #D3D3D3;
 }
+
+.navbar-default .navbar-nav > li > a:hover {
+    color: whitesmoke;
+}
