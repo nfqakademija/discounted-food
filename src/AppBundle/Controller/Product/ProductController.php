@@ -24,44 +24,54 @@ class ProductController extends Controller
      */
     public function newAction(Request $request, Address $address, \Swift_Mailer $mailer)
     {
-        $em = $this->getDoctrine()->getManager();
+        $authUserId = $this->getUser()->getId();
 
-        $repository = $em->getRepository('AppBundle:Product');
-        $products = $repository->findBy(array('addressId' => $address->getId()));
+        $addressOwnerId = $address->getShopOwner()->getId();
 
-        $product = new Product();
-        $product->setAddress($address);
-        $form = $this->createForm(ProductType::class, $product);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($form->getData());
-            $em->flush();
+        if ($authUserId === $addressOwnerId) {
 
-            $repository = $em->getRepository(Subscribe::class);
+            $em = $this->getDoctrine()->getManager();
 
-            $emails = $repository->findAll();
+            $repository = $em->getRepository('AppBundle:Product');
+            $products = $repository->findBy(array('addressId' => $address->getId()));
 
-            foreach ($emails as $email) {
-                $message = (new \Swift_Message('New food offer for you!'))
-                    ->setFrom('noreply@discountedfood.com')
-                    ->setTo($email->getEmail())
-                    ->setBody(
-                        $this->renderView(
-                            'emails/newproduct.html.twig',
-                            array('product' => $form->getData())
-                        ),
-                        'text/html'
-                    );
+            $product = new Product();
+            $product->setAddress($address);
+            $form = $this->createForm(ProductType::class, $product);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em->persist($form->getData());
+                $em->flush();
+
+                $repository = $em->getRepository(Subscribe::class);
+
+                $emails = $repository->findAll();
+
+                foreach ($emails as $email) {
+                    $message = (new \Swift_Message('New food offer for you!'))
+                        ->setFrom('noreply@discountedfood.com')
+                        ->setTo($email->getEmail())
+                        ->setBody(
+                            $this->renderView(
+                                'emails/newproduct.html.twig',
+                                array('product' => $form->getData())
+                            ),
+                            'text/html'
+                        );
 
 
-                $mailer->send($message);
+                    $mailer->send($message);
+                }
+
+                $this->addFlash(
+                    'notice',
+                    'New product added!'
+                );
+                return $this->redirect($request->getUri());
             }
-
-            $this->addFlash(
-                'notice',
-                'New product added!'
-            );
-            return $this->redirect($request->getUri());
+        } else {
+            throw $this->createNotFoundException('Unauthorized action');
         }
 
         return $this->render('Product/index.html.twig', array(
