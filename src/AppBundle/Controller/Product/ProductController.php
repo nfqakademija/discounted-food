@@ -29,7 +29,6 @@ class ProductController extends Controller
         $addressOwnerId = $address->getShopOwner()->getId();
 
         if ($authUserId === $addressOwnerId) {
-
             $em = $this->getDoctrine()->getManager();
 
             $repository = $em->getRepository('AppBundle:Product');
