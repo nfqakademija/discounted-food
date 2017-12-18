@@ -19,7 +19,8 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('companyName', TextType::class, array('required' => true))
-            ->add('legalEntityCode')->add('phone', TextType::class, array('required' => true));
+            ->add('legalEntityCode', TextType::class, array('required' => true))
+            ->add('phone', TextType::class, array('required' => true));
     }
 
     public function getParent()
