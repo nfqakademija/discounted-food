@@ -1,0 +1,9 @@
+Name: {{ product.name }} <br>
+Description:{{ product.description }}<br>
+Portions:{{ product.portions }}<br>
+Price:{{ product.price }}<br>
+Address:{{ product.address.address }}<br>
+Date to:{{ product.dateTo|date("Y-m-d H:i:s")  }}<br>
+Date from:{{ product.dateFrom|date("Y-m-d H:i:s")  }}<br>
+
+<img src="{{ asset('images/products/'  ~ product.ImageName) }}" alt="">

@@ -45,11 +45,16 @@ class ProductController extends Controller
                 $message = (new \Swift_Message('New food offer for you!'))
                     ->setFrom('noreply@discountedfood.com')
                     ->setTo($email->getEmail())
-                    ->setBody($product->getName());
+                    ->setBody(
+                        $this->renderView(
+                            'emails/newproduct.html.twig',
+                            array('product' => $form->getData())
+                        ),
+                        'text/html'
+                    );
 
 
                 $mailer->send($message);
-
             }
 
             $this->addFlash(

@@ -19,7 +19,7 @@ class ProductFixtures extends Fixture
     {
         $faker = Factory::create();
 
-        $foodPhotos = ['burger', 'cake', 'omelette', 'pancakes', 'pizza', 'quinoa', 'spaghetti'];
+        $foodPhotos = ['burger', 'omelette', 'pancakes', 'pizza', 'quinoa', 'spaghetti'];
 
         $photoIndex = 0;
 
@@ -33,7 +33,7 @@ class ProductFixtures extends Fixture
             $product->setDateTo($faker->dateTime());
             $product->setAddress($this->getReference('address' . $i));
 
-            if ($photoIndex === 7) {
+            if ($photoIndex === 6) {
                 $photoIndex = 0;
             }
 

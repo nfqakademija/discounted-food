@@ -51,7 +51,6 @@ class ProfileController extends Controller
                     'error',
                     "Query limit reached, please, retry in a few seconds!"
                 );
-                return $this->redirectToRoute('profile_index');
             }
 
             if ($response->getStatus() === 'ZERO_RESULTS') {
@@ -90,8 +89,6 @@ class ProfileController extends Controller
         $mapGenerator = $this->get('custom_map_generator');
 
         $currentRouteName = $this->container->get('request_stack')->getMasterRequest()->get('_route');
-
-        dump($currentRouteName);
 
         $map = $mapGenerator->generateMap($addresses, null, $currentRouteName);
 

@@ -22,7 +22,7 @@ class UserFixtures extends Fixture
         $userAdmin->setCompanyName('noreply');
         $userAdmin->setLegalEntityCode(4535345345);
         $userAdmin->setPhone('000-000-000');
-        $userAdmin->setPlainPassword('admin');
+        $userAdmin->setPlainPassword('realadmin');
         $userAdmin->setEnabled(true);
         $userManager->updateUser($userAdmin, true);
 

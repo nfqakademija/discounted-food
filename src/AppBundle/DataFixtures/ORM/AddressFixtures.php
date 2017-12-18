@@ -24,9 +24,9 @@ class AddressFixtures extends Fixture
 
 
             if ($i < 20) {
-                //vilnius
-                $address->setLatitude($faker->randomFloat(5, 54.65, 54.7));
-                $address->setLongitude($faker->randomFloat(5, 25.25, 25.3));
+                //panevezys
+                $address->setLatitude($faker->randomFloat(5, 55.68, 55.78));
+                $address->setLongitude($faker->randomFloat(5, 24.3, 24.4));
             } elseif ($i >= 20 && $i < 40) {
                 //kaunas
                 $address->setLatitude($faker->randomFloat(5, 54.85, 54.95));
@@ -40,9 +40,9 @@ class AddressFixtures extends Fixture
                 $address->setLatitude($faker->randomFloat(5, 55.65, 55.75));
                 $address->setLongitude($faker->randomFloat(5, 21.1, 21.19));
             } elseif ($i >= 80 && $i < 100) {
-                //panevezys
-                $address->setLatitude($faker->randomFloat(5, 55.68, 55.78));
-                $address->setLongitude($faker->randomFloat(5, 24.3, 24.4));
+                //vilnius
+                $address->setLatitude($faker->randomFloat(5, 54.65, 54.7));
+                $address->setLongitude($faker->randomFloat(5, 25.25, 25.3));
             }
 
             $address->setAddress($faker->address);

@@ -8,12 +8,14 @@
                         class="sr-only">(current)</span></a></li>
         <li class="menu__item"><a class="menu__link" href="{{ path('map') }}">Show Map<span
                         class="sr-only">(current)</span></a></li>
+        <li class="menu__item"><a class="menu__link" href="{{ path('subscribe') }}">Subscribe</a></li>
         <li class="active menu__item menu__item--current"><a class="menu__link" href="{{ path('about') }}">About</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
         {% if is_granted('ROLE_USER') %}
             <li><a href="{{ path('profile_index') }}"><i class="fa fa-user" aria-hidden="true"></i> Manage Shops</a></li>
-            <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
+            <li>
+                <a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
             </li>
         {% else %}
             <li><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-unlock-alt" aria-hidden="true"></i>
