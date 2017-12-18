@@ -142,6 +142,9 @@ easy_admin:
                     - dateFrom
                     - portions
                     - price
+        Subscribe:
+            class: AppBundle\Entity\Subscribe
+
 
 vich_uploader:
     db_driver: orm

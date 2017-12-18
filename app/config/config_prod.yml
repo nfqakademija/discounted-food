@@ -20,3 +20,10 @@ monolog:
         console:
             type: console
             process_psr_3_messages: false
+swiftmailer:
+    transport:  smtp
+    encryption: ssl
+    auth_mode:  login
+    host:       smtp.gmail.com
+    username:   discounted.food2017@gmail.com
+    password:   discounted123

@@ -4,6 +4,7 @@ namespace AppBundle\Controller\Product;
 
 use AppBundle\Entity\Address;
 use AppBundle\Entity\Product;
+use AppBundle\Entity\Subscribe;
 use AppBundle\Form\ProductType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -21,7 +22,7 @@ class ProductController extends Controller
      * @Route("/{id}/show", name="profile_item_show")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request, Address $address)
+    public function newAction(Request $request, Address $address, \Swift_Mailer $mailer)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -35,6 +36,22 @@ class ProductController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($form->getData());
             $em->flush();
+
+            $repository = $em->getRepository(Subscribe::class);
+
+            $emails = $repository->findAll();
+
+            foreach ($emails as $email) {
+                $message = (new \Swift_Message('New food offer for you!'))
+                    ->setFrom('noreply@discountedfood.com')
+                    ->setTo($email->getEmail())
+                    ->setBody($product->getName());
+
+
+                $mailer->send($message);
+
+            }
+
             $this->addFlash(
                 'notice',
                 'New product added!'

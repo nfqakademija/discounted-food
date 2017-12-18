@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dicounted Food{% endblock %}
+
+{% block navbar %}
+    <ul class="nav navbar-nav menu__list">
+        <li class="menu__item"><a class="menu__link" href="{{ path('homepage') }}">Home <span
+                        class="sr-only">(current)</span></a></li>
+        <li class="menu__item"><a class="menu__link" href="{{ path('map') }}">Show Map<span
+                        class="sr-only">(current)</span></a></li>
+        <li class="active menu__item menu__item--current"><a class="menu__link" href="{{ path('subscribe') }}">Subscribe</a></li>
+        <li class="menu__item"><a class="menu__link" href="{{ path('about') }}">About</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        {% if is_granted('ROLE_USER') %}
+            <li><a href="{{ path('profile_index') }}"><i class="fa fa-user" aria-hidden="true"></i> Manage Shops</a></li>
+            <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
+            </li>
+        {% else %}
+            <li><a href="{{ path('fos_user_security_login') }}"><i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                    Login </a></li>
+            <li><a href="{{ path('fos_user_registration_register') }}"><i class="fa fa-pencil-square-o"
+                                                                          aria-hidden="true"></i> Register </a></li>
+        {% endif %}
+    </ul>
+    <style>
+
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="new_arrivals_agile_w3ls_info">
+        <div class="container">
+            <h3 class="wthree_text_info">Get <span>Notifications</span></h3>
+            <section>
+                <div class="container">
+                    <div class="row">
+                        {% for message in app.flashes('notice') %}
+                            <div class="alert alert-success col-md-6 col-md-offset-3">
+                                <p class="text-center">
+                                    <b>{{ message }}</b>
+                                </p>
+                            </div>
+                        {% endfor %}
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="well">
+                                {{ form_start(form) }}
+                                <div class="input-group">
+                                    {{ form_errors(form.email) }}
+                                    {{ form_widget(form.email, {'attr': {'class': 'btn btn-lg', 'placeholder': 'Your Email'}}) }}
+                                    {#<input class="btn btn-lg" name="email" id="email" type="email" placeholder="Your Email" required>#}
+                                    <button class="btn btn-info btn-lg" type="submit">Subscribe</button>
+                                </div>
+                                {{ form_end(form) }}
+                            </div>
+                            <small class="promise"><em>You will receive an email when new food is available</em></small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <!-- footer -->
+    <div class="footer">
+        <div class="footer_agile_inner_info_w3l">
+            <p class="copy-right">&copy 2017 Discounted food app. All rights reserved | THIRD TEAM <3 </p>
+        </div>
+    </div>
+    <!-- //footer -->
+{% endblock %}
