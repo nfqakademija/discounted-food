@@ -78,16 +78,21 @@
                                     {{ form_widget(form.price, {'attr': {'class': 'form-control'}}) }}
                                 </div>
 
-                                <div class="form-group">
-                                    {{ form_errors(form.dateFrom) }}
-                                    {{ form_label(form.dateFrom) }}
-                                    {{ form_widget(form.dateFrom) }}
-                                </div>
-
-                                <div class="form-group">
-                                    {{ form_errors(form.dateTo) }}
-                                    {{ form_label(form.dateTo) }}
-                                    {{ form_widget(form.dateTo) }}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            {{ form_errors(form.dateFrom) }}
+                                            {{ form_label(form.dateFrom) }}
+                                            {{ form_widget(form.dateFrom, {'attr': {'class': 'form-control', 'placeholder': 'Click here to open calendar'}}) }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            {{ form_errors(form.dateTo) }}
+                                            {{ form_label(form.dateTo) }}
+                                            {{ form_widget(form.dateTo, {'attr': {'class': 'form-control', 'placeholder': 'Click here to open calendar '}}) }}
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -144,10 +149,12 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         $('#appbundle_product_dateTo').flatpickr({
-            enableTime: true
+            enableTime: true,
+            minDate: "today"
         });
         $('#appbundle_product_dateFrom').flatpickr({
-            enableTime: true
+            enableTime: true,
+            minDate: "today"
         });
     </script>
 {% endblock %}

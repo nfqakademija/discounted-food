@@ -71,6 +71,7 @@ class ProductController extends Controller
                     'Product updated!'
                 );
                 $this->getDoctrine()->getManager()->flush();
+                return $this->redirectToRoute('profile_item_show', array('id' => $product->getId()));
             }
 
             return $this->render('Product/edit.html.twig', array(
