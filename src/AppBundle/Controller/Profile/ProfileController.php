@@ -6,9 +6,6 @@ use AppBundle\Entity\Address;
 use AppBundle\Form\AddressType;
 use Http\Adapter\Guzzle6\Client;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
-use Ivory\GoogleMap\Helper\Builder\ApiHelperBuilder;
-use Ivory\GoogleMap\Helper\Builder\PlaceAutocompleteHelperBuilder;
-use Ivory\GoogleMap\Place\Autocomplete;
 use Ivory\GoogleMap\Service\Geocoder\GeocoderService;
 use Ivory\GoogleMap\Service\Geocoder\Request\GeocoderAddressRequest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -92,27 +89,10 @@ class ProfileController extends Controller
 
         $map = $mapGenerator->generateMap($addresses, null, $currentRouteName);
 
-//        $autocomplete = new Autocomplete();
-//
-//        $autocomplete->setInputId('appbundle_address_address');
-
-//        $placeAutocompleteHelperBuilder = PlaceAutocompleteHelperBuilder::create();
-//        $placeAutocompleteHelper = $placeAutocompleteHelperBuilder->build();
-//        $placeAutocompleteHelperBuilder->getFormatter()->setDebug(true);
-//        $placeAutocompleteHelperBuilder->getFormatter()->setIndentationStep(4);
-////        $placeAutocompleteHelper->renderHtml($autocomplete);
-////        $placeAutocompleteHelper->renderJavascript($autocomplete);
-//        $auto =  $placeAutocompleteHelper->render($autocomplete);
-////        echo $auto;
-//        $apiHelperBuilder = ApiHelperBuilder::create();
-//        $apiHelper = $apiHelperBuilder->build();
-//        echo $apiHelper->render([$map, $auto]);
-
         return $this->render('Profile/profile.html.twig', array(
             'shops' => $addresses,
             'form' => $form->createView(),
-            'map'  => $map,
-//            'autocomplete'  => $autocomplete,
+            'map'  => $map
         ));
     }
 

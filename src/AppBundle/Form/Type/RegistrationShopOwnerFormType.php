@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: triangle
- * Date: 17.10.29
- * Time: 12.38
- */
 
 namespace AppBundle\Form\Type;
 

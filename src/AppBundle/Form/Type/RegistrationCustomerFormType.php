@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: triangle
- * Date: 17.10.29
- * Time: 12.38
- */
 
 namespace AppBundle\Form\Type;
 
@@ -17,14 +11,4 @@ class RegistrationCustomerFormType extends AbstractType
     {
         $builder->remove('username');
     }
-
-//    public function getParent()
-//    {
-//        return 'FOS\UserBundle\Form\Type\RegistrationFormType';
-//    }
-//
-//    public function getBlockPrefix()
-//    {
-//        return 'customer_registration';
-//    }
 }
