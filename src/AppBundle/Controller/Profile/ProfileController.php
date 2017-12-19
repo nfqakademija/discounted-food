@@ -48,6 +48,7 @@ class ProfileController extends Controller
                     'error',
                     "Query limit reached, please, retry in a few seconds!"
                 );
+                return $this->redirectToRoute('profile_index');
             }
 
             if ($response->getStatus() === 'ZERO_RESULTS') {
