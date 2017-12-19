@@ -42,27 +42,27 @@ class AddressFixtures extends Fixture
         $this->addReference('realaddress2', $address);
 
 
-        for ($i = 0; $i < 1; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $address = new Address();
 
 
-            if ($i < 20) {
+            if ($i < 10) {
                 //panevezys
                 $address->setLatitude($faker->randomFloat(5, 55.68, 55.78));
                 $address->setLongitude($faker->randomFloat(5, 24.3, 24.4));
-            } elseif ($i >= 20 && $i < 40) {
+            } elseif ($i >= 10 && $i < 20) {
                 //kaunas
                 $address->setLatitude($faker->randomFloat(5, 54.85, 54.95));
                 $address->setLongitude($faker->randomFloat(5, 23.85, 23.95));
-            } elseif ($i >= 40 && $i < 60) {
+            } elseif ($i >= 20 && $i < 30) {
                 //siauliai
                 $address->setLatitude($faker->randomFloat(5, 55.9, 55.99));
                 $address->setLongitude($faker->randomFloat(5, 23.25, 23.36));
-            } elseif ($i >= 60 && $i < 80) {
+            } elseif ($i >= 30 && $i < 40) {
                 //klaipeda
                 $address->setLatitude($faker->randomFloat(5, 55.65, 55.75));
                 $address->setLongitude($faker->randomFloat(5, 21.1, 21.19));
-            } elseif ($i >= 80 && $i < 100) {
+            } elseif ($i >= 40 && $i < 50) {
                 //vilnius
                 $address->setLatitude($faker->randomFloat(5, 54.65, 54.7));
                 $address->setLongitude($faker->randomFloat(5, 25.25, 25.3));

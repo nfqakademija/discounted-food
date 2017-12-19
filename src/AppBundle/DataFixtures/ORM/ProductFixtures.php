@@ -63,7 +63,7 @@ class ProductFixtures extends Fixture
 
         $photoIndex = 0;
 
-        for ($i = 0; $i < 1; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $product = new Product();
 
             $product->setDescription($faker->sentence(4));
