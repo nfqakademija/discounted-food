@@ -39,7 +39,8 @@ class DefaultController extends Controller
             }
 
             $products = $repository->findBy(
-                $data
+                $data,
+                array('id' => 'DESC')
             );
         }
 
