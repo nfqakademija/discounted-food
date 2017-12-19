@@ -41,6 +41,7 @@ class UserFixtures extends Fixture
         $simpleUser->setPlainPassword('realuser');
         $simpleUser->setEnabled(true);
         $simpleUser->setRoles(array('ROLE_USER'));
+        $this->addReference('realuser', $simpleUser);
         $manager->persist($simpleUser);
         $manager->flush();
 
@@ -48,7 +49,7 @@ class UserFixtures extends Fixture
          $faker = Factory::create();
 
          //creates 100 users
-        for ($i =0; $i < 100; $i++) {
+        for ($i =0; $i < 1; $i++) {
             $user = new User();
             $user->setEmail($faker->email);
             $user->setUsername($faker->userName);

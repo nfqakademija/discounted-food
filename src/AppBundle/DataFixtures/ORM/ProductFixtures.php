@@ -19,11 +19,51 @@ class ProductFixtures extends Fixture
     {
         $faker = Factory::create();
 
+        $product = new Product();
+
+        $product->setDescription('Bandeles aprasymas');
+        $product->setPortions(3);
+        $product->setPrice(0.4);
+        $date = new \DateTime('2017-12-19 20:00');
+        $product->setDateFrom($date);
+        $date = new \DateTime('2017-12-19 22:00');
+        $product->setDateTo($date);
+        $product->setAddress($this->getReference('realaddress1'));
+        $product->setName('Bandele su cinamonu');
+        $product->setImageName('bandele_su_cinamonu.jpg');
+        $product->setImageSize(2000);
+        $product->setUpdatedAt($faker->dateTime());
+
+        $product->setDessert(1);
+        $product->setVegetarian(1);
+
+        $manager->persist($product);
+
+
+        $product = new Product();
+
+        $product->setDescription('Bandeles aprasymas');
+        $product->setPortions(3);
+        $product->setPrice(0.4);
+        $date = new \DateTime('2017-12-29 21:00');
+        $product->setDateFrom($date);
+        $date = new \DateTime('2017-12-20 23:00');
+        $product->setDateTo($date);
+        $product->setAddress($this->getReference('realaddress2'));
+        $product->setName('Bandele su mesa');
+        $product->setImageName('bandele_su_mesa.jpg');
+        $product->setImageSize(2000);
+        $product->setUpdatedAt($faker->dateTime());
+
+        $product->setMeal(1);
+
+        $manager->persist($product);
+
         $foodPhotos = ['burger', 'omelette', 'pancakes', 'pizza', 'quinoa', 'spaghetti', 'soup', 'cepelinai'];
 
         $photoIndex = 0;
 
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 1; $i++) {
             $product = new Product();
 
             $product->setDescription($faker->sentence(4));

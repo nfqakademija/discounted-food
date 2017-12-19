@@ -30,7 +30,7 @@
 
     <div class="new_arrivals_agile_w3ls_info">
         <div class="container">
-            <h3 class="wthree_text_info"><span>Yours Shops Map</span></h3>
+            <h3 class="wthree_text_info">Your <span>Shops Map</span></h3>
 
             <div class="row">
                 {% for message in app.flashes('notice') %}
@@ -99,9 +99,7 @@
             <br>
             <div id="horizontalTab">
                 <div class="row">
-                    <div class="col-md-12 col-sm-2 text-center">
-                        <h2>Added shops</h2>
-                    </div>
+                    <h3 class="wthree_text_info">Added <span>Shops</span></h3>
 
                     <div class="resp-tabs-container">
 
@@ -129,12 +127,6 @@
                                                 <a style="width:100%;"
                                                    href="{{ path('profile_item_show', { 'id': shop.id }) }}"
                                                    class="btn btn-success">Add product</a>
-                                            </div>
-                                            <br>
-                                            <div class="text-center">
-                                                <a style="width:100%;"
-                                                   href="{{ path('profile_edit', { 'id': shop.id }) }}"
-                                                   class="btn btn-warning">Edit</a>
                                             </div>
                                             <br>
                                             <div class="text-center">

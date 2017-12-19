@@ -19,7 +19,30 @@ class AddressFixtures extends Fixture
     {
         $faker = Factory::create();
 
-        for ($i = 0; $i < 100; $i++) {
+        $address = new Address();
+        $address->setLatitude(54.6938615);
+        $address->setLongitude(25.2761771);
+        $address->setAddress('Upės g. 9 , Vilnius');
+        $address->setShopOwner($this->getReference('realuser'));
+        $address->setImageName('donut_lab.jpg');
+        $address->setImageSize(2000);
+        $address->setUpdatedAt($faker->dateTime());
+        $manager->persist($address);
+        $this->addReference('realaddress1', $address);
+
+        $address = new Address();
+        $address->setLatitude(54.6800488);
+        $address->setLongitude(25.2775142);
+        $address->setAddress('Pylimo g. 58/1 , Vilnius');
+        $address->setShopOwner($this->getReference('realuser'));
+        $address->setImageName('kepyklele.jpg');
+        $address->setImageSize(2000);
+        $address->setUpdatedAt($faker->dateTime());
+        $manager->persist($address);
+        $this->addReference('realaddress2', $address);
+
+
+        for ($i = 0; $i < 1; $i++) {
             $address = new Address();
 
 
