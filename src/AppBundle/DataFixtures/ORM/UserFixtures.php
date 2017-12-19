@@ -12,7 +12,7 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
 
-        //creates one admin user
+        //creates admin user
         $userManager = $this->container->get('fos_user.user_manager');
 
         $userAdmin = $userManager->createUser();
@@ -24,15 +24,30 @@ class UserFixtures extends Fixture
         $userAdmin->setPhone('000-000-000');
         $userAdmin->setPlainPassword('realadmin');
         $userAdmin->setEnabled(true);
+        $userAdmin->setRoles(array('ROLE_ADMIN'));
         $userManager->updateUser($userAdmin, true);
 
         //other fixture class can reach admin obj
         $this->addReference('admin-user', $userAdmin);
 
 
+        //creates user for demonstration
+        $simpleUser = $userManager->createUser();
+        $simpleUser->setUsername('user');
+        $simpleUser->setEmail('user@example.com');
+        $simpleUser->setCompanyName('my company');
+        $simpleUser->setLegalEntityCode(123123123);
+        $simpleUser->setPhone('+37060000000');
+        $simpleUser->setPlainPassword('realuser');
+        $simpleUser->setEnabled(true);
+        $simpleUser->setRoles(array('ROLE_USER'));
+        $manager->persist($simpleUser);
+        $manager->flush();
+
+
          $faker = Factory::create();
 
-         //creates 100 regular users
+         //creates 100 users
         for ($i =0; $i < 100; $i++) {
             $user = new User();
             $user->setEmail($faker->email);
